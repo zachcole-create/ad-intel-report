@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Leonard - Michigan Governor 2026 Political Intelligence Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+        .ad-card { border-left: 4px solid #3b82f6; }
+        .ad-card.alt { border-left-color: #1e40af; }
+        .stat-card { background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(30, 58, 138, 0.05) 100%); }
+        .timeline-item { position: relative; padding-left: 32px; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; border: 2px solid white; box-shadow: 0 0 0 2px #3b82f6; }
+        .text-primary { color: #1e3a8a; }
+        .text-secondary { color: #475569; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- HEADER -->
+    <div class="gradient-header text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-5xl font-bold mb-2">Tom Leonard</h1>
+            <p class="text-2xl text-blue-100 mb-4">Michigan Governor 2026 Campaign</p>
+            <p class="text-blue-100">Political Intelligence Report | June 2025 – February 2026</p>
+        </div>
+    </div>
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Executive Summary</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h3 class="font-bold text-lg text-primary mb-3">Messaging Traction</h3>
+                <p class="text-secondary">Your campaign has identified a compelling and differentiated issue in utility reform and data center policy. Early media coverage and your January TV launch demonstrate strategic focus on rising electricity costs—a populist theme with broad appeal across Michigan households.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h3 class="font-bold text-lg text-primary mb-3">Name Recognition Gap</h3>
+                <p class="text-secondary">At 17% name recognition (vs. James at 64%), you are significantly behind the frontrunner with 200 days to the primary. This represents the single largest strategic challenge and must be addressed through accelerated earned media and digital presence.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h3 class="font-bold text-lg text-primary mb-3">Campaign Momentum Concerns</h3>
+                <p class="text-secondary">A five-month gap in Meta advertising (August–December 2025) coincided with declining fundraising ($646K → $91K quarterly). Perry Johnson's $9M entry in late January fundamentally altered the competitive dynamic and resource balance in the race.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h3 class="font-bold text-lg text-primary mb-3">Organizational Strength</h3>
+                <p class="text-secondary">Bill Stepien as campaign manager brings significant Trump-aligned network advantage. Your straw poll second-place finish (23.5%) demonstrates genuine support among engaged Republican activists and legislative experience provides credibility advantage over newer entrants.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY METRICS DASHBOARD -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Campaign Metrics Overview</h2>
+        <div class="grid md:grid-cols-4 gap-4">
+            <div class="stat-card p-6 rounded-lg border border-blue-200">
+                <p class="text-sm font-semibold text-primary uppercase mb-2">Meta Ad Spend</p>
+                <p class="text-3xl font-bold text-primary">$8.1K–$11.5K</p>
+                <p class="text-xs text-secondary mt-1">June 2025 – February 2026</p>
+            </div>
+            <div class="stat-card p-6 rounded-lg border border-blue-200">
+                <p class="text-sm font-semibold text-primary uppercase mb-2">Total Impressions</p>
+                <p class="text-3xl font-bold text-primary">1.4M–1.7M</p>
+                <p class="text-xs text-secondary mt-1">Estimated reach</p>
+            </div>
+            <div class="stat-card p-6 rounded-lg border border-blue-200">
+                <p class="text-sm font-semibold text-primary uppercase mb-2">Active Ads</p>
+                <p class="text-3xl font-bold text-primary">18</p>
+                <p class="text-xs text-secondary mt-1">Campaign ads (excl. legacy)</p>
+            </div>
+            <div class="stat-card p-6 rounded-lg border border-blue-200">
+                <p class="text-sm font-semibold text-primary uppercase mb-2">Name Recognition</p>
+                <p class="text-3xl font-bold text-primary">17%</p>
+                <p class="text-xs text-secondary mt-1">Detroit News/WDIV, Jan 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEMPORAL ANALYSIS -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Campaign Timeline & Spending</h2>
+        <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">Monthly Spend Trajectory</h3>
+                <canvas id="spendChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">Impression Volume</h3>
+                <canvas id="impressionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg border border-gray-200">
+            <h3 class="font-bold text-lg text-primary mb-6">Key Campaign Events Timeline</h3>
+            <div class="space-y-4">
+                <div class="timeline-item">
+                    <p class="font-semibold text-primary">June 17, 2025</p>
+                    <p class="text-secondary">Campaign announced</p>
+                </div>
+                <div class="timeline-item" style="border-left: 2px solid #dbeafe;">
+                    <p class="font-semibold text-primary">June 19 – July 8, 2025</p>
+                    <p class="text-secondary">Initial Meta ad surge (14 ads, ~$2.6K–$4.4K spend)</p>
+                </div>
+                <div class="timeline-item" style="border-left: 2px solid #fed7aa;">
+                    <p class="font-semibold text-primary">August – December 2025</p>
+                    <p class="text-secondary"><span class="font-semibold text-orange-600">5-MONTH MEDIA GAP</span> — No Meta activity during critical fall period</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="font-semibold text-primary">September 2025</p>
+                    <p class="text-secondary">Mackinac Island Straw Poll: Your campaign places 2nd (23.5%)</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="font-semibold text-primary">October 29 – November 4, 2025</p>
+                    <p class="text-secondary">GOP Debates; James absent from both events</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="font-semibold text-primary">January 8–14, 2026</p>
+                    <p class="text-secondary">Utility reform plan unveiled; TV ad "Is Your Family Fed Up?" launches</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="font-semibold text-primary">January 15 – February 2026</p>
+                    <p class="text-secondary">Major Meta advertising surge resumes (~$5.5K–$7.1K spend, 1M+ impressions)</p>
+                </div>
+                <div class="timeline-item" style="border-left: 2px solid #fecaca;">
+                    <p class="font-semibold text-primary">January 26, 2026</p>
+                    <p class="text-secondary"><span class="font-semibold text-red-600">PERRY JOHNSON ENTERS</span> with $9M self-funding pledge</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD CAMPAIGN EXAMPLES -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Top Campaign Ads Performance</h2>
+        <div class="space-y-4">
+            <div class="ad-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-primary">Ad #1: High Spend January Push</h3>
+                        <p class="text-sm text-secondary">Created Jan 14 | Delivered Jan 15–30</p>
+                    </div>
+                    <span class="inline-block bg-blue-200 text-primary px-3 py-1 rounded text-xs font-semibold">#1 Spend</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Spend</p>
+                        <p class="font-bold text-primary">$2.0K–$2.5K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Impressions</p>
+                        <p class="font-bold text-primary">250K–300K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">CPM</p>
+                        <p class="font-bold text-primary">$8.18</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Ad ID</p>
+                        <p class="font-bold text-primary text-sm">1206889404975231</p>
+                    </div>
+                </div>
+                <a href="https://www.facebook.com/ads/library/?id=1206889404975231" target="_blank" class="inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-blue-900 transition">View Ad</a>
+            </div>
+
+            <div class="ad-card alt bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border border-indigo-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-primary">Ad #2: Highest Impressions (Active)</h3>
+                        <p class="text-sm text-secondary">Created Jan 27 | Delivered Jan 29 – Still Running</p>
+                    </div>
+                    <span class="inline-block bg-blue-200 text-primary px-3 py-1 rounded text-xs font-semibold">#1 Reach</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Spend</p>
+                        <p class="font-bold text-primary">$1.5K–$2.0K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Impressions</p>
+                        <p class="font-bold text-primary">450K–500K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">CPM</p>
+                        <p class="font-bold text-primary">$3.68</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Ad ID</p>
+                        <p class="font-bold text-primary text-sm">873617655439355</p>
+                    </div>
+                </div>
+                <a href="https://www.facebook.com/ads/library/?id=873617655439355" target="_blank" class="inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-blue-900 transition">View Ad</a>
+            </div>
+
+            <div class="ad-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-primary">Ad #3: Secondary January Campaign</h3>
+                        <p class="text-sm text-secondary">Created Jan 14 | Delivered Jan 15–30</p>
+                    </div>
+                    <span class="inline-block bg-blue-200 text-primary px-3 py-1 rounded text-xs font-semibold">#3 Spend</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Spend</p>
+                        <p class="font-bold text-primary">$1.5K–$2.0K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Impressions</p>
+                        <p class="font-bold text-primary">250K–300K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">CPM</p>
+                        <p class="font-bold text-primary">$6.36</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Ad ID</p>
+                        <p class="font-bold text-primary text-sm">1208323167537919</p>
+                    </div>
+                </div>
+                <a href="https://www.facebook.com/ads/library/?id=1208323167537919" target="_blank" class="inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-blue-900 transition">View Ad</a>
+            </div>
+
+            <div class="ad-card alt bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border border-indigo-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-primary">Ad #4: Campaign Launch Phase</h3>
+                        <p class="text-sm text-secondary">Created Jun 19 | Delivered Jun 19 – Jul 1</p>
+                    </div>
+                    <span class="inline-block bg-blue-200 text-primary px-3 py-1 rounded text-xs font-semibold">#4 Spend</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Spend</p>
+                        <p class="font-bold text-primary">$1.0K–$1.5K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Impressions</p>
+                        <p class="font-bold text-primary">250K–300K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">CPM</p>
+                        <p class="font-bold text-primary">$4.54</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Ad ID</p>
+                        <p class="font-bold text-primary text-sm">603585222762822</p>
+                    </div>
+                </div>
+                <a href="https://www.facebook.com/ads/library/?id=603585222762822" target="_blank" class="inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-blue-900 transition">View Ad</a>
+            </div>
+
+            <div class="ad-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-primary">Ad #5: July Sustained Push</h3>
+                        <p class="text-sm text-secondary">Created Jul 8 | Delivered Jul 8 – Aug 1</p>
+                    </div>
+                    <span class="inline-block bg-blue-200 text-primary px-3 py-1 rounded text-xs font-semibold">#5 Spend</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Spend</p>
+                        <p class="font-bold text-primary">$600–$700</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Impressions</p>
+                        <p class="font-bold text-primary">70K–80K</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">CPM</p>
+                        <p class="font-bold text-primary">$8.66</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-secondary uppercase mb-1">Ad ID</p>
+                        <p class="font-bold text-primary text-sm">1943247349864265</p>
+                    </div>
+                </div>
+                <a href="https://www.facebook.com/ads/library/?id=1943247349864265" target="_blank" class="inline-block bg-primary text-white px-4 py-2 rounded font-semibold text-sm hover:bg-blue-900 transition">View Ad</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPETITIVE LANDSCAPE -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Competitive Landscape</h2>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">November 2025 Polling (Mitchell/MIRS)</h3>
+                <canvas id="pollChart"></canvas>
+                <p class="text-xs text-secondary mt-4">James commands 48% in latest available polling</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">Name Recognition (Jan 2026)</h3>
+                <canvas id="recognitionChart"></canvas>
+                <p class="text-xs text-secondary mt-4">Detroit News/WDIV Poll, 600 likely voters, ±4pt MOE</p>
+            </div>
+        </div>
+
+        <h3 class="font-bold text-lg text-primary mb-4">Competitor Meta Ad Activity</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h4 class="font-bold text-primary mb-3">John James</h4>
+                <p class="text-sm text-secondary mb-3">Very limited direct Meta presence; relies on traditional media and PAC support.</p>
+                <div class="bg-gray-50 p-3 rounded mb-3">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">PAC Support</p>
+                    <p class="font-bold text-primary">$5M DeVos PAC (single ad: 700K–800K impressions Dec 2025)</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Polling Lead</p>
+                    <p class="font-bold text-primary">48% (Nov 2025)</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h4 class="font-bold text-primary mb-3">Mike Cox</h4>
+                <p class="text-sm text-secondary mb-3">Very active on Meta since November 2025; consistent presence—never went dark.</p>
+                <div class="bg-gray-50 p-3 rounded mb-3">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Meta Ad Spend</p>
+                    <p class="font-bold text-primary">Est. $7K–$10K+ (22+ ads)</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Fundraising (EOY 2025)</p>
+                    <p class="font-bold text-primary">$4.58M raised | $4.1M cash on hand</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h4 class="font-bold text-primary mb-3">Aric Nesbitt</h4>
+                <p class="text-sm text-secondary mb-3">Active on Meta since January 2025; February 2026 expansion with 7 new ads.</p>
+                <div class="bg-gray-50 p-3 rounded mb-3">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Meta Ad Spend</p>
+                    <p class="font-bold text-primary">Est. $3.3K–$4.4K+ (Feb expansion)</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Straw Poll Performance</p>
+                    <p class="font-bold text-primary">29% (Mackinac, Sep 2025)</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200 card-hover">
+                <h4 class="font-bold text-primary mb-3">Perry Johnson</h4>
+                <p class="text-sm text-secondary mb-3"><span class="font-bold text-red-600">NEW ENTRANT</span> (Jan 26, 2026) with massive self-funding.</p>
+                <div class="bg-gray-50 p-3 rounded mb-3">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Funding Commitment</p>
+                    <p class="font-bold text-primary">$9M pledged over 60 days</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-xs font-semibold text-primary uppercase mb-1">Early Ad Spend</p>
+                    <p class="font-bold text-primary">$3M+ (TV, radio, internet, Super Bowl buy)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNDRAISING COMPARISON -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Fundraising Position (Through EOY 2025)</h2>
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-blue-50 border-b border-gray-200">
+                        <tr>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Candidate</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Total Raised</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Cash on Hand</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Self-Funded</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">External Support</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">John James</td>
+                            <td class="px-6 py-4 text-secondary">~$2.2M+</td>
+                            <td class="px-6 py-4 text-secondary">$2.4M</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                            <td class="px-6 py-4 font-semibold text-blue-600">$5M DeVos PAC</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 bg-blue-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Mike Cox</td>
+                            <td class="px-6 py-4 font-semibold text-secondary">$4.58M+</td>
+                            <td class="px-6 py-4 font-semibold text-secondary">$4.1M</td>
+                            <td class="px-6 py-4 text-secondary">$3.5M loan</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Tom Leonard</td>
+                            <td class="px-6 py-4 text-secondary">~$1.0M</td>
+                            <td class="px-6 py-4 text-secondary">~$500K est.</td>
+                            <td class="px-6 py-4 text-secondary">$105K loan</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Aric Nesbitt</td>
+                            <td class="px-6 py-4 text-secondary">~$800K+</td>
+                            <td class="px-6 py-4 text-secondary">~$600K est.</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                            <td class="px-6 py-4 text-secondary">$400K GOPAC</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Perry Johnson</td>
+                            <td class="px-6 py-4 font-semibold text-red-600">Self-funded</td>
+                            <td class="px-6 py-4 font-semibold text-red-600">$9M pledged</td>
+                            <td class="px-6 py-4 font-semibold text-red-600">$9M</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-6 p-6 bg-amber-50 border border-amber-200 rounded-lg">
+            <p class="text-sm text-secondary"><span class="font-semibold text-amber-900">Trend Alert:</span> Your campaign's quarterly fundraising declined sharply: $646K (Jun–Jul) → $290K (Q3) → $91K (Q4). With Perry Johnson now in the race at $9M and Mike Cox at $4.1M cash on hand, resource constraints will require strategic prioritization.</p>
+        </div>
+    </section>
+
+    <!-- MESSAGING & STRATEGY -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Messaging Strategy & Platform</h2>
+
+        <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
+            <h3 class="font-bold text-lg text-primary mb-4">Core Campaign Themes</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <p class="font-semibold text-primary mb-2">Utility Reform & Data Centers</p>
+                    <p class="text-secondary text-sm">Michigan electricity rates surged 117% over two decades (~$850/year added to household bills). Your campaign uniquely owns this issue with specific policy proposals.</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <p class="font-semibold text-primary mb-2">Education Reform</p>
+                    <p class="text-secondary text-sm">Third-grade reading proficiency initiative provides positive policy differentiation on K–12 competitiveness and student readiness.</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <p class="font-semibold text-primary mb-2">Freedom-to-Work & Taxes</p>
+                    <p class="text-secondary text-sm">Lower tax burden, reduced regulatory friction, and pro-business agenda appeal to traditional Republican base and business community.</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <p class="font-semibold text-primary mb-2">Government Accountability</p>
+                    <p class="text-secondary text-sm">Legislative experience as former House Speaker provides credibility on institutional reform and fiscal discipline messaging.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-green-200">
+                <h4 class="font-bold text-green-900 mb-4 flex items-center"><span class="text-2xl mr-2">✓</span> Key Strengths</h4>
+                <ul class="space-y-3">
+                    <li class="text-sm text-secondary"><span class="font-semibold text-green-900">Differentiated Issue:</span> Utility/data center focus is unique among field</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-green-900">Straw Poll Validation:</span> 23.5% finish shows genuine activist support</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-green-900">Experienced Leadership:</span> Former Speaker credential vs. newer entrants</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-green-900">Efficient Advertising:</span> CPM range of $3.68–$8.18 on major ads</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-green-900">Campaign Expertise:</span> Bill Stepien brings Trump-world operational depth</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-red-200">
+                <h4 class="font-bold text-red-900 mb-4 flex items-center"><span class="text-2xl mr-2">⚠</span> Areas Requiring Attention</h4>
+                <ul class="space-y-3">
+                    <li class="text-sm text-secondary"><span class="font-semibold text-red-900">Name Recognition Crisis:</span> 17% vs. James at 64% is 3.8x gap</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-red-900">5-Month Media Blackout:</span> Aug–Dec 2025 loss of momentum coincided with fundraising decline</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-red-900">Cash Position Disadvantage:</span> ~$500K cash vs. Cox ($4.1M) and Johnson ($9M)</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-red-900">Declining Fundraising Trend:</span> -71% decline Q3 to Q4 raises sustainability concerns</li>
+                    <li class="text-sm text-secondary"><span class="font-semibold text-red-900">Johnson Game-Changer:</span> $9M entrant fundamentally reshapes resource dynamics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEGRATED MEDIA STRATEGY -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Integrated Media Strategy</h2>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">Channel Mix (National Benchmark)</h3>
+                <canvas id="channelChart"></canvas>
+                <p class="text-xs text-secondary mt-4">2026 projected national digital/traditional split for gubernatorial races</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 class="font-bold text-lg text-primary mb-4">Your Campaign Activity</h3>
+                <div class="space-y-4">
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <p class="font-semibold text-primary">Television</p>
+                        <p class="text-sm text-secondary">Launched Jan 14, 2026: "Is Your Family Fed Up?" theme on utility/data center crisis</p>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <p class="font-semibold text-primary">Digital/Meta</p>
+                        <p class="text-sm text-secondary">$8.1K–$11.5K spend; 18 active ads; major surge Jan 15+ (1M+ impressions)</p>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <p class="font-semibold text-primary">Earned Media</p>
+                        <p class="text-sm text-secondary">Policy announcements (Jan 8, Feb 6), debate participation, straw poll performance</p>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <p class="font-semibold text-primary">Ground Game</p>
+                        <p class="text-sm text-secondary">Debate presence (Oct–Nov 2025), straw poll positioning, volunteer engagement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
+            <h4 class="font-bold text-primary mb-3">Michigan Ad Market Context</h4>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <div>
+                    <p class="font-semibold text-primary">Total State Spend 2026</p>
+                    <p class="text-secondary">$936M projected political ads (2nd most expensive state nationally)</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-primary">Governor's Race Share</p>
+                    <p class="text-secondary">$152M projected (highest among toss-up states)</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-primary">Digital Penetration</p>
+                    <p class="text-secondary">34% digital, 22% connected TV, 21% cable, 19% broadcast</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD PERFORMANCE METRICS -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Campaign Flight Performance Summary</h2>
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-blue-50 border-b border-gray-200">
+                        <tr>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Flight Period</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Ad Count</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Spend Range</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Impressions</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Avg CPM</th>
+                            <th class="px-6 py-4 text-left font-bold text-primary">Strategic Context</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Jun 19–Jul 1, 2025</td>
+                            <td class="px-6 py-4 text-secondary">10 ads</td>
+                            <td class="px-6 py-4 text-secondary">$2.0K–$3.4K</td>
+                            <td class="px-6 py-4 text-secondary">320K–395K</td>
+                            <td class="px-6 py-4 text-secondary">$6.21</td>
+                            <td class="px-6 py-4 text-secondary">Campaign launch burst</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 bg-blue-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Jul 8–Aug 1, 2025</td>
+                            <td class="px-6 py-4 text-secondary">4 ads</td>
+                            <td class="px-6 py-4 text-secondary">$600–$1.0K</td>
+                            <td class="px-6 py-4 text-secondary">73K–86K</td>
+                            <td class="px-6 py-4 text-secondary">$8.22</td>
+                            <td class="px-6 py-4 text-secondary">Sustain phase (lower spend)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Aug–Dec 2025</td>
+                            <td class="px-6 py-4 text-secondary">0 ads</td>
+                            <td class="px-6 py-4 font-bold text-red-600">$0</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                            <td class="px-6 py-4 text-secondary">—</td>
+                            <td class="px-6 py-4 text-red-600"><span class="font-bold">5-MONTH BLACKOUT</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-primary">Jan 15–30, 2026</td>
+                            <td class="px-6 py-4 text-secondary">4 ads</td>
+                            <td class="px-6 py-4 text-secondary">$5.5K–$7.1K</td>
+                            <td class="px-6 py-4 text-secondary">1.05M–1.22M</td>
+                            <td class="px-6 py-4 text-secondary">$5.41</td>
+                            <td class="px-6 py-4 font-bold text-green-600">TV launch coordination + major surge</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-6 p-6 bg-green-50 border border-green-200 rounded-lg">
+            <p class="text-sm text-secondary"><span class="font-semibold text-green-900">Key Insight:</span> Your January 2026 relaunch shows dramatically improved CPM efficiency ($5.41 vs. previous $6–$8 range) while achieving 2.6x higher impressions than initial launch. This suggests refined targeting and message refinement are working. The gap pattern—strong launch, fade, gap, then coordinated relaunch—suggests need for sustained presence strategy.</p>
+        </div>
+    </section>
+
+    <!-- STRATEGIC RECOMMENDATIONS -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-primary mb-8">Strategic Recommendations</h2>
+        <div class="space-y-6">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-primary mb-2">Never Go Dark on Advertising Again</h4>
+                        <p class="text-secondary mb-3">Your five-month gap (Aug–Dec 2025) allowed competitors to dominate the digital landscape and eroded campaign momentum. Implement a continuous, year-round Meta advertising strategy with floor spend of $1,500–$2,000/month through primary.</p>
+                        <p class="text-sm text-secondary font-semibold">Expected Impact: Sustained name recognition growth; prevents competitor narrative dominance</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-primary mb-2">Aggressive Name Recognition Campaign</h4>
+                        <p class="text-secondary mb-3">At 17% name ID with 200 days to primary, you need rapid awareness acceleration. Allocate 60% of remaining ad budget to awareness-focused digital (Meta, YouTube, programmatic display) and continued TV rotation. Emphasize "Tom Leonard, former House Speaker" in all messaging to leverage institutional credibility.</p>
+                        <p class="text-sm text-secondary font-semibold">Expected Impact: 17% → 40%+ name recognition by April primary</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-primary mb-2">Double Down on Utility Reform Issue Ownership</h4>
+                        <p class="text-secondary mb-3">Your data center/electricity crisis messaging is unique and resonates broadly. Create 5–7 thematic ad variations exploring different angles: senior citizens on fixed income, small manufacturers, renters, home services. Build multimedia content library (TV, social, YouTube) around this differentiated platform.</p>
+                        <p class="text-sm text-secondary font-semibold">Expected Impact: De-commoditizes primary race; attracts earned media coverage; populist appeal cuts across traditional demographics</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-primary mb-2">Address Fundraising Trajectory Immediately</h4>
+                        <p class="text-secondary mb-3">Declining quarterly fundraising ($646K → $91K) is unsustainable. Given cash constraints relative to Cox ($4.1M), Johnson ($9M), and James ($2.4M+ PAC), prioritize major donor cultivation, consider strategic self-investment ($200K–$500K range), and explore micro-fundraising digital campaigns to offset resource gap. Perry Johnson's entry validates self-funding viability.</p>
+                        <p class="text-sm text-secondary font-semibold">Expected Impact: $1.5M+ cash position by March; enables sustained media through April primary</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</div>
+                    <div>
+                        <h4 class="font-bold text-lg text-primary mb-2">Leverage James' Debate Absence for Earned Media</h4>
+                        <p class="text-secondary mb-3">John James' absence from both October and November debates and limited direct Meta presence creates opportunity. Continue strong debate participation, generate clips, and use social/digital to highlight his avoidance of public forums. Position yourself as the "serious candidate showing up." Pair with endorsement collection from debate-attending legislators.</p>
+                        <p class="text-sm text-secondary font-semibold">Expected Impact: Narrative differentiation; credential-building among engaged primary voters; Mackinac activists already prefer you over James (23.5% vs. 14%)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATA SOURCES -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="bg-gray-100 rounded-lg p-8 border border-gray-300">
+            <h2 class="text-2xl font-bold text-primary mb-4">Data Sources & Methodology</h2>
+            <p class="text-secondary mb-4">This political intelligence report integrates data from the following sources:</p>
+            <ul class="space-y-2 text-secondary">
+                <li><span class="font-semibold text-primary">Meta Ads Library:</span> Official Facebook Ad Archive data for all active candidate pages through February 6, 2026</li>
+                <li><span class="font-semibold text-primary">Public Polling:</span> Mitchell/MIRS (November 2025), Mackinac Island Straw Poll (September 2025), Detroit News/WDIV (January 2–6, 2026)</li>
+                <li><span class="font-semibold text-primary">FEC/State Filings:</span> Campaign finance data through end of 2025 reporting period</li>
+                <li><span class="font-semibold text-primary">Candidate Websites & Press Releases:</span> Official campaign announcements, policy platforms, and public statements</li>
+                <li><span class="font-semibold text-primary">Media Intelligence:</span> News archives, debate records, and earned media tracking</li>
+                <li><span class="font-semibold text-primary">Ad Market Context:</span> AdImpact projections for Michigan 2026 political advertising spend and channel allocation</li>
+            </ul>
+            <p class="text-secondary mt-6 text-sm italic">Report prepared for client use. All spend figures are estimates based on Meta's published ranges. Analysis reflects data available as of February 6, 2026.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="gradient-header text-white py-8 px-4 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-blue-100">&copy; 2026 Political Intelligence Report | Tom Leonard for Governor Campaign</p>
+            <p class="text-blue-100 text-sm mt-2">Campaign Website: tomformichigan.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // Monthly Spend Chart
+        const spendCtx = document.getElementById('spendChart').getContext('2d');
+        new Chart(spendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jun 2025', 'Jul 2025', 'Aug-Dec 2025', 'Jan 2026'],
+                datasets: [{
+                    label: 'Ad Spend (USD)',
+                    data: [2700, 800, 0, 6300],
+                    backgroundColor: ['#3b82f6', '#3b82f6', '#fee2e2', '#10b981'],
+                    borderColor: ['#1e3a8a', '#1e3a8a', '#dc2626', '#059669'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(v) { return '$' + v.toLocaleString(); } }
+                    }
+                }
+            }
+        });
+
+        // Impression Chart
+        const impCtx = document.getElementById('impressionChart').getContext('2d');
+        new Chart(impCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jun 2025', 'Jul 2025', 'Aug-Dec 2025', 'Jan 2026'],
+                datasets: [{
+                    label: 'Impressions',
+                    data: [357495, 79498, 0, 1137498],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#1e3a8a',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y.toLocaleString() + ' impressions';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(v) { return (v/1000).toLocaleString() + 'K'; } }
+                    }
+                }
+            }
+        });
+
+        // Polling Chart
+        const pollCtx = document.getElementById('pollChart').getContext('2d');
+        new Chart(pollCtx, {
+            type: 'bar',
+            data: {
+                labels: ['John James', 'Mike Cox', 'Tom Leonard', 'Others'],
+                datasets: [{
+                    label: 'Support %',
+                    data: [48, 11, 5, 36],
+                    backgroundColor: ['#1e3a8a', '#3b82f6', '#60a5fa', '#e5e7eb'],
+                    borderColor: ['#111827', '#1e3a8a', '#1e40af', '#9ca3af'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: { callback: function(v) { return v + '%'; } }
+                    }
+                }
+            }
+        });
+
+        // Name Recognition Chart
+        const recCtx = document.getElementById('recognitionChart').getContext('2d');
+        new Chart(recCtx, {
+            type: 'bar',
+            data: {
+                labels: ['John James', 'Mike Cox', 'Aric Nesbitt', 'Tom Leonard'],
+                datasets: [{
+                    label: 'Name Recognition %',
+                    data: [64, 49, 23, 17],
+                    backgroundColor: ['#1e3a8a', '#3b82f6', '#60a5fa', '#bfdbfe'],
+                    borderColor: ['#111827', '#1e3a8a', '#1e40af', '#1e40af'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 70,
+                        ticks: { callback: function(v) { return v + '%'; } }
+                    }
+                }
+            }
+        });
+
+        // Channel Mix Chart
+        const channelCtx = document.getElementById('channelChart').getContext('2d');
+        new Chart(channelCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Digital', 'Connected TV', 'Cable', 'Broadcast', 'Radio'],
+                datasets: [{
+                    data: [34, 22, 21, 19, 3],
+                    backgroundColor: ['#3b82f6', '#1e40af', '#60a5fa', '#93c5fd', '#dbeafe'],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
