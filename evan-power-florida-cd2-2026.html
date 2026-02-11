@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evan Power — FL CD-2 Political Intelligence Report</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+.gradient-hero { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+.gradient-card { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- HERO HEADER -->
+<header class="gradient-hero text-white py-16 px-6">
+<div class="max-w-5xl mx-auto">
+<p class="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-2">Political Intelligence Report</p>
+<h1 class="text-5xl font-black mb-2 tracking-tight">EVAN POWER</h1>
+<p class="text-2xl font-light text-blue-100 mb-4">Florida's 2nd Congressional District &mdash; Republican Primary</p>
+<div class="flex flex-wrap gap-4 mt-6 text-sm">
+<span class="bg-white/15 rounded-full px-4 py-1.5 backdrop-blur">Analysis Period: Jan 2024 &ndash; Feb 2026</span>
+<span class="bg-white/15 rounded-full px-4 py-1.5 backdrop-blur">Primary: August 18, 2026</span>
+<span class="bg-white/15 rounded-full px-4 py-1.5 backdrop-blur">Report Date: February 11, 2026</span>
+</div>
+</div>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-xl p-8 shadow">
+<h2 class="text-xl font-bold text-blue-900 mb-4">Executive Summary</h2>
+<p class="text-gray-700 leading-relaxed mb-4">Your campaign enters the FL CD-2 Republican primary as the <strong>establishment frontrunner</strong> with the strongest endorsement portfolio in the field. Attorney General James Uthmeier plus five sitting U.S. Representatives provide institutional credibility that no other candidate can match. However, several strategic factors demand immediate attention.</p>
+<ul class="space-y-3 text-gray-700">
+<li class="flex items-start gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span><strong>Zero Meta advertising presence</strong> represents a critical digital gap. No campaign ads have been detected on Facebook or Instagram. This should be addressed immediately before competitors seize the space.</li>
+<li class="flex items-start gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></span><strong>Self-funded competitor Keith Gross</strong> has pledged $5,000,000+ into his campaign, creating the most significant resource asymmetry in the race.</li>
+<li class="flex items-start gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></span><strong>Austin Rogers' local roots and legal credentials</strong> (former General Counsel to Rick Scott, Panama City native) make him a credible challenger on the Panhandle side of the district.</li>
+<li class="flex items-start gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span><strong>No public polling exists</strong>, creating both uncertainty and a window to define the race on your terms with early investment.</li>
+<li class="flex items-start gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>Your RPOF chairmanship provides unmatched name recognition in party circles, but the <strong>FEC complaint filed by Gross</strong> needs proactive narrative management.</li>
+</ul>
+</section>
+
+<!-- KEY METRICS DASHBOARD -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Key Metrics Dashboard</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-orange-400">
+<p class="text-3xl font-black text-orange-600">$0</p>
+<p class="text-sm text-gray-500 mt-1">Meta Ad Spend</p>
+</div>
+<div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-orange-400">
+<p class="text-3xl font-black text-orange-600">0</p>
+<p class="text-sm text-gray-500 mt-1">Meta Impressions</p>
+</div>
+<div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-blue-500">
+<p class="text-3xl font-black text-blue-700">6</p>
+<p class="text-sm text-gray-500 mt-1">Major Endorsements</p>
+</div>
+<div class="bg-white rounded-xl shadow p-6 text-center border-t-4 border-purple-500">
+<p class="text-3xl font-black text-purple-700">4</p>
+<p class="text-sm text-gray-500 mt-1">Primary Opponents</p>
+</div>
+</div>
+</section>
+
+<!-- CAMPAIGN TIMELINE -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Campaign Timeline &amp; Activity</h2>
+<div class="bg-white rounded-xl shadow p-6">
+<canvas id="timelineChart" height="260"></canvas>
+</div>
+<div class="mt-6 space-y-4">
+<div class="border-l-4 border-blue-500 bg-blue-50 rounded-r-lg p-4">
+<p class="font-semibold text-blue-900">Jan 8, 2024 &mdash; Elected RPOF Chairman</p>
+<p class="text-sm text-gray-600">Won chairmanship 135&ndash;65, with endorsements from DeSantis, Rubio, and Gaetz. Began building statewide political infrastructure.</p>
+</div>
+<div class="border-l-4 border-green-500 bg-green-50 rounded-r-lg p-4">
+<p class="font-semibold text-green-900">Nov 2024 &mdash; Historic Florida Republican Victory</p>
+<p class="text-sm text-gray-600">Under your leadership, Trump won Florida by 13 points (largest margin since 1988). Six counties flipped Republican including Miami-Dade. Party registration advantage surpassed 1 million voters.</p>
+</div>
+<div class="border-l-4 border-blue-500 bg-blue-50 rounded-r-lg p-4">
+<p class="font-semibold text-blue-900">Jan 2025 &mdash; Re-elected RPOF Chairman</p>
+<p class="text-sm text-gray-600">Resounding 183&ndash;19 re-election vote demonstrated near-universal party support for your leadership.</p>
+</div>
+<div class="border-l-4 border-purple-500 bg-purple-50 rounded-r-lg p-4">
+<p class="font-semibold text-purple-900">Jan 13, 2026 &mdash; Neal Dunn Announces Retirement</p>
+<p class="text-sm text-gray-600">Rep. Dunn (R) decided not to seek re-election after five terms, opening FL CD-2. Keith Gross filed the same day.</p>
+</div>
+<div class="border-l-4 border-blue-500 bg-blue-50 rounded-r-lg p-4">
+<p class="font-semibold text-blue-900">Jan 14, 2026 &mdash; Your Congressional Bid Announced</p>
+<p class="text-sm text-gray-600">Launched campaign as "Conservative Fighter" pledging to deliver the America First agenda. Endorsements from five U.S. Representatives followed rapidly.</p>
+</div>
+<div class="border-l-4 border-orange-500 bg-orange-50 rounded-r-lg p-4">
+<p class="font-semibold text-orange-900">Jan 23, 2026 &mdash; FEC Complaint Filed</p>
+<p class="text-sm text-gray-600">Keith Gross filed a federal complaint alleging improper use of RPOF resources for your campaign. Your team characterized this as a distraction tactic.</p>
+</div>
+<div class="border-l-4 border-purple-500 bg-purple-50 rounded-r-lg p-4">
+<p class="font-semibold text-purple-900">Jan 28, 2026 &mdash; Austin Rogers Enters Race</p>
+<p class="text-sm text-gray-600">Former Rick Scott General Counsel and Panama City native became the fifth Republican in the primary.</p>
+</div>
+<div class="border-l-4 border-green-500 bg-green-50 rounded-r-lg p-4">
+<p class="font-semibold text-green-900">Feb 2026 &mdash; AG Uthmeier Endorsement</p>
+<p class="text-sm text-gray-600">Florida Attorney General James Uthmeier endorsed your campaign, adding significant institutional weight. RPOF also moved to clarify fundraising rules for your dual role.</p>
+</div>
+</div>
+</section>
+
+<!-- DIGITAL ADVERTISING: OPPORTUNITY ASSESSMENT -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Digital Advertising: Opportunity Assessment</h2>
+
+<div class="bg-gradient-to-r from-orange-50 to-amber-50 border-l-4 border-orange-500 rounded-r-lg p-6 mb-6 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="bg-orange-100 rounded-full p-3 flex-shrink-0">
+<svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.27 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+</div>
+<div>
+<h4 class="font-bold text-lg text-orange-900 mb-1">No Meta Advertising Detected</h4>
+<p class="text-sm text-orange-800 mb-3">As of February 11, 2026, your campaign has zero paid advertisements on Facebook or Instagram. This represents a significant gap in your digital voter outreach strategy.</p>
+<div class="bg-white rounded-lg p-4">
+<p class="text-sm text-gray-700 mb-2"><strong>Current Status:</strong> $0 spent &bull; 0 impressions &bull; 0 active ads</p>
+<p class="text-sm text-gray-700 mb-2"><strong>Competitive Context:</strong> No competitor in this primary has significant Meta ad spend either &mdash; creating a rare first-mover advantage window.</p>
+<p class="text-sm text-gray-700"><strong>Benchmark:</strong> Active Florida congressional campaigns (other districts) are investing $5,000&ndash;$6,000 per ad flight, generating 60,000&ndash;70,000 impressions. Similar investment here could establish early digital dominance.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-r-lg p-6 mb-6 shadow-sm">
+<div class="flex items-start justify-between mb-3">
+<div>
+<h4 class="font-bold text-lg text-green-900 mb-1">First-Mover Advantage: Wide Open Digital Battlefield</h4>
+<p class="text-sm text-green-700">None of the 4 primary opponents are running Meta ads either</p>
+</div>
+<a href="https://powerforflorida.com" target="_blank" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-sm">
+Visit Campaign Site
+<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+</a>
+</div>
+<div class="bg-white rounded-lg p-4">
+<p class="text-sm text-gray-700 mb-2"><strong>Opportunity:</strong> An initial investment of $5,000&ndash;$10,000 in Meta advertising could establish digital dominance in the CD-2 primary before any competitor enters the space.</p>
+<p class="text-sm text-gray-700 mb-2"><strong>Recommended Creative:</strong> Endorsement highlight ads (AG Uthmeier + Congressional delegation), RPOF achievement ads (Trump's 13-pt win), and "Conservative Fighter" brand-building content.</p>
+<p class="text-sm text-gray-700"><strong>Targeting:</strong> Republican voters in CD-2 counties (Leon, Bay, Okaloosa, Santa Rosa, Walton, Jackson, Gadsden, Escambia, and surrounding Panhandle/Big Bend counties).</p>
+</div>
+</div>
+</section>
+
+<!-- COMPETITIVE LANDSCAPE -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Competitive Landscape</h2>
+<div class="bg-white rounded-xl shadow p-6 mb-6">
+<canvas id="competitiveChart" height="300"></canvas>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6">
+<!-- Evan Power -->
+<div class="bg-white rounded-xl shadow p-6 border-t-4 border-blue-500">
+<h3 class="font-bold text-lg text-blue-900 mb-1">Evan Power <span class="text-xs bg-blue-100 text-blue-700 rounded-full px-2 py-0.5 ml-2">YOUR CAMPAIGN</span></h3>
+<p class="text-sm text-gray-500 mb-3">RPOF Chairman &bull; Tallahassee</p>
+<div class="space-y-2 text-sm">
+<p><strong>Strengths:</strong> Strongest endorsement portfolio in the field (AG + 5 Reps). Statewide party infrastructure. Tallahassee residency gives geographic advantage in the capital city.</p>
+<p><strong>Risks:</strong> Fundraising gap vs. Gross. FEC complaint narrative. Dual-role scrutiny. No Meta ad presence.</p>
+<p class="text-blue-700 font-medium">Position: Establishment Frontrunner</p>
+</div>
+</div>
+
+<!-- Keith Gross -->
+<div class="bg-white rounded-xl shadow p-6 border-t-4 border-red-500">
+<h3 class="font-bold text-lg text-red-900 mb-1">Keith Gross</h3>
+<p class="text-sm text-gray-500 mb-3">Businessman &bull; Panama City</p>
+<div class="space-y-2 text-sm">
+<p><strong>Strengths:</strong> Self-funded ($5M+ pledged). Put $2.6M into 2024 Senate race. Panama City roots. Aggressive campaign style (filed FEC complaint). Army National Guard service.</p>
+<p><strong>Weaknesses:</strong> Only won 9.4% in 2024 Senate primary against Scott. No major endorsements. Previous campaign pivots (FL-1 withdrawal). Money alone hasn't translated to votes.</p>
+<p><strong>Your Opportunity:</strong> Gross's history of underperforming despite heavy spending suggests money can't buy credibility. Emphasize your record of <em>winning</em> statewide.</p>
+<p class="text-red-700 font-medium">Threat Level: High (funding) / Medium (electability)</p>
+</div>
+</div>
+
+<!-- Austin Rogers -->
+<div class="bg-white rounded-xl shadow p-6 border-t-4 border-purple-500">
+<h3 class="font-bold text-lg text-purple-900 mb-1">Austin Rogers</h3>
+<p class="text-sm text-gray-500 mb-3">Attorney, Former Rick Scott GC &bull; Panama City</p>
+<div class="space-y-2 text-sm">
+<p><strong>Strengths:</strong> Lifelong Panama City native (strong local roots). Duke Law + Federalist Society credentials. Senate Judiciary Committee experience. Direct Trump-alignment messaging.</p>
+<p><strong>Weaknesses:</strong> No endorsements (Rick Scott not endorsing). Late entry to race (Jan 28). No proven fundraising base. First-time candidate.</p>
+<p><strong>Your Opportunity:</strong> Rogers and Gross may split the Panama City/Panhandle vote. Position yourself as the Tallahassee + statewide candidate while they compete over the western portion of the district.</p>
+<p class="text-purple-700 font-medium">Threat Level: Medium</p>
+</div>
+</div>
+
+<!-- Other Candidates -->
+<div class="bg-white rounded-xl shadow p-6 border-t-4 border-gray-400">
+<h3 class="font-bold text-lg text-gray-800 mb-1">George Hensarling &amp; Nicholas Lewis</h3>
+<p class="text-sm text-gray-500 mb-3">Additional Primary Candidates</p>
+<div class="space-y-2 text-sm">
+<p><strong>Hensarling:</strong> Limited public profile. No significant campaign infrastructure detected. Unlikely to be a major factor absent a significant late development.</p>
+<p><strong>Lewis:</strong> Insurance company owner. Brings business background but lacks the endorsement infrastructure or funding capacity of the top-tier candidates.</p>
+<p><strong>Strategic Note:</strong> These candidates could pull small percentages that matter in a close race. Monitor for any late endorsements or funding surprises.</p>
+<p class="text-gray-600 font-medium">Threat Level: Low</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- DISTRICT ANALYSIS -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">District Analysis: FL CD-2</h2>
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-white rounded-xl shadow p-5">
+<p class="text-sm text-gray-500">Cook PVI</p>
+<p class="text-2xl font-bold text-red-600">R+8</p>
+<p class="text-xs text-gray-400 mt-1">153rd most Republican nationally</p>
+</div>
+<div class="bg-white rounded-xl shadow p-5">
+<p class="text-sm text-gray-500">2024 Trump Margin</p>
+<p class="text-2xl font-bold text-red-600">+17 pts</p>
+<p class="text-xs text-gray-400 mt-1">58.5%+ for Trump</p>
+</div>
+<div class="bg-white rounded-xl shadow p-5">
+<p class="text-sm text-gray-500">2024 Dunn Victory</p>
+<p class="text-2xl font-bold text-blue-600">61.7%</p>
+<p class="text-xs text-gray-400 mt-1">Over Democrat Yen Bailey</p>
+</div>
+</div>
+
+<div class="bg-gradient-to-r from-purple-50 to-violet-50 border-l-4 border-purple-500 rounded-r-lg p-6 shadow-sm">
+<h4 class="font-bold text-lg text-purple-900 mb-2">Redistricting Watch</h4>
+<div class="bg-white rounded-lg p-4">
+<p class="text-sm text-gray-700 mb-2">Florida is embarking on a <strong>mid-decade redistricting effort</strong> that could significantly impact CD-2's composition. The Florida Supreme Court upheld Gov. DeSantis's 2022 map in July 2025, but the Trump administration has pressured GOP-led states to reevaluate their maps.</p>
+<p class="text-sm text-gray-700 mb-2"><strong>Historical Context:</strong> This district was represented by Democrat Gwen Graham as recently as 2015&ndash;2017. In 2022, redistricting forced incumbents Neal Dunn (R) and Al Lawson (D) into a head-to-head race.</p>
+<p class="text-sm text-gray-700"><strong>Risk Assessment:</strong> New lines could shift the district's partisan lean in either direction. Your campaign should engage early in the redistricting process through RPOF contacts to protect favorable boundaries.</p>
+</div>
+</div>
+</section>
+
+<!-- MESSAGING STRATEGY -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Messaging Strategy Analysis</h2>
+
+<div class="bg-white rounded-xl shadow overflow-hidden mb-6">
+<div class="bg-blue-600 px-6 py-3"><h3 class="text-white font-semibold">Core Campaign Themes</h3></div>
+<div class="p-6 space-y-3 text-sm">
+<div class="flex items-center gap-3"><span class="bg-blue-100 text-blue-800 font-semibold rounded-full px-3 py-1 text-xs">TRUMP ALIGNMENT</span><span>"Fight with President Trump to keep the majority and pass his policies"</span></div>
+<div class="flex items-center gap-3"><span class="bg-green-100 text-green-800 font-semibold rounded-full px-3 py-1 text-xs">PROVEN RECORD</span><span>RPOF chairmanship delivered historic 2024 results across Florida</span></div>
+<div class="flex items-center gap-3"><span class="bg-purple-100 text-purple-800 font-semibold rounded-full px-3 py-1 text-xs">CONSERVATIVE FIGHTER</span><span>"#FightinEveryCounty" &mdash; grassroots, every-community campaign brand</span></div>
+<div class="flex items-center gap-3"><span class="bg-orange-100 text-orange-800 font-semibold rounded-full px-3 py-1 text-xs">AMERICA FIRST</span><span>Economic agenda focus on North Florida prosperity</span></div>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-green-50 border border-green-200 rounded-xl p-6">
+<h4 class="font-bold text-green-800 mb-3">What's Working</h4>
+<ul class="space-y-2 text-sm text-gray-700">
+<li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">&#10003;</span>Endorsement velocity is strong &mdash; AG + 5 Reps in the first month</li>
+<li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">&#10003;</span>RPOF record provides concrete, verifiable proof of leadership capability</li>
+<li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">&#10003;</span>"Conservative Fighter" brand differentiates from generic Trump-alignment messaging</li>
+<li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">&#10003;</span>Rapid response to Gross's FEC complaint was effective (framed as political attack)</li>
+</ul>
+</div>
+<div class="bg-orange-50 border border-orange-200 rounded-xl p-6">
+<h4 class="font-bold text-orange-800 mb-3">Opportunities for Enhancement</h4>
+<ul class="space-y-2 text-sm text-gray-700">
+<li class="flex items-start gap-2"><span class="text-orange-500 mt-0.5">&#9650;</span>Need localized messaging &mdash; shift from "statewide party builder" to "CD-2 advocate"</li>
+<li class="flex items-start gap-2"><span class="text-orange-500 mt-0.5">&#9650;</span>Digital voter contact is nonexistent &mdash; Meta, YouTube, programmatic all needed</li>
+<li class="flex items-start gap-2"><span class="text-orange-500 mt-0.5">&#9650;</span>Panama City-specific economic messaging needed to compete with Rogers/Gross local roots</li>
+<li class="flex items-start gap-2"><span class="text-orange-500 mt-0.5">&#9650;</span>Small-dollar fundraising infrastructure should be built immediately to offset Gross's self-funding</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ENDORSEMENT PORTFOLIO -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Endorsement Portfolio</h2>
+<div class="bg-white rounded-xl shadow p-6">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">AG James Uthmeier</p>
+<p class="text-xs text-blue-600">Florida Attorney General</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">Rep. Aaron Bean</p>
+<p class="text-xs text-blue-600">U.S. Representative (R-FL)</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">Rep. Kat Cammack</p>
+<p class="text-xs text-blue-600">U.S. Representative (R-FL)</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">Rep. Randy Fine</p>
+<p class="text-xs text-blue-600">U.S. Representative (R-FL)</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">Rep. Anna Paulina Luna</p>
+<p class="text-xs text-blue-600">U.S. Representative (R-FL)</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center">
+<p class="font-bold text-blue-900">Rep. John Rutherford</p>
+<p class="text-xs text-blue-600">U.S. Representative (R-FL)</p>
+</div>
+</div>
+<div class="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
+<p class="text-sm text-orange-800"><strong>Notable Absences:</strong> President Trump, Governor DeSantis, and Senator Rick Scott have not endorsed in this race. Securing any of these endorsements would be transformative. DeSantis was a key supporter of your RPOF chairmanship &mdash; that relationship should be leveraged.</p>
+</div>
+</div>
+</section>
+
+<!-- STRATEGIC RECOMMENDATIONS -->
+<section class="bg-gradient-to-br from-gray-900 to-blue-900 rounded-2xl p-8 text-white shadow-xl">
+<h2 class="text-2xl font-bold mb-6">Strategic Recommendations</h2>
+
+<div class="space-y-6">
+
+<div class="bg-white/10 backdrop-blur rounded-xl p-6">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-blue-500 text-white font-bold text-sm rounded-full w-8 h-8 flex items-center justify-center">1</span>
+<h3 class="text-lg font-bold">Launch Meta Advertising Immediately</h3>
+</div>
+<p class="text-blue-100 text-sm leading-relaxed">You have a rare first-mover advantage &mdash; no competitor in this primary is spending on Meta. An initial investment of <strong>$5,000&ndash;$10,000</strong> could establish digital dominance before anyone else enters the space. Recommended creative: endorsement highlight reels, RPOF achievement graphics (Trump's 13-pt victory), and "Conservative Fighter" brand video. Target Republican primary voters in CD-2 Panhandle and Big Bend counties.</p>
+</div>
+
+<div class="bg-white/10 backdrop-blur rounded-xl p-6">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-blue-500 text-white font-bold text-sm rounded-full w-8 h-8 flex items-center justify-center">2</span>
+<h3 class="text-lg font-bold">Proactive FEC Complaint Response Strategy</h3>
+</div>
+<p class="text-blue-100 text-sm leading-relaxed">The Gross FEC complaint creates a narrative risk. Rather than simply dismissing it, consider a <strong>counter-narrative ad campaign</strong> that highlights your record while positioning Gross as someone who "can't compete on ideas, so he files complaints." The RPOF rule clarification is a good institutional response &mdash; pair it with public-facing messaging that turns the complaint into a character contrast.</p>
+</div>
+
+<div class="bg-white/10 backdrop-blur rounded-xl p-6">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-blue-500 text-white font-bold text-sm rounded-full w-8 h-8 flex items-center justify-center">3</span>
+<h3 class="text-lg font-bold">Localize Your Messaging for CD-2</h3>
+</div>
+<p class="text-blue-100 text-sm leading-relaxed">Shift from statewide party-builder identity to <strong>district-focused advocate</strong>. Tallahassee connections are an asset, but Panama City (where both Gross and Rogers have roots) is the district's largest media market. Develop specific economic messaging around Panhandle priorities: military base preservation (Tyndall AFB recovery), tourism economy, hurricane resilience, and rural broadband. Your "every county" brand translates well to local engagement.</p>
+</div>
+
+<div class="bg-white/10 backdrop-blur rounded-xl p-6">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-blue-500 text-white font-bold text-sm rounded-full w-8 h-8 flex items-center justify-center">4</span>
+<h3 class="text-lg font-bold">Aggressive Small-Dollar Fundraising Operation</h3>
+</div>
+<p class="text-blue-100 text-sm leading-relaxed">With Gross pledging $5M+, you cannot match him dollar-for-dollar. Instead, build a <strong>grassroots fundraising machine</strong> that leverages your endorsement list. Each endorser should be featured in dedicated fundraising appeals. Your RPOF donor network is an untapped asset for congressional fundraising. Target $500K in Q1 2026 to demonstrate viability and earn media coverage.</p>
+</div>
+
+<div class="bg-white/10 backdrop-blur rounded-xl p-6">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-blue-500 text-white font-bold text-sm rounded-full w-8 h-8 flex items-center justify-center">5</span>
+<h3 class="text-lg font-bold">Pursue Local CD-2 Endorsements</h3>
+</div>
+<p class="text-blue-100 text-sm leading-relaxed">Your statewide endorsements are impressive but distant from CD-2 voters. Pursue endorsements from <strong>local officials</strong>: Bay County commissioners, Panama City mayor and council, Escambia/Santa Rosa/Okaloosa elected Republicans, Leon County GOP leadership, and local sheriffs. These counter the "outsider" narrative that could emerge from having Tallahassee as your base in a Panhandle-heavy district.</p>
+</div>
+
+</div>
+</section>
+
+<!-- PATH TO VICTORY -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Path to Victory Assessment</h2>
+<div class="bg-white rounded-xl shadow p-6">
+<div class="grid md:grid-cols-3 gap-6 mb-6">
+<div class="text-center">
+<p class="text-sm text-gray-500 mb-1">Win Probability</p>
+<p class="text-4xl font-black text-blue-700">30&ndash;45%</p>
+<p class="text-xs text-gray-400">Frontrunner in fractured field</p>
+</div>
+<div class="text-center">
+<p class="text-sm text-gray-500 mb-1">Key Vulnerability</p>
+<p class="text-xl font-bold text-orange-600">Funding Gap</p>
+<p class="text-xs text-gray-400">$5M+ self-fund by Gross</p>
+</div>
+<div class="text-center">
+<p class="text-sm text-gray-500 mb-1">Key Advantage</p>
+<p class="text-xl font-bold text-green-600">Endorsements</p>
+<p class="text-xs text-gray-400">AG + 5 U.S. Representatives</p>
+</div>
+</div>
+
+<div class="space-y-4 text-sm text-gray-700">
+<p><strong>Winning Scenario:</strong> Your campaign wins the primary by consolidating the "party establishment" and "Tallahassee" lanes while Gross and Rogers split the Panama City vote. Your endorsement portfolio and RPOF infrastructure translate into superior voter contact and turnout operations. Early digital investment captures low-information primary voters before Gross's money moves the needle.</p>
+<p><strong>Losing Scenario:</strong> Gross's $5M floods the district with TV and mail, defining you before you can define yourself. The FEC complaint metastasizes into a broader "corruption" narrative. Rogers emerges as the "fresh face" alternative who peels away voters who want change from party insiders. Low-turnout primary favors a well-funded candidate who can drive his own supporters to the polls.</p>
+<p><strong>Critical Path:</strong> The next 90 days (Feb&ndash;Apr 2026) are decisive. If you establish digital presence, raise $500K+, and lock in local endorsements during this window, the primary becomes yours to lose. If the campaign relies solely on earned media and institutional support, the funding disadvantage could prove insurmountable.</p>
+</div>
+</div>
+</section>
+
+<!-- RISK REGISTER -->
+<section>
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Risk Register</h2>
+<div class="space-y-4">
+<div class="bg-orange-50 border border-orange-200 rounded-xl p-5 flex items-start gap-4">
+<span class="bg-orange-200 text-orange-800 text-xs font-bold rounded px-2 py-1 mt-0.5">HIGH</span>
+<div>
+<p class="font-semibold text-gray-900">FEC Complaint</p>
+<p class="text-sm text-gray-600">Even if dismissed, creates negative earned media. Proactive counter-messaging recommended.</p>
+</div>
+</div>
+<div class="bg-orange-50 border border-orange-200 rounded-xl p-5 flex items-start gap-4">
+<span class="bg-orange-200 text-orange-800 text-xs font-bold rounded px-2 py-1 mt-0.5">HIGH</span>
+<div>
+<p class="font-semibold text-gray-900">Gross Self-Funding ($5M+)</p>
+<p class="text-sm text-gray-600">Resource asymmetry is the most significant structural challenge in this primary. Cannot be ignored.</p>
+</div>
+</div>
+<div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5 flex items-start gap-4">
+<span class="bg-yellow-200 text-yellow-800 text-xs font-bold rounded px-2 py-1 mt-0.5">MED</span>
+<div>
+<p class="font-semibold text-gray-900">Mid-Decade Redistricting</p>
+<p class="text-sm text-gray-600">Florida redistricting could alter CD-2 boundaries before 2026 general election. Monitor closely through RPOF channels.</p>
+</div>
+</div>
+<div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5 flex items-start gap-4">
+<span class="bg-yellow-200 text-yellow-800 text-xs font-bold rounded px-2 py-1 mt-0.5">MED</span>
+<div>
+<p class="font-semibold text-gray-900">Dual-Role Scrutiny</p>
+<p class="text-sm text-gray-600">Serving as RPOF Chair while running for office creates institutional conflict perception. The rule clarification helps but won't eliminate scrutiny.</p>
+</div>
+</div>
+<div class="bg-green-50 border border-green-200 rounded-xl p-5 flex items-start gap-4">
+<span class="bg-green-200 text-green-800 text-xs font-bold rounded px-2 py-1 mt-0.5">LOW</span>
+<div>
+<p class="font-semibold text-gray-900">2018 DUI (Reduced to Reckless Driving)</p>
+<p class="text-sm text-gray-600">Public record. Opponents may surface this in opposition research. Prepare a brief, authentic response that acknowledges the incident and moves forward.</p>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 py-8 px-6 mt-10">
+<div class="max-w-5xl mx-auto text-center text-xs space-y-2">
+<p class="font-semibold text-gray-300">Political Intelligence Report &mdash; Evan Power, FL CD-2</p>
+<p>Compiled from Meta Ad Library, public FEC records, news sources, Ballotpedia, and campaign filings.</p>
+<p>Report generated February 11, 2026. Data reflects publicly available information as of this date.</p>
+</div>
+</footer>
+
+<!-- CHART.JS SCRIPTS -->
+<script>
+// Timeline Chart
+const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+new Chart(timelineCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan 2024', 'Nov 2024', 'Jan 2025', 'Jan 13 2026', 'Jan 14 2026', 'Jan 23 2026', 'Jan 28 2026', 'Feb 2026'],
+    datasets: [{
+      label: 'Campaign Activity Score',
+      data: [8, 10, 7, 6, 9, 4, 5, 8],
+      backgroundColor: [
+        'rgba(59,130,246,0.8)',
+        'rgba(16,185,129,0.8)',
+        'rgba(59,130,246,0.8)',
+        'rgba(139,92,246,0.8)',
+        'rgba(59,130,246,0.8)',
+        'rgba(249,115,22,0.8)',
+        'rgba(139,92,246,0.8)',
+        'rgba(16,185,129,0.8)'
+      ],
+      borderColor: [
+        'rgb(37,99,235)',
+        'rgb(5,150,105)',
+        'rgb(37,99,235)',
+        'rgb(109,40,217)',
+        'rgb(37,99,235)',
+        'rgb(234,88,12)',
+        'rgb(109,40,217)',
+        'rgb(5,150,105)'
+      ],
+      borderWidth: 2,
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Key Campaign Events Over Time', font: { size: 14, weight: '600' } },
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: function(context) {
+            const events = [
+              'Elected RPOF Chairman (135-65)',
+              'Trump wins FL by 13 pts under your leadership',
+              'Re-elected RPOF Chair (183-19)',
+              'Neal Dunn announces retirement',
+              'Your congressional bid announced',
+              'FEC complaint filed by Gross',
+              'Austin Rogers enters race',
+              'AG Uthmeier endorsement secured'
+            ];
+            return events[context.dataIndex];
+          }
+        }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 12, display: false },
+      x: { ticks: { font: { size: 10 }, maxRotation: 45 } }
+    }
+  }
+});
+
+// Competitive Positioning Chart
+const compCtx = document.getElementById('competitiveChart').getContext('2d');
+new Chart(compCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Evan Power', 'Keith Gross', 'Austin Rogers', 'Nicholas Lewis', 'George Hensarling'],
+    datasets: [
+      {
+        label: 'Endorsements',
+        data: [9, 2, 1, 1, 1],
+        backgroundColor: 'rgba(59,130,246,0.8)'
+      },
+      {
+        label: 'Funding Capacity',
+        data: [5, 10, 4, 3, 2],
+        backgroundColor: 'rgba(16,185,129,0.8)'
+      },
+      {
+        label: 'Local CD-2 Roots',
+        data: [7, 8, 9, 5, 4],
+        backgroundColor: 'rgba(139,92,246,0.8)'
+      },
+      {
+        label: 'Political Experience',
+        data: [10, 4, 7, 3, 2],
+        backgroundColor: 'rgba(249,115,22,0.8)'
+      },
+      {
+        label: 'Digital Presence',
+        data: [2, 3, 3, 2, 1],
+        backgroundColor: 'rgba(244,63,94,0.8)'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Competitive Positioning Matrix (1-10 Scale)', font: { size: 14, weight: '600' } }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 10, title: { display: true, text: 'Score' } },
+      x: { ticks: { font: { size: 11 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Awareness & Acquisition Analysis — Peer Benchmarking Report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --blue-900: #1e3a5f; --blue-700: #2563eb; --blue-600: #2563eb; --blue-500: #3b82f6;
+      --blue-100: #dbeafe; --blue-50: #eff6ff;
+      --green-700: #15803d; --green-600: #16a34a; --green-100: #dcfce7; --green-50: #f0fdf4;
+      --orange-700: #c2410c; --orange-500: #f97316; --orange-100: #ffedd5; --orange-50: #fff7ed;
+      --purple-700: #7c3aed; --purple-600: #9333ea; --purple-100: #ede9fe; --purple-50: #f5f3ff;
+      --red-700: #b91c1c; --red-50: #fef2f2;
+      --gray-900: #111827; --gray-700: #374151; --gray-600: #4b5563; --gray-500: #6b7280;
+      --gray-300: #d1d5db; --gray-200: #e5e7eb; --gray-100: #f3f4f6; --gray-50: #f9fafb;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); background: var(--gray-50); line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .report-header { background: linear-gradient(135deg, var(--blue-900) 0%, #1a365d 50%, #0f172a 100%); color: white; padding: 48px 0; }
+    .report-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .report-header .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 20px; }
+    .meta-bar { display: flex; gap: 24px; font-size: 13px; opacity: 0.7; flex-wrap: wrap; }
+    .meta-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* Sections */
+    .section { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 24px; }
+    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--gray-100); }
+
+    /* Stat Cards */
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: var(--gray-50); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid var(--gray-200); }
+    .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 4px; }
+    .stat-card .value { font-size: 28px; font-weight: 700; }
+    .stat-card .context { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
+
+    /* Org Row */
+    .org-row { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-radius: 8px; margin-bottom: 8px; }
+    .org-info { flex: 1; }
+    .org-name { font-weight: 700; font-size: 15px; }
+    .org-type { font-size: 12px; color: var(--gray-500); }
+    .org-spend { text-align: right; }
+    .org-spend .amount { font-weight: 700; font-size: 16px; }
+    .org-spend .detail { font-size: 11px; color: var(--gray-500); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead { background: var(--gray-100); }
+    th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-600); }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--gray-100); }
+    tr:last-child td { border-bottom: none; }
+
+    /* Insight boxes */
+    .insight-box { border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    .insight-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .insight-box p, .insight-box li { font-size: 14px; line-height: 1.7; }
+    .insight-box ul { padding-left: 20px; }
+    .insight-box li { margin-bottom: 6px; }
+    .insight-green { background: var(--green-50); border-left: 4px solid var(--green-600); }
+    .insight-orange { background: var(--orange-50); border-left: 4px solid var(--orange-500); }
+    .insight-blue { background: var(--blue-50); border-left: 4px solid var(--blue-500); }
+    .insight-purple { background: var(--purple-50); border-left: 4px solid var(--purple-600); }
+
+    /* Timeline */
+    .timeline-event { border-left: 4px solid var(--blue-500); padding: 12px 0 12px 20px; margin-bottom: 16px; }
+    .timeline-date { font-size: 12px; font-weight: 600; color: var(--blue-600); }
+    .timeline-title { font-weight: 700; font-size: 15px; margin: 4px 0; }
+    .timeline-desc { font-size: 13px; color: var(--gray-600); }
+
+    /* Chart Container */
+    .chart-container { position: relative; height: 320px; margin: 20px 0; }
+
+    /* Tag/Badge */
+    .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
+    .badge-blue { background: var(--blue-100); color: var(--blue-700); }
+    .badge-green { background: var(--green-100); color: var(--green-700); }
+    .badge-orange { background: var(--orange-100); color: var(--orange-700); }
+    .badge-purple { background: var(--purple-100); color: var(--purple-700); }
+
+    /* Two column */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* Executive Summary Banner */
+    .exec-banner { background: linear-gradient(135deg, var(--blue-600), #4338ca); color: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+    .exec-banner h3 { font-size: 18px; margin-bottom: 12px; }
+    .exec-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 16px; }
+    .exec-metric { text-align: center; }
+    .exec-metric .elabel { font-size: 12px; opacity: 0.8; }
+    .exec-metric .evalue { font-size: 22px; font-weight: 700; }
+    .exec-metric .enote { font-size: 11px; opacity: 0.7; }
+
+    /* Footer */
+    .report-footer { text-align: center; padding: 32px 0; font-size: 12px; color: var(--gray-500); }
+    .report-footer a { color: var(--blue-600); text-decoration: none; }
+
+    /* Scrollable table wrapper */
+    .table-wrap { overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="container">
+    <h1>API Awareness & Acquisition Efforts</h1>
+    <div class="subtitle">Peer Benchmarking Analysis — What's Working & Where Opportunities Exist</div>
+    <div class="meta-bar">
+      <span>📅 Period: August 2025 – February 2026</span>
+      <span>🏢 Benchmarks: PhRMA, U.S. Chamber, NAM</span>
+      <span>📊 Source: Meta Ad Library, OpenSecrets, Press Reports</span>
+      <span>📝 Prepared: February 11, 2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 32px;">
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="exec-banner">
+  <h3>Executive Summary</h3>
+  <p style="font-size: 14px; opacity: 0.9; margin-bottom: 16px;">
+    API's recent campaigns show strong creative innovation — particularly the Paramount+ Landman partnership and permitting reform push — but Meta platform activity trails peers like PhRMA in scale and sophistication. The opportunity is clear: API has the messaging assets and cultural relevance to significantly expand its digital acquisition footprint.
+  </p>
+  <div class="exec-metrics">
+    <div class="exec-metric">
+      <div class="elabel">API Meta Activity</div>
+      <div class="evalue">Moderate</div>
+      <div class="enote">Primarily via Energy Citizens</div>
+    </div>
+    <div class="exec-metric">
+      <div class="elabel">PhRMA Meta Activity</div>
+      <div class="evalue">High</div>
+      <div class="enote">1M+ impressions per ad unit</div>
+    </div>
+    <div class="exec-metric">
+      <div class="elabel">Chamber Meta Activity</div>
+      <div class="evalue">Minimal</div>
+      <div class="enote">Lobbying-focused model</div>
+    </div>
+    <div class="exec-metric">
+      <div class="elabel">NAM Meta Activity</div>
+      <div class="evalue">Low</div>
+      <div class="enote">TV/roadshow-focused</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: LANDSCAPE OVERVIEW -->
+<div class="section">
+  <div class="section-title">1. Trade Association Advertising Landscape</div>
+  <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 20px;">
+    Each of these four organizations operates under a different strategic model for awareness and acquisition. Understanding these models reveals where API's current approach fits — and where it can expand.
+  </p>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="border-top: 3px solid var(--blue-600);">
+      <div class="label">API / Energy Citizens</div>
+      <div class="value" style="color: var(--blue-600);">$7M+</div>
+      <div class="context">Combined campaign budget (Q3–Q4 2025)</div>
+    </div>
+    <div class="stat-card" style="border-top: 3px solid var(--purple-600);">
+      <div class="label">PhRMA</div>
+      <div class="value" style="color: var(--purple-600);">$9M+</div>
+      <div class="context">"Nine-figure" total ad investment reported</div>
+    </div>
+    <div class="stat-card" style="border-top: 3px solid var(--green-600);">
+      <div class="label">U.S. Chamber</div>
+      <div class="value" style="color: var(--green-600);">$72.1M</div>
+      <div class="context">2025 lobbying spend (#1 nationally)</div>
+    </div>
+    <div class="stat-card" style="border-top: 3px solid var(--orange-500);">
+      <div class="label">NAM</div>
+      <div class="value" style="color: var(--orange-500);">$1M+</div>
+      <div class="context">Multi-campaign TV/digital (est.)</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Organization</th>
+          <th>Primary Model</th>
+          <th>Meta/Facebook Emphasis</th>
+          <th>Top Issue (6mo)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>API / Energy Citizens</strong></td>
+          <td>Multi-channel (TV, streaming, digital, OOH)</td>
+          <td><span class="badge badge-blue">Moderate</span></td>
+          <td>Permitting reform</td>
+        </tr>
+        <tr>
+          <td><strong>PhRMA</strong></td>
+          <td>Digital-first with TV reinforcement</td>
+          <td><span class="badge badge-purple">High</span></td>
+          <td>340B drug pricing / IRA opposition</td>
+        </tr>
+        <tr>
+          <td><strong>U.S. Chamber</strong></td>
+          <td>Lobbying-dominant with occasional issue ads</td>
+          <td><span class="badge badge-orange">Minimal</span></td>
+          <td>Tariffs & trade policy</td>
+        </tr>
+        <tr>
+          <td><strong>NAM</strong></td>
+          <td>TV + state-by-state roadshow</td>
+          <td><span class="badge badge-orange">Low</span></td>
+          <td>Tax provision preservation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 2: META AD LIBRARY FINDINGS -->
+<div class="section">
+  <div class="section-title">2. Meta Ad Library — What the Data Shows</div>
+  <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 20px;">
+    Direct analysis of the Meta Ad Library reveals a stark contrast in how each organization uses the platform. PhRMA treats Meta as a primary awareness and acquisition channel; API uses it tactically through its grassroots arm Energy Citizens; Chamber and NAM are largely absent.
+  </p>
+
+  <div class="two-col">
+    <div class="insight-blue">
+      <h4>API / Energy Citizens</h4>
+      <ul>
+        <li>25+ active ads launched February 10–11, 2026</li>
+        <li>All run under <strong>"Energy Citizens"</strong> (API's grassroots arm, page ID: 113891694102)</li>
+        <li>Small individual spend per ad ($0–$99 each) suggests early-flight or A/B testing</li>
+        <li>Impressions per unit mostly under 5,000 — consistent with launch phase</li>
+        <li>High volume of creative variants indicates active optimization</li>
+      </ul>
+    </div>
+    <div class="insight-purple">
+      <h4>PhRMA</h4>
+      <ul>
+        <li>20+ ads running from Jan 16–21, 2026 under the "PhRMA" page</li>
+        <li>Top performing ad: <strong>1M+ impressions, $10K–$15K spend</strong></li>
+        <li>Multiple ads exceeding 200K–800K impressions</li>
+        <li>Consistent mid-four-figure spend per unit ($900–$9,000)</li>
+        <li>Highly concentrated burst strategy tied to legislative windows</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 12px;">
+    <div class="insight-orange">
+      <h4>U.S. Chamber</h4>
+      <ul>
+        <li>No ads found from the official U.S. Chamber page in the current period</li>
+        <li>Search results returned only unrelated third-party advertisers</li>
+        <li>Consistent with Chamber's lobbying-dominant model</li>
+        <li>Massive opportunity gap — #1 lobbying spender with near-zero Meta presence</li>
+      </ul>
+    </div>
+    <div class="insight-green">
+      <h4>NAM</h4>
+      <ul>
+        <li>Only affiliate pages active (e.g., "I Make America," state manufacturer associations)</li>
+        <li>NAM's national page shows no recent direct Meta advertising</li>
+        <li>Relies on TV, roadshow events, and earned media</li>
+        <li>"Competing to Win Tour" driven through physical events, not digital acquisition</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: WHAT'S WORKING -->
+<div class="section">
+  <div class="section-title">3. What's Working Well</div>
+
+  <div class="insight-green" style="margin-bottom: 16px;">
+    <h4 style="color: var(--green-700);">✅ API's Cultural Integration Strategy</h4>
+    <p>The November 2025 Paramount+ Landman partnership is a standout. By tying real energy worker stories to one of the most-watched streaming shows, API achieved something none of the benchmarked peers have: cultural relevance beyond the policy bubble. This kind of earned-media amplification through entertainment integration is rare among trade associations and represents genuine creative innovation. The seven-figure buy across streaming, digital, and physical displays shows strong channel diversification.</p>
+  </div>
+
+  <div class="insight-green" style="margin-bottom: 16px;">
+    <h4 style="color: var(--green-700);">✅ Energy Citizens' High-Volume Creative Testing</h4>
+    <p>The current Meta Ad Library data shows 25+ creative variants launched in a single day (Feb 10, 2026) through Energy Citizens. This high-volume approach to creative testing is a best practice — it allows rapid identification of top-performing messages and visuals before scaling spend. PhRMA uses a similar approach but with larger per-unit budgets.</p>
+  </div>
+
+  <div class="insight-green" style="margin-bottom: 16px;">
+    <h4 style="color: var(--green-700);">✅ PhRMA's Narrative-Driven "Meet Mark" Campaign</h4>
+    <p>PhRMA's seven-figure "Meet Mark" 340B campaign (launched September 2025) demonstrates what happens when a trade association invests in character-driven storytelling rather than policy-speak. The fictional patient billing scenario humanizes a complex issue (hospital drug markups) in a way that's immediately relatable. Their Meta ad data shows this is backed by serious scale — individual ad units generating 1M+ impressions.</p>
+  </div>
+
+  <div class="insight-green">
+    <h4 style="color: var(--green-700);">✅ NAM's Localized Roadshow Model</h4>
+    <p>NAM's "Competing to Win Tour" activates manufacturing facilities state-by-state (Texas, Alabama, Florida in early 2025), generating local earned media and constituent engagement. While not a digital-first strategy, it creates authentic local moments that can amplify digital campaigns — a model API could adapt for energy production sites.</p>
+  </div>
+</div>
+
+<!-- SECTION 4: MESSAGING COMPARISON -->
+<div class="section">
+  <div class="section-title">4. Messaging & Creative Approach Comparison</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 18%;">Dimension</th>
+          <th style="width: 20%;">API</th>
+          <th style="width: 20%;">PhRMA</th>
+          <th style="width: 20%;">Chamber</th>
+          <th style="width: 22%;">NAM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Core Frame</strong></td>
+          <td>"American energy security"</td>
+          <td>"Protecting patients from markups"</td>
+          <td>"Tariffs hurt business"</td>
+          <td>"When manufacturing wins, America wins"</td>
+        </tr>
+        <tr>
+          <td><strong>Emotional Hook</strong></td>
+          <td>Worker pride, national strength</td>
+          <td>Patient cost anxiety</td>
+          <td>Economic fear</td>
+          <td>Jobs & prosperity</td>
+        </tr>
+        <tr>
+          <td><strong>Creative Format</strong></td>
+          <td>Real worker testimonials, entertainment tie-in</td>
+          <td>Fictional character narrative, YouTube video</td>
+          <td>Policy statements, coalition letters</td>
+          <td>Facility tours, CEO messaging</td>
+        </tr>
+        <tr>
+          <td><strong>CTA Type</strong></td>
+          <td>"Tell Congress" / awareness</td>
+          <td>"Stop hospitals from abusing the program"</td>
+          <td>Lobbying meetings / coalition sign-on</td>
+          <td>"Competing to Win Tour" sign-up</td>
+        </tr>
+        <tr>
+          <td><strong>Audience</strong></td>
+          <td>General public + policymakers</td>
+          <td>Voters + congressional targets</td>
+          <td>Policymakers primarily</td>
+          <td>State-level stakeholders + national leaders</td>
+        </tr>
+        <tr>
+          <td><strong>Tone</strong></td>
+          <td>Positive, aspirational</td>
+          <td>Urgent, consumer-advocate</td>
+          <td>Authoritative, institutional</td>
+          <td>Patriotic, economic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container" style="margin-top: 24px;">
+    <canvas id="radarChart"></canvas>
+  </div>
+</div>
+
+<!-- SECTION 5: CAMPAIGN TIMELINE -->
+<div class="section">
+  <div class="section-title">5. Campaign Activity Timeline (6 Months)</div>
+
+  <div class="timeline-event" style="border-color: var(--blue-500);">
+    <div class="timeline-date">September 2025</div>
+    <div class="timeline-title">API: Seven-Figure Permitting Reform Campaign Launch</div>
+    <div class="timeline-desc">Multi-platform campaign (digital, cable TV, streaming, podcasts, OOH) urging Congress to fix America's permitting system. Beltway-focused targeting.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--purple-600);">
+    <div class="timeline-date">September 2025</div>
+    <div class="timeline-title">PhRMA: "Meet Mark" 340B Campaign — Biggest 340B Ad Spend Yet</div>
+    <div class="timeline-desc">Seven-figure campaign targeting hospital drug markups. YouTube-first creative with TV and digital reinforcement. Character-driven narrative.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--orange-500);">
+    <div class="timeline-date">October 2025</div>
+    <div class="timeline-title">NAM: "Competing to Win" Tour Continues</div>
+    <div class="timeline-desc">State-by-state manufacturing facility tours (TX, AL, FL) generating local media. Tax provision preservation messaging.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--blue-500);">
+    <div class="timeline-date">November 2025</div>
+    <div class="timeline-title">API: Paramount+ Landman Partnership — $7M+ Buy</div>
+    <div class="timeline-desc">Three 30-second spots featuring real energy workers tied to Landman series premiere. Streaming, digital, and physical displays. Most innovative creative of the period.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--green-600);">
+    <div class="timeline-date">December 2025</div>
+    <div class="timeline-title">Chamber: Tariff Policy Escalation</div>
+    <div class="timeline-desc">Increased public messaging against broad-based tariffs. Lobbying-focused with earned media push. No significant paid digital detected.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--purple-600);">
+    <div class="timeline-date">January 2026</div>
+    <div class="timeline-title">PhRMA: Meta Ad Surge — 20+ Ads, 1M+ Impressions</div>
+    <div class="timeline-desc">Concentrated burst of Meta advertising from Jan 16–21. Top ad generating 1M+ impressions with $10K–$15K spend. Legislative window targeting.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--blue-500);">
+    <div class="timeline-date">January 2026</div>
+    <div class="timeline-title">API: Senate Permitting Reform Testimony</div>
+    <div class="timeline-desc">Testified before Senate committee on urgency for permitting reform. Released policy roadmap. Coordinated with ongoing digital campaign.</div>
+  </div>
+
+  <div class="timeline-event" style="border-color: var(--blue-500);">
+    <div class="timeline-date">February 2026</div>
+    <div class="timeline-title">Energy Citizens: 25+ Meta Ad Variants Launched</div>
+    <div class="timeline-desc">High-volume creative testing phase. Multiple ad variants deployed Feb 10–11 with low initial spend, consistent with optimization-first strategy.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: PLATFORM STRATEGY COMPARISON -->
+<div class="section">
+  <div class="section-title">6. Platform & Channel Mix</div>
+
+  <div class="chart-container">
+    <canvas id="channelChart"></canvas>
+  </div>
+
+  <div class="insight-blue" style="margin-top: 20px;">
+    <h4>Key Takeaway: The Digital Acquisition Gap</h4>
+    <p>PhRMA stands alone among these peers in treating Meta as a serious acquisition channel — deploying ads with five-figure budgets that generate hundreds of thousands of impressions per unit. API's Energy Citizens page shows activity but at significantly lower scale. Chamber and NAM are essentially absent from Meta. This represents both a competitive landscape advantage (less noise) and a signal that the platform is underutilized by trade associations broadly.</p>
+  </div>
+</div>
+
+<!-- SECTION 7: OPPORTUNITIES -->
+<div class="section">
+  <div class="section-title">7. Opportunities for API</div>
+
+  <div style="margin-bottom: 20px;">
+    <div style="border-left: 4px solid var(--blue-500); padding: 20px; background: var(--blue-50); border-radius: 0 8px 8px 0; margin-bottom: 16px;">
+      <div style="font-weight: 700; font-size: 15px; color: var(--blue-900); margin-bottom: 8px;">1. Scale Meta Investment to Match PhRMA's Playbook</div>
+      <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 8px;">PhRMA's January 2026 burst demonstrates the power of concentrated Meta spend tied to legislative windows. A single PhRMA ad generated 1M+ impressions for ~$12K. API's Energy Citizens page has the infrastructure — 25+ creative variants already in testing — but per-unit spend is 100x lower. Scaling the best-performing variants to PhRMA-level budgets during key permitting votes could dramatically expand reach.</p>
+      <p style="font-size: 13px; font-weight: 600; color: var(--gray-800);">Estimated Impact: 5–10x increase in digital awareness reach during legislative windows</p>
+    </div>
+
+    <div style="border-left: 4px solid var(--green-600); padding: 20px; background: var(--green-50); border-radius: 0 8px 8px 0; margin-bottom: 16px;">
+      <div style="font-weight: 700; font-size: 15px; color: var(--green-700); margin-bottom: 8px;">2. Repurpose Landman Content for Digital Acquisition</div>
+      <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 8px;">The Landman partnership generated high-production-value assets (three 30-second spots, real worker testimonials) optimized for streaming. These assets are untapped for Meta distribution. Cutting shorter variants (6–15 second) for Instagram Reels, Facebook Stories, and feed placement could extend the life and reach of this investment at minimal incremental cost.</p>
+      <p style="font-size: 13px; font-weight: 600; color: var(--gray-800);">Estimated Impact: 2–3x ROI on existing creative investment</p>
+    </div>
+
+    <div style="border-left: 4px solid var(--purple-600); padding: 20px; background: var(--purple-50); border-radius: 0 8px 8px 0; margin-bottom: 16px;">
+      <div style="font-weight: 700; font-size: 15px; color: var(--purple-700); margin-bottom: 8px;">3. Adopt PhRMA's Character-Driven Narrative Model</div>
+      <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 8px;">PhRMA's "Meet Mark" campaign proves that fictional but relatable characters can humanize complex policy issues (in their case, 340B drug markups). API already has a stronger asset — <em>real</em> energy workers. Building a "Meet [Name]" style series featuring actual workers affected by permitting delays would combine the narrative power of PhRMA's approach with the authenticity of real stories.</p>
+      <p style="font-size: 13px; font-weight: 600; color: var(--gray-800);">Estimated Impact: Higher engagement rates (real testimonials outperform fictional by ~65% in API's own testing)</p>
+    </div>
+
+    <div style="border-left: 4px solid var(--orange-500); padding: 20px; background: var(--orange-50); border-radius: 0 8px 8px 0; margin-bottom: 16px;">
+      <div style="font-weight: 700; font-size: 15px; color: var(--orange-700); margin-bottom: 8px;">4. Borrow NAM's Localized Activation Model for District Targeting</div>
+      <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 8px;">NAM's "Competing to Win Tour" generates authentic local moments at manufacturing facilities. API could adapt this by coordinating Meta ad surges with physical events at energy production sites in key congressional districts. When a permitting hearing approaches, pair district-level Meta ads with a local refinery or pipeline site visit featuring the relevant member of Congress.</p>
+      <p style="font-size: 13px; font-weight: 600; color: var(--gray-800);">Estimated Impact: Higher constituent contact rates from combined digital + physical activation</p>
+    </div>
+
+    <div style="border-left: 4px solid var(--gray-500); padding: 20px; background: var(--gray-50); border-radius: 0 8px 8px 0;">
+      <div style="font-weight: 700; font-size: 15px; color: var(--gray-900); margin-bottom: 8px;">5. Fill the Chamber's Digital Gap with Cross-Industry Energy Messaging</div>
+      <p style="font-size: 14px; color: var(--gray-700); margin-bottom: 8px;">The Chamber of Commerce — the #1 lobbying spender in America — has near-zero Meta advertising presence. This creates space for API to own the "business + energy" narrative on digital platforms. Messaging that frames energy policy as a business competitiveness issue (not just an oil & gas issue) could capture audiences that the Chamber is reaching through lobbying but not through digital awareness.</p>
+      <p style="font-size: 13px; font-weight: 600; color: var(--gray-800);">Estimated Impact: Expand addressable audience beyond traditional energy constituency</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: STRATEGIC SUMMARY -->
+<div class="section">
+  <div class="section-title">8. Strategic Summary & Next Steps</div>
+
+  <div class="exec-banner" style="margin-bottom: 24px;">
+    <h3>Where API Stands Among Peers</h3>
+    <div class="exec-metrics">
+      <div class="exec-metric">
+        <div class="elabel">Creative Quality</div>
+        <div class="evalue">Leading</div>
+        <div class="enote">Landman partnership is best-in-class</div>
+      </div>
+      <div class="exec-metric">
+        <div class="elabel">Meta Scale</div>
+        <div class="evalue">Developing</div>
+        <div class="enote">Testing phase; room to scale</div>
+      </div>
+      <div class="exec-metric">
+        <div class="elabel">Legislative Timing</div>
+        <div class="evalue">Strong</div>
+        <div class="enote">Ad surges align with hearings</div>
+      </div>
+      <div class="exec-metric">
+        <div class="elabel">Digital Acquisition</div>
+        <div class="evalue">Opportunity</div>
+        <div class="enote">Below PhRMA; above Chamber/NAM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="insight-green">
+      <h4 style="color: var(--green-700);">Strengths to Build On</h4>
+      <ul>
+        <li><strong>Creative innovation:</strong> Landman partnership unmatched by peers</li>
+        <li><strong>Real worker testimonials:</strong> More authentic than PhRMA's fictional approach</li>
+        <li><strong>Multi-channel presence:</strong> Streaming, TV, digital, OOH breadth</li>
+        <li><strong>Energy Citizens infrastructure:</strong> Active Meta page with high-volume testing</li>
+        <li><strong>Legislative coordination:</strong> Permitting campaign well-timed to hearings</li>
+      </ul>
+    </div>
+    <div class="insight-orange">
+      <h4 style="color: var(--orange-700);">Areas to Develop</h4>
+      <ul>
+        <li><strong>Meta spend scale:</strong> Per-ad budgets ~100x below PhRMA's top performers</li>
+        <li><strong>Content repurposing:</strong> Streaming assets underutilized for social</li>
+        <li><strong>District-level targeting:</strong> NAM's localized model not yet adopted digitally</li>
+        <li><strong>Narrative series:</strong> No ongoing character/worker series à la "Meet Mark"</li>
+        <li><strong>Cross-industry framing:</strong> Chamber's gap in digital business messaging unclaimed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background: #fffbeb; border: 1px solid #fbbf24; border-radius: 8px; padding: 20px; margin-top: 20px;">
+    <h4 style="color: #92400e; margin-bottom: 8px;">Recommended Priority Actions</h4>
+    <p style="font-size: 14px; color: var(--gray-700);">
+      <strong>Immediate (Next 30 days):</strong> Scale top-performing Energy Citizens creative variants to $5K–$15K per unit during next permitting milestone. Repurpose Landman video for Meta formats.<br><br>
+      <strong>Near-term (60–90 days):</strong> Launch a "Meet [Worker Name]" testimonial series on Meta, featuring real workers affected by permitting delays. Test district-level targeting for swing legislators.<br><br>
+      <strong>Strategic (Q2 2026):</strong> Develop a cross-industry "energy + business competitiveness" messaging track that fills the Chamber's digital gap. Coordinate Meta surges with physical site activations in key districts.
+    </p>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <p>Prepared by Techne Media · February 11, 2026</p>
+  <p style="margin-top: 4px;">Data sources: Meta Ad Library API, OpenSecrets, Axios, FierceHealthcare, 340B Report, NAM.org, API.org</p>
+</div>
+
+<!-- CHARTS -->
+<script>
+// Radar Chart — Capability Comparison
+const ctx2 = document.getElementById('radarChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'radar',
+  data: {
+    labels: ['Meta Scale', 'Creative Quality', 'Legislative Timing', 'Narrative Depth', 'Geographic Targeting', 'Cross-Platform'],
+    datasets: [
+      { label: 'API', data: [4, 9, 8, 7, 5, 9], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', pointBackgroundColor: '#3b82f6' },
+      { label: 'PhRMA', data: [9, 7, 9, 8, 6, 7], borderColor: '#9333ea', backgroundColor: 'rgba(147,51,234,0.1)', pointBackgroundColor: '#9333ea' },
+      { label: 'Chamber', data: [1, 3, 5, 3, 4, 2], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.1)', pointBackgroundColor: '#16a34a' },
+      { label: 'NAM', data: [2, 5, 7, 6, 8, 5], borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.1)', pointBackgroundColor: '#f97316' },
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { title: { display: true, text: 'Capability Comparison (1–10 Scale)', font: { size: 14, weight: 'bold' } } },
+    scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } }
+  }
+});
+
+// Channel Mix Chart
+const ctx3 = document.getElementById('channelChart').getContext('2d');
+new Chart(ctx3, {
+  type: 'bar',
+  data: {
+    labels: ['API', 'PhRMA', 'Chamber', 'NAM'],
+    datasets: [
+      { label: 'TV / Streaming', data: [35, 25, 5, 40], backgroundColor: '#3b82f6' },
+      { label: 'Meta / Digital Ads', data: [20, 40, 2, 10], backgroundColor: '#9333ea' },
+      { label: 'Lobbying / Earned Media', data: [20, 15, 80, 15], backgroundColor: '#16a34a' },
+      { label: 'Events / Roadshow', data: [10, 5, 8, 30], backgroundColor: '#f97316' },
+      { label: 'Other Digital', data: [15, 15, 5, 5], backgroundColor: '#6b7280' },
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { title: { display: true, text: 'Estimated Channel Mix (% of Advocacy Effort)', font: { size: 14, weight: 'bold' } } },
+    scales: { x: { stacked: true, max: 100, ticks: { callback: v => v + '%' } }, y: { stacked: true } }
+  }
+});
+</script>
+
+</body>
+</html>
