@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dudley for Governor - Campaign Intelligence Report 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2d5a8c 100%);
+            color: white;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        .metric-card {
+            background: white;
+            border-left: 4px solid #1e3a8a;
+        }
+        .metric-card.alt {
+            border-left-color: #0ea5e9;
+        }
+        .section-header {
+            border-bottom: 3px solid #1e3a8a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #1e3a8a;
+            border-radius: 50%;
+            border: 3px solid #f0f4f8;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #cbd5e1;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f8fafc;
+        }
+        .badge-primary {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        .data-point {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: #dbeafe;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: #1e3a8a;
+        }
+        .recommendation-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            border-left: 4px solid #1e3a8a;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .risk-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 4px solid #dc2626;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .opportunity-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-left: 4px solid #16a34a;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .footer-info {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="gradient-header p-8 mb-8">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl font-bold mb-2">Dudley for Governor 2026</h1>
+            <h2 class="text-xl font-light">Campaign Intelligence Report - Oregon Gubernatorial Race</h2>
+            <p class="text-blue-100 mt-3 text-sm">Prepared February 2026 | Confidential - Campaign Strategic Use</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 pb-12">
+
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Executive Summary</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="metric-card card-hover p-6 rounded-lg shadow">
+                    <p class="text-gray-600 text-sm font-semibold uppercase">Approval Rating Opponent</p>
+                    <p class="text-3xl font-bold text-red-600 mt-2">42%</p>
+                    <p class="text-xs text-gray-500 mt-1">Disapprove Tina Kotek (6th most unpopular governor nationally)</p>
+                </div>
+
+                <div class="metric-card card-hover alt p-6 rounded-lg shadow">
+                    <p class="text-gray-600 text-sm font-semibold uppercase">Years Since Republican Governor</p>
+                    <p class="text-3xl font-bold text-blue-600 mt-2">44</p>
+                    <p class="text-xs text-gray-500 mt-1">Since Vic Atiyeh (1982)</p>
+                </div>
+
+                <div class="metric-card card-hover p-6 rounded-lg shadow">
+                    <p class="text-gray-600 text-sm font-semibold uppercase">2010 Performance</p>
+                    <p class="text-3xl font-bold text-green-600 mt-2">47.8%</p>
+                    <p class="text-xs text-gray-500 mt-1">Closest Republican in 44 years (lost by 1.5 points)</p>
+                </div>
+
+                <div class="metric-card card-hover alt p-6 rounded-lg shadow">
+                    <p class="text-gray-600 text-sm font-semibold uppercase">Primary Challenge</p>
+                    <p class="text-3xl font-bold text-purple-600 mt-2">3</p>
+                    <p class="text-xs text-gray-500 mt-1">Serious GOP primary competitors</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="text-xl font-bold text-1e3a8a mb-4">Strategic Position</h3>
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                    Your campaign enters the 2026 Oregon gubernatorial race with significant advantages, despite challenging statewide demographics. You possess a unique combination of celebrity recognition from your NBA career, proven electoral viability (2010 near-miss with 47.8%), and policy positioning aligned with Oregon's electorate on key issues. However, you face a compressed primary timeline and need to rapidly establish campaign infrastructure and financial momentum.
+                </p>
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                    The general election landscape is complex: while Oregon has not elected a Republican governor in 44 years, your opponent faces historically unpopular approval ratings (42% disapprove, 6th nationally). Increased homelessness, declining residential permits, and cost-of-living concerns have created electoral vulnerability. The 2026 midterm environment typically favors the out-of-power party, and without a third-party spoiler (as appeared in 2022), the dynamics are fundamentally different.
+                </p>
+                <div class="mt-4 flex gap-2 flex-wrap">
+                    <span class="data-point">Runnable in General Election</span>
+                    <span class="data-point">Competitive Primary Required</span>
+                    <span class="data-point">Early Digital Strategy Critical</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CANDIDATE PROFILE & UNIQUE ADVANTAGES -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Your Profile & Unique Advantages</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6 card-hover">
+                    <h3 class="font-bold text-lg mb-3 text-1e3a8a">Celebrity & Local Recognition</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>16-year NBA career; 6 seasons (1993-97, 2001-02) with Portland Trail Blazers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Only person with Type 1 diabetes to play in NBA</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>J. Walter Kennedy Citizenship Award (1995-96)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Deep roots in Portland/Lake Oswego community</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 card-hover">
+                    <h3 class="font-bold text-lg mb-3 text-1e3a8a">Business & Leadership</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Yale graduate; financial planning background</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Founded health-tech company in Beaverton (Oregon)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Chris Dudley Foundation (1994) - established community credibility</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Presidential community service recognition (2004)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 card-hover">
+                    <h3 class="font-bold text-lg mb-3 text-1e3a8a">Policy Positioning</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span><strong>Pro-abortion rights</strong> - Alignment with Oregon voters (69% support)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Focus on education, public safety, affordability</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Economic growth & practical solutions over partisan conflict</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">•</span>
+                            <span>Moderate positioning appeals to swing voters and independent-leaning Dems</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="opportunity-box">
+                <h4 class="font-bold text-lg mb-2">Strategic Advantage: Positioning Against Primary & General Dynamics</h4>
+                <p class="text-sm text-gray-800 mb-3">Your pro-choice stance is distinctive in the Republican primary and is a significant general election advantage. Unlike frontrunner Christine Drazan (Oregon Right to Life endorsement), your position aligns with Oregon's voters—recent polling shows 61% of Oregon voters prefer candidates who challenge rather than implement Trump's agenda. This creates a powerful general election narrative while differentiating you in the primary as the moderate-pragmatic alternative to Drazan's conservative base.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRIMARY LANDSCAPE -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Republican Primary Landscape</h2>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">Field Overview</h3>
+                <p class="text-gray-700 mb-6">The 2026 GOP primary is shaping into a three-tier race. While multiple candidates filed, three serious competitors have emerged, each with distinct bases and messaging.</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm table-striped">
+                        <thead>
+                            <tr class="bg-gray-50 border-b">
+                                <th class="text-left p-3 font-bold">Candidate</th>
+                                <th class="text-left p-3 font-bold">Background</th>
+                                <th class="text-left p-3 font-bold">Base & Strength</th>
+                                <th class="text-left p-3 font-bold">Primary Risk to You</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3 font-bold text-red-600">Christine Drazan</td>
+                                <td class="p-3">State Senator (R-Canby); 2022 nominee</td>
+                                <td class="p-3"><strong>Institutional backing, fundraising advantage ($1.3M+ raised since Jan 2025)</strong><br>Anti-abortion positioning appeals to social conservatives<br>3+ month head start in announcements</td>
+                                <td class="p-3"><span class="badge-danger px-2 py-1 rounded text-xs font-semibold">HIGH</span> Frontrunner status, fundraising edge, Senate fundraising advantage during legislative session</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-bold text-orange-600">Ed Diehl</td>
+                                <td class="p-3">State Rep (R-Scio)</td>
+                                <td class="p-3"><strong>Grassroots credibility (transportation referendum)</strong><br>Strong debate performer<br>Won straw poll at Western Liberty Network forum (2x+ votes vs. Dudley/Bethell)<br>Conservative policy platform</td>
+                                <td class="p-3"><span class="badge-warning px-2 py-1 rounded text-xs font-semibold">MODERATE</span> Could consolidate conservative/grassroots vote; may lack statewide resources</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-blue-600">Danielle Bethell</td>
+                                <td class="p-3">Marion County Commissioner</td>
+                                <td class="p-3">"Consensus builder" positioning<br>Local government experience<br>Limited cash on hand ($55K-$63K)</td>
+                                <td class="p-3"><span class="badge-warning px-2 py-1 rounded text-xs font-semibold">LOW</span> Underfunded, weak debate performance at recent forum</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="risk-box">
+                    <h4 class="font-bold text-lg mb-2">Primary Challenge: Drazan Head Start</h4>
+                    <p class="text-sm text-gray-800">Christine Drazan announced October 27, 2025—over three months before your January 26, 2026 announcement. She has $1.3M+ raised and $750K-$850K cash on hand. More critically, as a State Senator, she can fundraise during the legislative session, while House members cannot. This structural advantage means her fundraising pace may exceed yours through the May 19 primary.</p>
+                </div>
+
+                <div class="opportunity-box">
+                    <h4 class="font-bold text-lg mb-2">Primary Opportunity: Drazan's 2022 Baggage</h4>
+                    <p class="text-sm text-gray-800">Drazan lost the 2022 general election to Democrat Tina Kotek in a three-way race. While she performed competitively (within ~67,000 votes in a 3-way split), this creates a vulnerability: you can argue your 2010 near-miss (47.8%, losing by only 23,000 votes in a two-candidate race) proves you are Oregon's most electable Republican. This is a powerful contrast in a primary focused on 2026 viability.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">Primary Dynamics & Path to Victory</h3>
+
+                <div class="space-y-4">
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Base Consolidation Strategy</h4>
+                        <p class="text-sm text-gray-700">The Republican primary electorate (~80K-100K voters in May 2026) will be dominated by conservative and moderate-conservative voters. Your 2010 victory in a crowded primary (39% of the vote) demonstrates you can win pluralities in diverse GOP fields. However, the current field is smaller and more polarized.</p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Drazan vs. You: Moderate-Conservative Split</h4>
+                        <p class="text-sm text-gray-700">Your pro-choice positioning creates a fundamental contrast with Drazan (Oregon Right to Life endorsement). In Oregon GOP primary dynamics, this could work two ways: (1) social conservative voters gravitate to Drazan (risk to you), or (2) moderate Republicans and independents voting in the GOP primary gravitate to you as the "electable" alternative (opportunity). Diehl will compete for the conservative grassroots vote.</p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">The Diehl Factor</h4>
+                        <p class="text-sm text-gray-700">Ed Diehl's strong debate performance and straw poll victory (2x+ votes vs. your and Bethell's results) indicates he has consolidated grassroots conservative energy. If you compete for moderate/pragmatic Republican voters while Diehl takes conservatives, Drazan could split the institutional/business conservative vote. Monitor whether Diehl gains momentum post-forum—he could force a two-tier primary where you battle Drazan for the top slot while Diehl challenges from the right.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-box">
+                <h4 class="font-bold text-lg mb-2">Primary Recommendation: Leverage Your Unique Position</h4>
+                <p class="text-sm text-gray-800 mb-3">You occupy a distinct lane in this primary: the only candidate who can credibly challenge the incumbent Democrat while remaining Republican. Your pro-choice stance is not a liability—it's a differentiator that appeals to the Oregon voters you need in the general election. In the primary, emphasize:</p>
+                <ul class="text-sm text-gray-800 space-y-2 ml-4">
+                    <li>Your 2010 near-miss proves you are Oregon's most competitive Republican</li>
+                    <li>Your business success and foundation work demonstrate leadership beyond party</li>
+                    <li>Your practical, solutions-focused agenda appeals to swing voters Oregon will decide the general on</li>
+                    <li>Your celebrity and name recognition provide a unique advantage for a statewide race</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GENERAL ELECTION ANALYSIS -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">General Election Analysis: Tina Kotek Vulnerability</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4 text-red-600">Kotek Weaknesses</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span><strong>42% disapproval rating</strong> - 6th most unpopular governor nationally</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span>3rd least popular Democratic governor in nation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span><strong>Homelessness crisis:</strong> +60% increase in Multnomah County since 2023</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span><strong>Housing crisis:</strong> Residential permits declining</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span>Cost of living/affordability concerns across electorate</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">•</span>
+                            <span>Swing voter frustration with status quo</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4 text-green-600">Kotek Strengths</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span><strong>Oregon's deep blue lean:</strong> No Republican governor since 1982</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span>2026 midterm environment (Trump in power favors out-party)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span><strong>No third-party spoiler</strong> (unlike 2022 with Betsy Johnson taking ~9%)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span>Functional campaign infrastructure and donor base</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span>$1.5M-$1.8M cash on hand for general election</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-2">•</span>
+                            <span>Confident media analysis: anti-Trump sentiment will carry her</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <h3 class="font-bold text-lg mb-3 text-1e3a8a">Critical Strategic Insight: Referendum vs. Choice Framework</h3>
+                <p class="text-sm text-gray-800 mb-3">Political analysts noted: "If this election were a referendum on Tina Kotek, she'd be in a very dangerous position. It won't be a referendum on Tina Kotek though."</p>
+                <p class="text-sm text-gray-800">This captures the core challenge and opportunity: Democratic strategists believe anti-Trump sentiment and Oregon's blue lean will prevail regardless of Kotek's unpopularity. Your campaign must make the election about Oregon's record—homelessness, housing, costs of living—rather than a national referendum on Trump.</p>
+                <p class="text-sm text-gray-800 mt-3"><strong>This is where your moderate, pragmatic positioning becomes essential.</strong> You can argue for change without embracing partisan warfare. Your pro-choice stance differentiates you from Trump-aligned Republicanism, allowing you to make the election about Oregon's future, not national politics.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="risk-box">
+                    <h4 class="font-bold text-lg mb-2">General Election Risk: Oregon's Democratic Lean</h4>
+                    <p class="text-sm text-gray-800">Every major election forecaster (Cook Political Report, Inside Elections, Sabato's Crystal Ball) rates this race "Solid Democratic." Oregon has not elected a Republican governor in 44 years. This structural disadvantage is real. You must win persuasion among moderate Democrats, independents, and frustrated swing voters—a group that exists but represents the minority of the likely electorate.</p>
+                </div>
+
+                <div class="opportunity-box">
+                    <h4 class="font-bold text-lg mb-2">General Election Opportunity: Kotek's Vulnerability is Real</h4>
+                    <p class="text-sm text-gray-800">Kotek's 42% disapproval rating (6th most unpopular governor nationally) combined with Oregon's homelessness crisis (up 60%+ in Multnomah County) creates genuine electoral vulnerability. If you can frame the race as a choice between Kotek's failed record and your pragmatic alternative—and avoid being defined as a Trump Republican—you have a path. Your pro-choice stance and business success provide cover from the "partisan" label.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-8">
+                <h3 class="font-bold text-lg mb-4">Electorate Composition & Swing Voter Analysis</h3>
+
+                <div class="mb-6">
+                    <p class="text-sm text-gray-700 mb-4">Recent polling (PPP, Nov 2025) provides crucial insight into Oregon's 2026 electorate:</p>
+                    <div class="chart-container">
+                        <canvas id="electorateChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-4 rounded">
+                        <p class="text-xs font-bold text-red-900 uppercase">Anti-Trump Sentiment</p>
+                        <p class="text-2xl font-bold text-red-600 mt-2">61%</p>
+                        <p class="text-xs text-gray-700 mt-1">Prefer candidate challenging Trump agenda</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded">
+                        <p class="text-xs font-bold text-blue-900 uppercase">Trump Supporters</p>
+                        <p class="text-2xl font-bold text-blue-600 mt-2">34%</p>
+                        <p class="text-xs text-gray-700 mt-1">Want candidate implementing Trump agenda</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded">
+                        <p class="text-xs font-bold text-gray-900 uppercase">Margin of Persuasion</p>
+                        <p class="text-2xl font-bold text-gray-600 mt-2">27%</p>
+                        <p class="text-xs text-gray-700 mt-1">Undecided/persuadable voters</p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-700 mt-6">Your strategic position: You can capture anti-Trump Republicans/independents (represented in that 61%) while your pro-choice stance and pragmatic framing prevent being labeled as Trump's Republican. This creates a distinct lane from both Kotek (status quo) and Trump-aligned Republicans.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TELEVISION ADVERTISING INTELLIGENCE -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Television Advertising Intelligence & FCC Analysis</h2>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">2026 FCC Political File Status: Early Stage</h3>
+                <p class="text-sm text-gray-700 mb-4">Our analysis of FCC political advertising filings on all major Oregon stations (KGW, KOIN, KATU, KPTV in Portland; KEZI, KVAL in Eugene; KOBI in Medford-Klamath Falls) reveals:</p>
+
+                <div class="bg-blue-50 border border-blue-200 rounded p-4 mb-6">
+                    <p class="font-bold text-blue-900 mb-2">No 2026 gubernatorial TV advertising has been filed by any candidate on any station as of February 2026.</p>
+                    <p class="text-sm text-gray-700">This is expected: the primary election is May 19, 2026 (3+ months away), and sophisticated campaigns typically begin sustained TV advertising in April or late March. No candidate—Dudley, Drazan, Diehl, Bethell, or Kotek—has filed initial TV contracts yet.</p>
+                </div>
+
+                <h4 class="font-bold text-lg mb-3 mt-6">Historical Reference: 2022 Drazan Campaign TV Strategy</h4>
+                <p class="text-sm text-gray-700 mb-4">To understand the competitive landscape, we analyzed Christine Drazan's 2022 campaign TV advertising pattern on FCC filings:</p>
+
+                <div class="bg-gray-50 p-4 rounded mb-4 border-l-4 border-gray-400">
+                    <ul class="text-sm text-gray-800 space-y-2">
+                        <li><strong>Primary focus:</strong> Eugene market (KEZI-TV, ABC affiliate)</li>
+                        <li><strong>Filing pattern:</strong> 50+ TV contracts filed across 2022 cycle (March-November)</li>
+                        <li><strong>Frequency:</strong> Weekly contract filings, showing sustained presence</li>
+                        <li><strong>Campaign duration:</strong> Began TV in late March 2022, maintained through November general</li>
+                        <li><strong>2022 total campaign spend:</strong> $2.1M raised, $2.5M spent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4">Oregon Media Market Analysis</h3>
+                    <div class="space-y-3 text-sm text-gray-700">
+                        <div class="border-b pb-3">
+                            <p class="font-bold text-gray-900">Portland DMA (Market 22)</p>
+                            <p>~70% of Oregon voters; TV stations: KGW (NBC), KOIN (CBS), KATU (ABC), KPTV (Fox)</p>
+                        </div>
+                        <div class="border-b pb-3">
+                            <p class="font-bold text-gray-900">Eugene DMA (Market 119)</p>
+                            <p>Secondary but significant market; stations: KEZI (ABC), KVAL-TV (CBS)</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-900">Medford-Klamath Falls (Market 140)</p>
+                            <p>Southern Oregon; station: KOBI (NBC); smaller but loyal audience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4">2026 National TV Spending Trends</h3>
+                    <p class="text-xs text-gray-600 uppercase font-bold mb-3">Total 2026 Political Ad Spend: $10.8B</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span>Digital Platforms</span>
+                            <span class="font-bold">34%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded h-2 mb-3">
+                            <div class="bg-blue-600 h-2 rounded" style="width: 34%"></div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>Connected TV (CTV)</span>
+                            <span class="font-bold">22%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded h-2 mb-3">
+                            <div class="bg-purple-600 h-2 rounded" style="width: 22%"></div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>Cable/Traditional TV</span>
+                            <span class="font-bold">21%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded h-2 mb-3">
+                            <div class="bg-green-600 h-2 rounded" style="width: 21%"></div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>Broadcast TV</span>
+                            <span class="font-bold">19%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded h-2 mb-3">
+                            <div class="bg-orange-600 h-2 rounded" style="width: 19%"></div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>Radio</span>
+                            <span class="font-bold">3%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded h-2">
+                            <div class="bg-red-600 h-2 rounded" style="width: 3%"></div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-4">Gubernatorial races expected to see ~$6B total spending nationally</p>
+                </div>
+            </div>
+
+            <div class="recommendation-box">
+                <h4 class="font-bold text-lg mb-2">Television Strategy for Your Campaign</h4>
+                <p class="text-sm text-gray-800 mb-3">Given 2026 TV advertising trends and Oregon-specific factors, your campaign should pursue a multi-channel TV strategy:</p>
+
+                <ul class="text-sm text-gray-800 space-y-2 ml-4 mb-4">
+                    <li><strong>Connected TV (CTV) as primary channel:</strong> CTV now represents 22% of political ad placements nationally and is the preferred choice for 2026 campaigns due to targeting efficiency, cost-effectiveness, and measurement capabilities. This aligns with your need to efficiently reach Oregon voters.</li>
+                    <li><strong>Strategic broadcast TV presence:</strong> While declining nationally (19% of placements), broadcast TV still matters in Oregon's concentrated Portland market (70% of voters). Selective buys on KGW, KOIN, and KATU during news/sports programming can build earned media and reach older demographics.</li>
+                    <li><strong>Market prioritization:</strong> Portland DMA is essential (70% of voters). Eugene market (KEZI, KVAL) provides secondary reach. Southern Oregon media can be addressed through cable/digital given its smaller share of statewide voters.</li>
+                    <li><strong>Primary (March-May 2026) timing:</strong> Sustained presence beginning late March is standard. Your campaign should plan TV contracting by February to secure favorable rates and inventory.</li>
+                </ul>
+
+                <div class="bg-blue-100 border border-blue-300 rounded p-3 mt-4">
+                    <p class="text-xs text-blue-900"><strong>Competitive reference:</strong> In 2022, Drazan spent $2.5M total campaign spend across primary and general. Most 2026 campaigns are increasing budgets by 15-20% to account for higher media costs and increased competition. Plan accordingly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: DIGITAL ADVERTISING -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Digital Advertising Landscape & Opportunities</h2>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">Why Digital is Your Competitive Advantage</h3>
+                <p class="text-sm text-gray-700 mb-4">Digital platforms represent 34% of all 2026 political ad placements nationally—the largest single channel. For your campaign, digital advertising offers multiple strategic benefits:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Name Recognition Leverage</h4>
+                        <p class="text-sm text-gray-700">Your NBA/celebrity background gives digital a multiplier effect. Organic content and earned media from your basketball career can be efficiently amplified through digital to reach voters who may not regularly watch broadcast TV.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Precision Targeting</h4>
+                        <p class="text-sm text-gray-700">Digital platforms allow hyper-targeted messaging by voter segment. Your pro-choice positioning, business background, and moderate messaging can be tailored to reach swing voters, moderate Republicans, and independent-leaning Democrats.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Cost Efficiency in Primary</h4>
+                        <p class="text-sm text-gray-700">Digital reaches Oregon's ~80K-100K primary voters more cost-effectively than broadcast TV, which is cluttered with non-voters. Concentrate digital in the primary to build awareness among likely GOP voters.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4 py-2">
+                        <h4 class="font-bold text-blue-900 mb-1">Rapid Message Testing</h4>
+                        <p class="text-sm text-gray-700">Digital allows quick A/B testing of message frames (NBA/founder/moderate positioning). You can rapidly identify which narratives resonate with different voter groups and optimize spending accordingly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="font-bold text-lg mb-4">Digital Channel Priorities</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">1.</span>
+                            <span><strong>Google Search & YouTube</strong> - Reach high-intent voters searching for Oregon politics, education, economy. Video placements on YouTube allow long-form storytelling (your NBA story, foundation work).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">2.</span>
+                            <span><strong>Meta (Facebook/Instagram)</strong> - Broad reach across Oregon demographics. Critical for reaching women 35-65 (pro-choice messaging) and establishing community connection narrative.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">3.</span>
+                            <span><strong>Connected TV (CTV)</strong> - Technically digital but TV-like. Programmatic buying of Hulu, YouTube TV, Roku, etc. Efficient reach of cord-cutting voters with TV-quality creative.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-2">4.</span>
+                            <span><strong>Native/Contextual</strong> - Sponsored content on news sites (Oregonian, local outlets) builds credibility and reaches politically engaged readers.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4">Digital Message Priorities by Voter Segment</h3>
+                    <div class="space-y-3 text-xs text-gray-700">
+                        <div class="bg-purple-50 p-3 rounded">
+                            <p class="font-bold text-purple-900 mb-1">Moderate Republicans (PRIMARY)</p>
+                            <p>Practical solutions, business success, electability vs. Drazan</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded">
+                            <p class="font-bold text-red-900 mb-1">Swing Democrats (GENERAL)</p>
+                            <p>Pro-choice positioning, homelessness crisis response, affordability focus</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded">
+                            <p class="font-bold text-blue-900 mb-1">Independents (PRIMARY & GENERAL)</p>
+                            <p>Non-partisan problem-solving, bridge-building, NBA celebrity/community work</p>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded">
+                            <p class="font-bold text-green-900 mb-1">Young/Urban Voters (GENERAL)</p>
+                            <p>Pro-choice, education, economic opportunity, climate/environment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="opportunity-box">
+                <h4 class="font-bold text-lg mb-2">Digital Opportunity: Early Awareness Building</h4>
+                <p class="text-sm text-gray-800 mb-3">With your January 26 announcement, a robust digital program can immediately begin building awareness of your candidacy among Oregon voters, particularly those who don't follow traditional political news. Your NBA background is inherently shareable—digital platforms amplify earned media around your announcement, foundation work, and business success more efficiently than traditional media buying alone.</p>
+                <p class="text-sm text-gray-800">By the time traditional TV campaigns launch in March-April, your digital presence should have already established your candidacy, allowing TV to reinforce rather than introduce your message.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 7: TIMELINE & NEWS CORRELATION -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Campaign Timeline & Critical Dates</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">January 26, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Your Campaign Announcement</strong> - Formal entry into Republican primary. This is your launch moment for earned media coverage across Portland, state, and national outlets (NBA celebrity angle).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">January 31, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>First GOP Candidate Forum (Western Liberty Network)</strong> - Drazan skipped this (was in Roseburg), allowing you to potentially dominate coverage. Diehl won straw poll decisively. This is a critical opportunity to establish yourself as the serious frontrunner against Drazan in absentia.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">February 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Primary Coalescing Period</strong> - Drazan/Diehl/You establish fundraising pace. Your campaign should finalize media buying strategy and begin digital awareness campaign. Watch for Drazan's February fundraising pace (legislative session advantage).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">March 1-31, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Campaign Acceleration</strong> - TV advertising typically begins in late March. Your campaign should finalize TV contracts by early March. Digital campaigns should be in full swing. Debates/forums increase. Early voting information becomes prominent in earned media.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">April 15-May 19, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Primary Election Sprint</strong> - Mail ballots arrive in Oregon. Final debates occur. TV advertising peaks. Your campaign is in maximum earned/paid media mode. Turnout operations critical for GOP base consolidation.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">May 19, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Oregon Republican Primary Election Day</strong> - Results determine if you advance to general election. Victory margins matter for candidate consolidation (does Drazan/Diehl supporter base unite behind you?).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">May 20-June 30, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>General Election Pivot</strong> - Shift messaging from primary (GOP base/moderate split) to general (swing voters/moderate Dems). Begin building out general election organization. Kotek campaign will ramp up attacks and definition efforts.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">July-September 2026</p>
+                        <p class="text-sm text-gray-700"><strong>General Election Campaign</strong> - Peak TV/digital spending. Debate season (if scheduled). Voter persuasion reaches critical mass. National political environment becomes clearer (Trump dynamics, congressional race outcomes impact state races).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">October 15-November 3, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>Election Sprint & GOTV</strong> - Mail ballots arrive. Final push in paid/earned media. Ground game activation. Turnout operations determine margin. Last debate typically occurs final week.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex-1">
+                        <p class="font-bold text-blue-900">November 3, 2026</p>
+                        <p class="text-sm text-gray-700"><strong>General Election Day</strong> - Oregon votes. Results reveal whether your campaign successfully navigated GOP primary, consolidated the base, and persuaded swing voters in general election.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: COMPETITIVE FINANCIAL POSITION -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Competitive Financial Position & Fundraising Analysis</h2>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">2026 Fundraising Landscape</h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">Republican Primary Fundraising Status</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="border-b pb-3">
+                                <p class="font-bold text-gray-900">Christine Drazan (Frontrunner)</p>
+                                <p class="text-gray-700">$1.3M+ raised since Jan 2025<br>$750K-$850K cash on hand</p>
+                            </div>
+                            <div class="border-b pb-3">
+                                <p class="font-bold text-gray-900">Chris Dudley (You)</p>
+                                <p class="text-gray-700">Just announced (Jan 26); fundraising phase beginning<br>Celebrity status = donor base potential</p>
+                            </div>
+                            <div class="border-b pb-3">
+                                <p class="font-bold text-gray-900">Ed Diehl</p>
+                                <p class="text-gray-700">Grassroots momentum but unknown primary fundraising totals<br>May lack traditional donor network</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-900">Danielle Bethell</p>
+                                <p class="text-gray-700">$55K-$63K cash on hand<br>Significantly underfunded</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">General Election Fundraising (Incumbent)</h4>
+                        <div class="bg-blue-50 p-4 rounded mb-4">
+                            <p class="font-bold text-blue-900">Tina Kotek (Democrat Incumbent)</p>
+                            <p class="text-sm text-gray-700">$1.5M-$1.8M cash on hand for general election<br>Functional donor base + party support infrastructure</p>
+                        </div>
+                        <h4 class="font-bold text-blue-900 mb-3 mt-6">2010 Reference Point</h4>
+                        <div class="bg-gray-50 p-4 rounded">
+                            <p class="text-sm text-gray-700"><strong>Your 2010 Campaign:</strong> $5.6M total raised</p>
+                            <p class="text-sm text-gray-700 mt-2"><strong>Major donors then:</strong> Phil Knight ($400K), Andrew Miller/Stimson Lumber ($510K, said he won't give again), Dan Fegan ($100K)</p>
+                            <p class="text-xs text-gray-600 mt-2">Note: Phil Knight's 2026 support status unclear; Stimson said "too timid"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="risk-box">
+                    <h4 class="font-bold text-lg mb-2">Financial Risk: Drazan's Structural Advantage</h4>
+                    <p class="text-sm text-gray-800 mb-3">Drazan has three fundraising advantages:</p>
+                    <ul class="text-sm text-gray-800 space-y-1 ml-4">
+                        <li>1. Three-month head start (announced Oct 27, 2025)</li>
+                        <li>2. Legislative session access (Senators can fundraise during session; House members cannot)</li>
+                        <li>3. 2022 candidate infrastructure (existing donor network, operational relationships)</li>
+                    </ul>
+                    <p class="text-sm text-gray-800 mt-3">Her fundraising pace through May primary may exceed yours if her institutional advantage is not counterbalanced.</p>
+                </div>
+
+                <div class="opportunity-box">
+                    <h4 class="font-bold text-lg mb-2">Financial Opportunity: Celebrity Donor Network</h4>
+                    <p class="text-sm text-gray-800 mb-3">Your NBA background and national profile provide unique fundraising advantages:</p>
+                    <ul class="text-sm text-gray-800 space-y-1 ml-4">
+                        <li>NBA/sports business network (agents, team executives, players)</li>
+                        <li>National profile enables out-of-state fundraising</li>
+                        <li>Foundation network and philanthropic community</li>
+                        <li>Yale alumni network and financial services industry connections</li>
+                    </ul>
+                    <p class="text-sm text-gray-800 mt-3">Key question: Can Phil Knight (2010: $400K) be re-engaged? Even modest success in your network can offset Drazan's structural advantages.</p>
+                </div>
+            </div>
+
+            <div class="recommendation-box">
+                <h4 class="font-bold text-lg mb-2">Financial Strategy Recommendation</h4>
+                <p class="text-sm text-gray-800 mb-3">Given Drazan's fundraising head start, your campaign must aggressively pursue dual fundraising strategies:</p>
+
+                <ul class="text-sm text-gray-800 space-y-2 ml-4">
+                    <li><strong>Early Major Donor Cultivation (Feb-March 2026):</strong> Immediate outreach to 2010 major donor base (Phil Knight status must be clarified immediately; Stimson Lumber relationship reassessed). Pitch: "More viable candidate this time, proven track record, new context with Kotek's unpopularity."</li>
+                    <li><strong>Celebrity/Sports Network Activation:</strong> Leverage NBA relationships, teammates from 1990s Trail Blazers era, sports business figures. These donors are less motivated by partisan ideology and more by personal/community connection.</li>
+                    <li><strong>Small Dollar Digital Fundraising:</strong> Digital platforms enable grassroots fundraising. Your foundation work and moderate positioning appeal to younger, smaller-dollar donors. Consider ActBlue for primary; emphasize underdog narrative vs. Drazan's institutional advantage.</li>
+                    <li><strong>Self-Funding Strategy:</strong> If personal resources allow, strategic self-funding (especially for early digital/travel) demonstrates commitment and reduces dependence on traditional donors, particularly valuable in a primary where your unique positioning is a strength.</li>
+                </ul>
+
+                <p class="text-sm text-gray-800 mt-4">Target: Match Drazan's cash pace by May primary (at minimum $500K-$750K cash on hand by April). While you likely won't exceed her total through primary, rough parity in financial resources shifts dynamic from "Drazan has structural advantage" to "this is a competitive primary based on message/positioning."</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6 mt-8">
+                <h3 class="font-bold text-lg mb-4">2010 Campaign Financial Breakdown (Context)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <tr class="border-b">
+                            <th class="text-left p-2 font-bold">Category</th>
+                            <th class="text-right p-2 font-bold">Amount</th>
+                            <th class="text-left p-2 font-bold">Notes</th>
+                        </tr>
+                        <tr class="border-b bg-gray-50">
+                            <td class="p-2"><strong>Total Raised</strong></td>
+                            <td class="text-right p-2 font-bold">$5.6M</td>
+                            <td class="p-2">Lost to Kitzhaber 47.8% to 49.3%</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-2">Phil Knight</td>
+                            <td class="text-right p-2">$400K</td>
+                            <td class="p-2">Status for 2026 unknown</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-2">Stimson Lumber (Miller)</td>
+                            <td class="text-right p-2">$510K</td>
+                            <td class="p-2">Said he won't give again ("too timid")</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-2">Dan Fegan (agent)</td>
+                            <td class="text-right p-2">$100K</td>
+                            <td class="p-2">Sports business network</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2">David Stern (NBA Commissioner)</td>
+                            <td class="text-right p-2">$2,500</td>
+                            <td class="p-2">NBA network connection</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: STRATEGIC ASSESSMENT & PATH FORWARD -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Strategic Assessment & Path Forward</h2>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">SWOT Analysis: Your Campaign Position</h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-green-50 border-l-4 border-green-600 p-6 rounded">
+                        <h4 class="font-bold text-green-900 text-lg mb-3">Strengths</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-green-600 font-bold mr-2">+</span>
+                                <span><strong>Celebrity/Name Recognition:</strong> NBA fame + Portland Trail Blazer connection provides earned media advantage no opponent has</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 font-bold mr-2">+</span>
+                                <span><strong>2010 Near-Miss Proof:</strong> 47.8% in two-candidate race proves viability. Closest Republican in 44 years.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 font-bold mr-2">+</span>
+                                <span><strong>Pro-Choice Positioning:</strong> Differentiates you from Drazan; aligns with Oregon voters (69% support)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 font-bold mr-2">+</span>
+                                <span><strong>Business/Leadership Background:</strong> Yale, financial planner, health-tech founder, foundation leader</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 font-bold mr-2">+</span>
+                                <span><strong>Moderate Brand:</strong> Practical, non-partisan positioning appeals to Oregon's political center and swing voters</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded">
+                        <h4 class="font-bold text-red-900 text-lg mb-3">Weaknesses</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-red-600 font-bold mr-2">-</span>
+                                <span><strong>Late Entry:</strong> Announced Jan 26; Drazan announced Oct 27 (3+ month head start)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 font-bold mr-2">-</span>
+                                <span><strong>Fundraising Disadvantage:</strong> Drazan has $750K-$850K cash on hand; you're building from zero</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 font-bold mr-2">-</span>
+                                <span><strong>Limited Recent Political Profile:</strong> 16 years since 2010 campaign; political engagement unclear 2010-2026</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 font-bold mr-2">-</span>
+                                <span><strong>Donor Uncertainty:</strong> Major 2010 donors (Knight, Stimson Lumber) status unclear or stated unwilling to give</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-600 font-bold mr-2">-</span>
+                                <span><strong>Pro-Choice Primary Liability:</strong> May alienate social conservative GOP primary voters who support Drazan's anti-abortion stance</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded">
+                        <h4 class="font-bold text-blue-900 text-lg mb-3">Opportunities</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-2">→</span>
+                                <span><strong>Kotek's Unpopularity:</strong> 42% disapprove rating (6th worst governor nationally). Homelessness crisis, housing, affordability vulnerabilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-2">→</span>
+                                <span><strong>Drazan's 2022 Loss Baggage:</strong> She lost general election. You can credibly argue 2010 near-miss proves you're more electable</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-2">→</span>
+                                <span><strong>No Third-Party Spoiler:</strong> Unlike 2022 (Betsy Johnson took ~9%), 2026 general is two-candidate race. Simplified choice favors challenger</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-2">→</span>
+                                <span><strong>Digital Advantages:</strong> Digital is 34% of political ad placements nationally. Celebrity/brand narrative amplifies efficiently</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-2">→</span>
+                                <span><strong>Diehl Factor:</strong> If Diehl consolidates conservative vote, Drazan/you split mainstream/moderate GOP, potentially allowing you to win plurality</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-600 p-6 rounded">
+                        <h4 class="font-bold text-yellow-900 text-lg mb-3">Threats</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-yellow-600 font-bold mr-2">!</span>
+                                <span><strong>Oregon's Democratic Lean:</strong> No Republican governor in 44 years. Solid Democratic rating from all major forecasters</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-600 font-bold mr-2">!</span>
+                                <span><strong>2026 Midterm Environment:</strong> Trump in power typically hurts party in power. Anti-Trump sentiment may overcome Kotek's unpopularity</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-600 font-bold mr-2">!</span>
+                                <span><strong>Drazan's Institutional Advantage:</strong> Established candidate, donor network, political infrastructure. Primary could be determined by April</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-600 font-bold mr-2">!</span>
+                                <span><strong>Compressed Timeline:</strong> 3.5 months to primary (Feb 12 to May 19). Limited time to build organization, raise funds, establish message</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-yellow-600 font-bold mr-2">!</span>
+                                <span><strong>Trump Association Risk:</strong> General election opponent will link you to Trump/national GOP. Must differentiate aggressively</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-8 mb-8">
+                <h3 class="font-bold text-lg mb-4">Win Conditions: Primary vs. General</h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-purple-900 text-lg mb-4">Primary Victory Condition (May 19)</h4>
+                        <p class="text-sm text-gray-800 mb-4"><strong>Scenario 1: Direct Plurality Win (Most Likely)</strong></p>
+                        <ul class="text-sm text-gray-800 space-y-2 ml-4 mb-4">
+                            <li>You win 28-35% in three-way race (You vs. Drazan vs. Diehl)</li>
+                            <li>Requires consolidating moderate/establishment GOP + anti-Drazan voters</li>
+                            <li>Diehl siphons conservative vote from Drazan, splitting right</li>
+                            <li>You win without majority if vote is sufficiently fragmented</li>
+                        </ul>
+
+                        <p class="text-sm text-gray-800 mb-4"><strong>Scenario 2: Drazan Stumble</strong></p>
+                        <ul class="text-sm text-gray-800 space-y-2 ml-4 mb-4">
+                            <li>Negative story/gaffe significantly damages Drazan</li>
+                            <li>You surge late as "safe alternative" to damaged frontrunner</li>
+                            <li>Requires Diehl not consolidating enough to prevent Drazan #2</li>
+                        </ul>
+
+                        <p class="text-sm text-gray-800 border-t pt-4"><strong>What You Don't Need:</strong> Majority of GOP primary vote (Oregon doesn't require runoff). Plurality wins in three-way race.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-green-900 text-lg mb-4">General Election Victory Condition (Nov 3)</h4>
+                        <p class="text-sm text-gray-800 mb-4"><strong>Core Challenge:</strong> Win ~50%+ in a state rated Solid Democratic, with opponent at 42% disapprove but benefiting from +10-15 point blue lean</p>
+
+                        <p class="text-sm text-gray-800 mb-4"><strong>Your Path:</strong></p>
+                        <ul class="text-sm text-gray-800 space-y-2 ml-4 mb-4">
+                            <li>Consolidate GOP base (95%+ of primary winner support)</li>
+                            <li>Win at least 15-20% of swing Democrats (focus: women 35-65, suburban moderates)</li>
+                            <li>Win 60%+ of independents (your moderate/non-partisan brand)</li>
+                            <li>Suppress Republican turnout disadvantage vs. 2010</li>
+                            <li>Make election referendum on Kotek's homelessness/housing failures, not Trump</li>
+                        </ul>
+
+                        <p class="text-sm text-gray-800 border-t pt-4"><strong>Mathematical Reality:</strong> You likely need Kotek's approval to drop below 40% (more negative news on homelessness/housing) AND your campaign to effectively argue "choice, not referendum on Trump" to move the 5-7 points needed to win</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-8">
+                <h3 class="font-bold text-lg mb-4">90-Day Priority Action Plan</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded border-l-4 border-blue-600">
+                        <h4 class="font-bold text-blue-900 mb-3">Days 1-30 (Feb 12-Mar 12)</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li><strong>Fundraising:</strong> Intensive donor outreach to 2010 base + sports network. Target $300K-$500K in commitments.</li>
+                            <li><strong>Message Development:</strong> Finalize core messaging framework (electability, pro-choice, moderate positioning).</li>
+                            <li><strong>Digital Launch:</strong> Activate Google/Meta digital presence. Build email list through website/social. Begin small-dollar fundraising.</li>
+                            <li><strong>Earned Media:</strong> Maximize NBA/celebrity angle through media tours, op-eds, interviews in Oregonian, local TV.</li>
+                            <li><strong>Organization:</strong> Hire campaign manager, communications director, digital director. Establish Portland HQ.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded border-l-4 border-orange-600">
+                        <h4 class="font-bold text-orange-900 mb-3">Days 31-60 (Mar 13-Apr 12)</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li><strong>TV Contracting:</strong> Finalize broadcast TV and CTV media buys. Begin TV production for primary spots.</li>
+                            <li><strong>Digital Scaling:</strong> Increase digital ad spend. Launch message testing across voter segments. Optimize based on performance.</li>
+                            <li><strong>Ground Game:</strong> Activate volunteer recruitment, particularly in Portland DMA (70% of voters). Build phone/canvass operation.</li>
+                            <li><strong>Debates/Forums:</strong> Prepare for multiple debates/forums. Train for key contrasts with Drazan/Diehl (your electability, pro-choice differentiation).</li>
+                            <li><strong>Fundraising Acceleration:</strong> Reach $600K-$800K cash on hand by April 1 to match Drazan's pace.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-red-50 p-4 rounded border-l-4 border-red-600">
+                        <h4 class="font-bold text-red-900 mb-3">Days 61-90 (Apr 13-May 12)</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li><strong>TV Campaign Peak:</strong> Maximum TV spend (broadcast + CTV). Earned media from ads/debates amplifies paid message.</li>
+                            <li><strong>Digital Saturation:</strong> Full digital campaign across all channels. Heavy spend in final weeks on high-intent voters.</li>
+                            <li><strong>GOTV Mobilization:</strong> Intensive voter contact program targeting likely GOP primary voters. Mail, phone, digital GOTV.</li>
+                            <li><strong>Coalition Building:</strong> Consolidate business community, moderate Republicans, independents. Publish endorsements strategically.</li>
+                            <li><strong>Primary Victory Preparation:</strong> Draft general election transition plan. Begin vetting general election messaging/operation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded border-l-4 border-green-600">
+                        <h4 class="font-bold text-green-900 mb-3">Post-Primary (If You Win)</h4>
+                        <ul class="text-sm text-gray-800 space-y-2">
+                            <li><strong>Message Pivot:</strong> Shift from primary (moderate vs. conservative split) to general (your record vs. Kotek's record).</li>
+                            <li><strong>Coalition Expansion:</strong> Aggressively pursue swing Democrat/independent voters. De-emphasize Republican identity; emphasize problem-solver brand.</li>
+                            <li><strong>General Election Fundraising:</strong> Reboot fundraising targeting general election swing voter coalition (business moderates, women, young professionals).</li>
+                            <li><strong>Anti-Kotek Narrative:</strong> Make campaign about homelessness crisis, housing failures, cost of living. Center Oregon record, not Trump.</li>
+                            <li><strong>Talent Recruitment:</strong> Expand campaign staff for 6-month general election sprint. Significant digital/TV spending ramp.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: METHODOLOGY -->
+        <section class="mb-12">
+            <h2 class="section-header text-3xl font-bold">Methodology & Data Sources</h2>
+
+            <div class="bg-white rounded-lg shadow p-8">
+                <h3 class="font-bold text-lg mb-4">Research Approach</h3>
+                <p class="text-sm text-gray-700 mb-6">This report synthesizes publicly available intelligence from multiple sources to provide a comprehensive competitive and strategic analysis of the 2026 Oregon gubernatorial race from the perspective of your campaign.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">FCC Political File Analysis</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>Analyzed FCC public political advertising filings on all major Oregon TV stations (Portland, Eugene, Medford markets)</li>
+                            <li>2026 cycle: No gubernatorial candidate has filed TV advertising contracts as of February 2026</li>
+                            <li>2022 reference: Reviewed Christine Drazan's 2022 FCC filings to establish historical TV advertising patterns</li>
+                            <li>NAB forms and contract filings show timing, frequency, and market prioritization of past campaigns</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">Campaign Finance Data</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>Oregon Secretary of State campaign finance filings (2010 historical and 2026 YTD)</li>
+                            <li>Federal Election Commission filings for out-of-state donor patterns</li>
+                            <li>Drazan 2022 gubernatorial campaign finance records</li>
+                            <li>2010 Dudley campaign donor analysis and 2026 re-engagement potential assessment</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">Public Polling & Political Metrics</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>Morning Consult approval tracking (Tina Kotek national comparison)</li>
+                            <li>PPP polling on Oregon voter sentiment (61% prefer anti-Trump candidate)</li>
+                            <li>2022 election results (Kotek vs. Drazan vs. Johnson spoiler dynamics)</li>
+                            <li>2010 election results (your 47.8% performance historical baseline)</li>
+                            <li>Major election forecasters: Cook Political Report, Inside Elections, Sabota's Crystal Ball ratings</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-blue-900 mb-3">National Political Intelligence</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>2026 national political ad spending forecasts and channel breakdown</li>
+                            <li>Gubernatorial race spending benchmarks and national trends</li>
+                            <li>Connected TV (CTV) and digital advertising adoption rates among 2026 campaigns</li>
+                            <li>Midterm election dynamics (Trump in power, out-party advantage patterns)</li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <h4 class="font-bold text-blue-900 mb-3">Candidate & Issue Research</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>Candidate biographical databases (Chris Dudley NBA career, Yale background, foundation work)</li>
+                            <li>Comparative candidate positioning analysis (pro-choice vs. anti-abortion platforms)</li>
+                            <li>Oregon homelessness and housing data (Multnomah County trends, statewide impact)</li>
+                            <li>Oregon voter preferences on abortion, Trump agenda, state governance priorities</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded p-4 mt-6">
+                    <h4 class="font-bold text-blue-900 mb-2">Limitations & Caveats</h4>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>This analysis reflects conditions as of February 12, 2026. Political environments change rapidly; regular updates are recommended.</li>
+                        <li>Candidate position statements, policy platforms, and issue priorities may be updated. Monitor candidate websites and media for evolved positioning.</li>
+                        <li>FCC political file data only covers broadcast TV filings; cable/CTV/digital advertising is not systematically public. Spend estimates are extrapolated.</li>
+                        <li>Fundraising totals reflect publicly reported figures; unreported commitments/pledges may vary.</li>
+                        <li>Polling data reflects point-in-time snapshots; margins of error and sample sizes vary by source.</li>
+                        <li>2010 campaign analysis assumes donor/media landscape has evolved; 16 years is significant time for relationship/network changes.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded mt-6 border-l-4 border-gray-400">
+                    <p class="text-xs text-gray-700"><strong>Report Prepared:</strong> February 2026</p>
+                    <p class="text-xs text-gray-700"><strong>Data Current As Of:</strong> February 12, 2026</p>
+                    <p class="text-xs text-gray-700"><strong>Primary Election Date:</strong> May 19, 2026</p>
+                    <p class="text-xs text-gray-700"><strong>General Election Date:</strong> November 3, 2026</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOSING SUMMARY -->
+        <section class="bg-white rounded-lg shadow p-8">
+            <h2 class="text-2xl font-bold mb-4 text-1e3a8a">Closing Assessment</h2>
+
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                Your entry into the 2026 Oregon gubernatorial race is strategically timely, despite the compressed primary timeline. You enter with significant advantages—celebrity recognition, proven electoral viability, pro-choice positioning aligned with Oregon voters, and a clear differentiation from both your Republican primary opponents and your potential general election opponent.
+            </p>
+
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                The Republican primary is competitive but navigable. Christine Drazan has a fundraising head start, but you have a more competitive positioning (electability narrative, moderate brand, pro-choice advantage). Ed Diehl could consolidate conservative votes, potentially fragmenting the field in your favor. Victory in May requires rapid organization building, aggressive fundraising to match Drazan's pace, and immediate deployment of digital and earned media to establish your candidacy.
+            </p>
+
+            <p class="text-gray-700 mb-4 leading-relaxed">
+                The general election is challenging but winnable. Tina Kotek faces unprecedented unpopularity (42% disapprove, 6th worst governor nationally) combined with genuine Oregon crises (homelessness up 60%, housing crisis, affordability concerns). However, Oregon's Democratic lean and the 2026 midterm environment (Trump in power) create structural headwinds. Your path to victory requires framing the race as a choice between her failed record and your pragmatic alternative, rather than allowing it to become a referendum on Trump and national politics.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+                The next 90 days are critical: establish campaign infrastructure, aggressively fundraise, deploy digital to build awareness, and perform strongly in primary forums and debates. If you can remain competitive with Drazan through April, consolidate momentum into a May primary victory, and pivot your moderate positioning toward swing voters in the general, this is a genuinely competitive race.
+            </p>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-info mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="mb-2"><strong>Dudley for Governor 2026 - Campaign Intelligence Report</strong></p>
+            <p class="mb-2">This report contains proprietary campaign intelligence and strategic analysis. It is intended for campaign staff, authorized advisors, and leadership use only.</p>
+            <p class="mb-2">Primary Election: May 19, 2026 | General Election: November 3, 2026</p>
+            <p>Prepared February 2026 | Confidential - Campaign Strategic Use</p>
+        </div>
+    </footer>
+
+    <!-- Chart.js Initialization -->
+    <script>
+        // Electorate Composition Chart
+        const electorateCtx = document.getElementById('electorateChart');
+        if (electorateCtx) {
+            new Chart(electorateCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Anti-Trump\nSentiment', 'Trump\nSupporters', 'Undecided/\nPersuadable'],
+                    datasets: [{
+                        label: 'Oregon Voter Sentiment',
+                        data: [61, 34, 27],
+                        backgroundColor: [
+                            '#ef4444',
+                            '#3b82f6',
+                            '#9ca3af'
+                        ],
+                        borderColor: [
+                            '#991b1b',
+                            '#1e40af',
+                            '#4b5563'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 70
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
