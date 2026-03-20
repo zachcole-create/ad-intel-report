@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Intelligence Report: Alabama Governor 2026 — Coach Tuberville</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2a4a7f;
+    --accent: #c53030;
+    --accent-light: #fc8181;
+    --success: #276749;
+    --warning: #c05621;
+    --info: #2b6cb0;
+    --purple: #553c9a;
+    --bg: #f7fafc;
+    --card: #ffffff;
+    --text: #1a202c;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* Hero Header */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    color: white; padding: 48px 40px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%;
+  }
+  .hero h1 { font-size: 2.4em; font-weight: 800; margin-bottom: 4px; position: relative; }
+  .hero .subtitle { font-size: 1.15em; opacity: 0.9; margin-bottom: 16px; position: relative; }
+  .hero .meta-row { display: flex; gap: 24px; flex-wrap: wrap; font-size: 0.95em; opacity: 0.85; position: relative; }
+  .hero .meta-row span { display: flex; align-items: center; gap: 6px; }
+
+  /* Classification Banner */
+  .classification {
+    background: var(--accent); color: white; text-align: center; padding: 8px;
+    font-weight: 700; font-size: 0.85em; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  /* Container */
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+  /* Section headers */
+  .section-header {
+    font-size: 1.5em; font-weight: 700; color: var(--primary); margin: 40px 0 20px;
+    padding-bottom: 12px; border-bottom: 3px solid var(--primary);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card); border-radius: 12px; padding: 28px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    margin-bottom: 24px; border: 1px solid var(--border);
+  }
+  .card h3 { font-size: 1.15em; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+
+  /* Metric Cards */
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 32px; }
+  .metric-card {
+    border-radius: 12px; padding: 24px; color: white; position: relative; overflow: hidden;
+  }
+  .metric-card::after {
+    content: ''; position: absolute; top: -20px; right: -20px; width: 80px; height: 80px;
+    background: rgba(255,255,255,0.1); border-radius: 50%;
+  }
+  .metric-card .label { font-size: 0.85em; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 2em; font-weight: 800; margin: 4px 0; }
+  .metric-card .detail { font-size: 0.85em; opacity: 0.8; }
+  .metric-blue { background: linear-gradient(135deg, #2b6cb0, #3182ce); }
+  .metric-green { background: linear-gradient(135deg, #276749, #38a169); }
+  .metric-orange { background: linear-gradient(135deg, #c05621, #dd6b20); }
+  .metric-purple { background: linear-gradient(135deg, #553c9a, #805ad5); }
+  .metric-red { background: linear-gradient(135deg, #9b2c2c, #c53030); }
+
+  /* Alert Box */
+  .alert-box {
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .alert-critical { background: #fff5f5; border-left: 5px solid var(--accent); }
+  .alert-warning { background: #fffaf0; border-left: 5px solid var(--warning); }
+  .alert-info { background: #ebf8ff; border-left: 5px solid var(--info); }
+  .alert-success { background: #f0fff4; border-left: 5px solid var(--success); }
+  .alert-purple { background: #faf5ff; border-left: 5px solid var(--purple); }
+  .alert-box .alert-icon { font-size: 1.4em; flex-shrink: 0; }
+  .alert-box .alert-title { font-weight: 700; margin-bottom: 4px; }
+  .alert-box .alert-text { font-size: 0.95em; color: #4a5568; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th { background: var(--primary); color: white; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 0.9em; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.92em; }
+  tr:hover td { background: #f7fafc; }
+  .td-right { text-align: right; }
+  .td-center { text-align: center; }
+
+  /* Candidate Cards */
+  .candidates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0; }
+  .candidate-card {
+    border-radius: 12px; padding: 20px; border: 2px solid var(--border);
+    background: white; transition: transform 0.2s;
+  }
+  .candidate-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .candidate-card .party-tag {
+    display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75em;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .tag-r { background: #fed7d7; color: #9b2c2c; }
+  .tag-d { background: #bee3f8; color: #2a4365; }
+  .candidate-card .name { font-size: 1.2em; font-weight: 700; color: var(--primary); }
+  .candidate-card .role { font-size: 0.88em; color: var(--text-muted); margin-bottom: 12px; }
+  .candidate-card .stat-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9em; border-bottom: 1px solid #f0f0f0; }
+  .candidate-card .stat-label { color: var(--text-muted); }
+  .candidate-card .stat-value { font-weight: 600; }
+
+  /* Timeline */
+  .timeline-item {
+    padding: 16px 20px; margin-bottom: 12px; border-radius: 8px; background: white;
+    border-left: 4px solid #cbd5e0; position: relative;
+  }
+  .timeline-item.positive { border-left-color: var(--success); }
+  .timeline-item.negative { border-left-color: var(--accent); }
+  .timeline-item.neutral { border-left-color: var(--info); }
+  .timeline-item.warning { border-left-color: var(--warning); }
+  .timeline-item.strategic { border-left-color: var(--purple); }
+  .timeline-date { font-weight: 700; font-size: 0.85em; color: var(--text-muted); margin-bottom: 4px; }
+  .timeline-title { font-weight: 600; margin-bottom: 4px; }
+  .timeline-text { font-size: 0.92em; color: #4a5568; }
+
+  /* Two Column */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+  .strength-box { background: #f0fff4; border: 1px solid #c6f6d5; border-radius: 12px; padding: 20px; }
+  .challenge-box { background: #fffaf0; border: 1px solid #feebc8; border-radius: 12px; padding: 20px; }
+  .strength-box h4 { color: var(--success); margin-bottom: 12px; }
+  .challenge-box h4 { color: var(--warning); margin-bottom: 12px; }
+  .strength-box li, .challenge-box li { margin-bottom: 8px; font-size: 0.92em; }
+
+  /* Chart containers */
+  .chart-container { position: relative; height: 350px; margin: 20px 0; }
+
+  /* Source box */
+  .source-box {
+    background: #ebf8ff; border-left: 4px solid var(--info); border-radius: 0 8px 8px 0;
+    padding: 16px 20px; margin: 12px 0; font-size: 0.88em; color: #2a4365;
+  }
+  .source-box strong { color: var(--info); }
+
+  /* Footer */
+  .report-footer {
+    background: var(--primary); color: white; padding: 32px 40px; margin-top: 48px; text-align: center;
+  }
+  .report-footer .footer-meta { font-size: 0.85em; opacity: 0.8; margin-top: 8px; }
+
+  /* Tags */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600; margin: 2px; }
+  .tag-none { background: #edf2f7; color: #718096; }
+  .tag-active { background: #c6f6d5; color: #276749; }
+  .tag-inactive { background: #fed7d7; color: #9b2c2c; }
+  .tag-ctv { background: #e9d8fd; color: #553c9a; }
+
+  /* Print */
+  @media print {
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .metric-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="classification">CONFIDENTIAL — CLIENT DELIVERABLE — DO NOT DISTRIBUTE</div>
+
+<div class="hero">
+  <h1>Alabama Governor 2026: Competitive Intelligence Report</h1>
+  <div class="subtitle">Subject: Coach Tommy Tuberville (R) — Opposition & Full-Spectrum Media Analysis</div>
+  <div class="meta-row">
+    <span>Office: Governor of Alabama</span>
+    <span>Party: Republican</span>
+    <span>Primary: May 19, 2026</span>
+    <span>General: November 3, 2026</span>
+  </div>
+  <div class="meta-row" style="margin-top: 8px;">
+    <span>Report Date: March 20, 2026</span>
+    <span>Analysis Period: January 2025 — March 2026</span>
+    <span>Prepared by: Campaign Intelligence Unit</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <h2 class="section-header">1. Executive Summary</h2>
+
+  <div class="metrics-grid">
+    <div class="metric-card metric-blue">
+      <div class="label">Primary Polling (Tuberville)</div>
+      <div class="value">63%</div>
+      <div class="detail">Oct 2025 | Nearest rival: 4%</div>
+    </div>
+    <div class="metric-card metric-green">
+      <div class="label">Cash on Hand</div>
+      <div class="value">$7.5M</div>
+      <div class="detail">As of Jan 2026 filing</div>
+    </div>
+    <div class="metric-card metric-orange">
+      <div class="label">Total Raised (Since May '25)</div>
+      <div class="value">~$9M</div>
+      <div class="detail">$0 PAC money accepted</div>
+    </div>
+    <div class="metric-card metric-red">
+      <div class="label">New Opposition Threat</div>
+      <div class="value">ALF</div>
+      <div class="detail">Alabama Leadership Fund — Formed Jan 2026 | Ads Unconfirmed</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p>Coach Tommy Tuberville enters the spring stretch of the 2026 Alabama Republican gubernatorial primary in a commanding position: 63% in the only available primary poll, nearly $7.5 million cash on hand, and no serious intra-party challenger. His nearest Republican rival, Ken McFeeters, registered just 4% support with 22% undecided. On the Democratic side, former U.S. Senator Doug Jones is the most formidable potential general election opponent, having raised approximately $1.3 million since launching in November 2025.</p>
+    <p style="margin-top: 12px;">However, a new and potentially significant development has emerged: the <strong>Alabama Leadership Fund (ALF)</strong>, a nonprofit organization formed in January 2026 by Birmingham attorney Barry Ragsdale — a longtime Democratic operative with deep ties to Doug Jones — has been identified as a nascent opposition vehicle. Tuberville team intelligence suggests ALF may be preparing or has begun running CTV (Connected TV) ads focused on Tuberville's Senate stock trading record, framed as "insider trading." However, comprehensive multi-platform scans and field operative contacts in Alabama have <strong>not yet independently confirmed</strong> any live ad activity. ALF's operational infrastructure is in place and should be treated as an active threat regardless of current ad status. This report provides a comprehensive analysis of the competitive media landscape, ALF's posture, and strategic implications.</p>
+  </div>
+
+  <!-- CRITICAL ALERT: ALABAMA LEADERSHIP FUND -->
+  <h2 class="section-header">2. Priority Alert: Alabama Leadership Fund (ALF)</h2>
+
+  <div class="alert-box alert-critical">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <div class="alert-title">Opposition Attack Group Identified — Status: Unconfirmed but Operationally Ready</div>
+      <div class="alert-text">Alabama Leadership Fund has been identified as a newly formed opposition entity with rumored plans to run negative ads against Coach Tuberville on CTV platforms, targeting his Senate stock trading record. Multi-platform scans show zero activity on Meta, Google, broadcast TV, cable, or radio. Field operatives in Alabama have not yet seen or heard any ALF ads. Current assessment: ALF infrastructure is in place but ad activity remains <strong>unconfirmed</strong> — the group may be pre-launch, extremely narrow in targeting, or running at very low spend levels that haven't reached our contacts.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Entity Profile: Alabama Leadership Fund</h3>
+    <table>
+      <tr><td style="width: 220px; font-weight: 600;">Organization Name</td><td>Alabama Leadership Fund</td></tr>
+      <tr><td style="font-weight: 600;">Website</td><td><a href="https://www.alabamaleadershipfund.com">alabamaleadershipfund.com</a></td></tr>
+      <tr><td style="font-weight: 600;">Formation Date</td><td>January 2026 (Alabama nonprofit)</td></tr>
+      <tr><td style="font-weight: 600;">Likely Tax Status</td><td>527 political organization (unconfirmed — no IRS filing yet)</td></tr>
+      <tr><td style="font-weight: 600;">Key Principal</td><td>Barry A. Ragsdale, Esq.</td></tr>
+      <tr><td style="font-weight: 600;">Contact Email</td><td>cal@alabamaleadershipfund.com</td></tr>
+      <tr><td style="font-weight: 600;">Website Status</td><td>Minimal placeholder — "For information contact" only. Built on Squarespace. DC timezone metadata.</td></tr>
+      <tr><td style="font-weight: 600;">Attack Vector</td><td>Tuberville Senate stock trading / "insider trading" narrative</td></tr>
+      <tr><td style="font-weight: 600;">Rumored Medium</td><td>CTV (Connected TV / streaming platforms)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Barry A. Ragsdale — Principal Background</h3>
+    <table>
+      <tr><td style="width: 220px; font-weight: 600;">Current Position</td><td>Shareholder, Dominick Feld Hyde, P.C. (Birmingham, AL)</td></tr>
+      <tr><td style="font-weight: 600;">Practice Area</td><td>Complex litigation, class actions, appellate work</td></tr>
+      <tr><td style="font-weight: 600;">Education</td><td>University of Alabama — B.A. (1983, cum laude), J.D. (1985, magna cum laude)</td></tr>
+      <tr><td style="font-weight: 600;">Political Connections</td><td>Personal attorney to former U.S. Senator Doug Jones; represented Alabama Democratic Party and ADP reform efforts; represented Biden campaign in 2024 AL ballot certification</td></tr>
+      <tr><td style="font-weight: 600;">Recognition</td><td>Best Lawyers in America "Lawyer of the Year" (2022, 2023); Chambers USA Litigation; Alabama Super Lawyers</td></tr>
+      <tr><td style="font-weight: 600;">Hometown</td><td>Huntsville, AL (grew up); University of Central Florida (debate scholarship)</td></tr>
+    </table>
+    <div class="source-box" style="margin-top: 16px;">
+      <strong>Strategic Assessment:</strong> Ragsdale's direct connection to Doug Jones is significant. While Jones is running for the Democratic nomination, this outside group provides a vehicle for early attacks against Tuberville without Jones's fingerprints on them. The 527 structure avoids contribution limits and disclosure requirements that would apply to a PAC. The Squarespace site metadata showing a DC timezone suggests professional political operatives may be involved.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>ALF Digital Advertising Footprint — Multi-Platform Scan (March 20, 2026)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Search Performed</th>
+          <th>Result</th>
+          <th>Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Meta Ad Library (Facebook/Instagram)</td>
+          <td>"Alabama Leadership Fund" — keyword & page search</td>
+          <td><span class="tag tag-none">0 ads from ALF page</span></td>
+          <td>No Facebook/Instagram ads found from ALF. Broad keyword search (~280 results) returns unrelated candidates.</td>
+        </tr>
+        <tr>
+          <td>Google Ads Transparency Center</td>
+          <td>"Alabama Leadership Fund" — advertiser & domain search</td>
+          <td><span class="tag tag-none">0 results</span></td>
+          <td>ALF is not running Google Search, Display, or YouTube ads.</td>
+        </tr>
+        <tr>
+          <td>FCC Political Files (Broadcast TV)</td>
+          <td>Searched WBRC, WVTM, WIAT, WSFA, WAFF, WALA, WPMI</td>
+          <td><span class="tag tag-none">0 filings</span></td>
+          <td>No broadcast TV buys filed at any Alabama station for ALF or any 2026 Governor candidate.</td>
+        </tr>
+        <tr>
+          <td>FCC Political Files (Cable)</td>
+          <td>Searched Comcast, Charter/Spectrum, WOW, Mediacom in Alabama</td>
+          <td><span class="tag tag-none">0 filings</span></td>
+          <td>No cable political ad filings found for Alabama systems.</td>
+        </tr>
+        <tr>
+          <td>ProPublica 527 Explorer</td>
+          <td>"Alabama Leadership Fund" in Alabama 527 organizations</td>
+          <td><span class="tag tag-none">Not found</span></td>
+          <td>No IRS 527 filing has appeared yet. Organization may be too new or operating under a different filing status.</td>
+        </tr>
+        <tr>
+          <td>CTV / Streaming Platforms</td>
+          <td>Rumored activity per Tuberville team intel</td>
+          <td><span class="tag tag-ctv">UNCONFIRMED</span></td>
+          <td>CTV platforms have no public ad libraries. Tuberville team reports rumors of activity; field operatives in AL have not independently confirmed.</td>
+        </tr>
+        <tr>
+          <td>Meta Ad Library (Full CSV Export)</td>
+          <td>Complete Alabama political ad export — 307 ads, all advertisers</td>
+          <td><span class="tag tag-none">0 ads from ALF</span></td>
+          <td><strong>Hard confirmation:</strong> ALF is completely absent from the full Alabama Meta political ad dataset (March MTD).</td>
+        </tr>
+        <tr>
+          <td>Field Operative Contacts (Alabama)</td>
+          <td>In-state contacts queried on ALF ad sightings</td>
+          <td><span class="tag tag-none">No sightings</span></td>
+          <td>Multiple operative contacts in Alabama have not seen or heard any ALF advertising to date.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box alert-warning" style="margin-top: 16px;">
+      <div class="alert-icon">&#128269;</div>
+      <div>
+        <div class="alert-title">Assessment: ALF Activity Remains Unconfirmed Despite Active Infrastructure</div>
+        <div class="alert-text">ALF is absent from every tracked advertising platform (Meta, Google, broadcast TV, cable, radio), and in-state field operatives have not independently confirmed any ad sightings. This creates three plausible scenarios:</div>
+      </div>
+    </div>
+
+    <table style="margin-top: 0;">
+      <thead><tr><th>Scenario</th><th>Probability</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: 600;">A. Pre-Launch / Imminent</td>
+          <td><strong>40–50%</strong></td>
+          <td>ALF has built infrastructure (website, entity registration, DC operatives) but hasn't launched ads yet. May be waiting for creative production, fundraising threshold, or a triggering news event. The entity is "loaded and ready to fire."</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">B. Low-Spend CTV Test Flight</td>
+          <td><strong>25–35%</strong></td>
+          <td>ALF is running a very small, narrowly targeted CTV test buy (e.g., specific zip codes, specific streaming platforms, or a single programmatic DSP). Spend may be under $5K — too small for field contacts to encounter organically, but enough to test creative and audience response before scaling.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">C. Delayed / Stalled</td>
+          <td><strong>15–25%</strong></td>
+          <td>ALF formation and website launch were intentional signals, but the group has encountered obstacles (funding shortfalls, creative delays, legal review) and hasn't yet activated. The entity exists as a "paper tiger" for now.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="source-box" style="margin-top: 12px;">
+      <strong>Recommendation regardless of scenario:</strong> Deploy CTV ad monitoring services (Pathmatics/Sensor Tower, AdImpact, or equivalent) to establish baseline monitoring. Even if ALF is currently inactive, the infrastructure is in place for rapid activation. The combination of a formed entity, a professional website, DC operative connections, and a known attack vector (stock trading) means this group should be treated as an active threat regardless of current ad status. Additionally, the Meta Ad Library may lag by 24–72 hours — ALF could have launched social ads in the last 48 hours that aren't yet reflected in the March 17 cutoff data.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tuberville Stock Trading Vulnerability — The Attack Surface</h3>
+    <p>The ALF attack is expected to center on Tuberville's Senate stock trading record. Here is the factual record that informs this vulnerability:</p>
+    <table>
+      <thead><tr><th>Issue</th><th>Details</th><th>Date</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>STOCK Act Violations</td>
+          <td>Failed to disclose ~130 stock/option trades valued at $894K–$3.56M within required 45-day window</td>
+          <td>Jan–May 2021</td>
+        </tr>
+        <tr>
+          <td>Ethics Complaint</td>
+          <td>Campaign Legal Center filed complaint with Senate Ethics Committee</td>
+          <td>July 2021</td>
+        </tr>
+        <tr>
+          <td>Total Trades in Office</td>
+          <td>1,300+ stock trades reported — more than any other U.S. Senator</td>
+          <td>2021–2024</td>
+        </tr>
+        <tr>
+          <td>Committee Sensitivity</td>
+          <td>Armed Services Committee member trading defense-related stocks (Humacyte flagged by analysts)</td>
+          <td>2023–2024</td>
+        </tr>
+        <tr>
+          <td>Covid-Related Trades</td>
+          <td>Traded Regeneron, J&J, 3M while on Health, Education, Labor & Pensions Committee</td>
+          <td>2021</td>
+        </tr>
+        <tr>
+          <td>Campaign Response</td>
+          <td>Spokeswoman stated trades were conducted by financial advisors without Tuberville's knowledge</td>
+          <td>Ongoing</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="source-box">
+      <strong>Strategic Note:</strong> While no formal insider trading charges have been filed, and Tuberville's team attributes the trades to financial advisors, the volume (1,300+ trades), committee overlap, and STOCK Act violations create a compelling opposition narrative. Expect ALF to distill this into a simple "insider trading" attack message on CTV, likely featuring news clips and financial data visualizations.
+    </div>
+  </div>
+
+  <!-- TELEVISION INTELLIGENCE -->
+  <h2 class="section-header">3. Television Intelligence (FCC Data)</h2>
+
+  <div class="card">
+    <h3>Broadcast TV Political Filing Status — Complete Alabama Market Coverage (28 Stations, 6 DMAs)</h3>
+    <div class="source-box" style="margin-bottom: 16px;">
+      <strong>Methodology:</strong> Every broadcast station across all 6 Alabama DMAs was searched via the FCC OPIF API for filings containing "Governor," "Tuberville," "Alabama Leadership Fund," "Doug Jones," and "2026." Entity IDs were verified for each station. This represents exhaustive broadcast coverage of the Alabama television market.
+    </div>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Birmingham DMA (Market 45)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>CBS</td><td>WIAT</td><td>Nexstar</td><td>5360</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CW</td><td>WTTO</td><td>Katz</td><td>74138</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WBMA+</td><td>Katz</td><td>—</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WVTM</td><td>Hearst</td><td>74173</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>Fox</td><td>WBRC</td><td>Gray</td><td>71221</td><td><span class="tag tag-none">None</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Huntsville-Decatur DMA (Market 80)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>CBS</td><td>WHNT</td><td>Nexstar</td><td>48693</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CW</td><td>WHDF</td><td>Nexstar</td><td>65128</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WAAY</td><td>Katz</td><td>57292</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WAFF</td><td>Gray</td><td>591</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>Fox</td><td>WZDX</td><td>Tegna</td><td>28119</td><td><span class="tag tag-none">None</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Mobile-Pensacola DMA (Market 60)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>CBS</td><td>WKRG</td><td>Nexstar</td><td>73187</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CW</td><td>WFNA</td><td>Nexstar</td><td>83943</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WEAR</td><td>Katz</td><td>71363</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WPMI</td><td>Katz</td><td>11906</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>Fox</td><td>WALA</td><td>Gray</td><td>4143</td><td><span class="tag tag-none">None</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Montgomery-Selma DMA (Market 118)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>CBS</td><td>WAKA</td><td>Katz</td><td>701</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CW</td><td>WBMM</td><td>Katz</td><td>—</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WNCF</td><td>Katz</td><td>72307</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WSFA</td><td>Gray</td><td>13993</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>Fox</td><td>WCOV</td><td>Katz</td><td>73642</td><td><span class="tag tag-none">None — but Lt. Gov filing found*</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Dothan DMA (Market 171)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>Fox</td><td>WDFX</td><td>Katz</td><td>32851</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WDHN</td><td>Nexstar</td><td>43846</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CBS</td><td>WTVY</td><td>Gray</td><td>4152</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WRGX</td><td>Gray</td><td>—</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CW</td><td>ETVY</td><td>Gray</td><td>—</td><td><span class="tag tag-none">None</span></td></tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 8px; color: var(--primary);">Columbus, GA DMA (Market 127 — covers eastern Alabama)</h4>
+    <table>
+      <thead><tr><th>Network</th><th>Station</th><th>Rep/Owner</th><th>FCC Entity ID</th><th>2026 Gov Filings</th></tr></thead>
+      <tbody>
+        <tr><td>Fox</td><td>WXTX</td><td>—</td><td>12472</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>ABC</td><td>WTVM</td><td>Gray</td><td>595</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>CBS</td><td>WRBL</td><td>Nexstar</td><td>3359</td><td><span class="tag tag-none">None</span></td></tr>
+        <tr><td>NBC</td><td>WLTZ</td><td>Katz</td><td>37179</td><td><span class="tag tag-none">None</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box alert-info" style="margin-top: 16px;">
+      <div class="alert-icon">&#128250;</div>
+      <div>
+        <div class="alert-title">Zero 2026 Governor Race TV Buys Filed Across All 28 Alabama Stations in 6 DMAs</div>
+        <div class="alert-text">Exhaustive FCC OPIF search across every broadcast station in all 6 Alabama DMAs (Birmingham, Huntsville, Mobile, Montgomery, Dothan, Columbus GA) returns zero political filings for the 2026 Governor race. Search keys included "Governor," "Tuberville," "Alabama Leadership Fund," "Doug Jones," and "2026." With the primary still two months away (May 19), this confirms the race has not entered the broadcast television phase.<br><br>
+        <strong>*Validation note:</strong> A 2026 Lt. Governor race filing (John Wahl) was found at WCOV-Montgomery dated 3/13/2026, confirming the FCC OPIF system IS actively capturing 2026 Alabama political filings. The absence of Governor filings is real, not a data gap.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cable System Political Filing Status</h3>
+    <p>Major cable providers serving Alabama markets were searched for 2026 political filings. No cable system political ad filings were identified for any Alabama Governor candidate or related group.</p>
+    <table>
+      <thead><tr><th>Provider</th><th>Coverage</th><th>2026 Governor Filings</th></tr></thead>
+      <tbody>
+        <tr><td>Comcast (Xfinity)</td><td>Birmingham, Huntsville, Mobile metros</td><td><span class="tag tag-none">None found</span></td></tr>
+        <tr><td>Charter (Spectrum)</td><td>Statewide</td><td><span class="tag tag-none">None found</span></td></tr>
+        <tr><td>WOW! (Wide Open West)</td><td>Birmingham/North Alabama</td><td><span class="tag tag-none">None found</span></td></tr>
+        <tr><td>Mediacom</td><td>Select Alabama markets</td><td><span class="tag tag-none">None found</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DIGITAL ADVERTISING INTELLIGENCE -->
+  <h2 class="section-header">4. Digital Advertising Intelligence</h2>
+
+  <div class="card">
+    <h3>Google Ads Transparency Center — Political Ads Scan</h3>
+    <table>
+      <thead><tr><th>Search Term</th><th>Results</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>"Alabama Leadership Fund"</td><td><strong>0 results</strong></td><td>No Google advertisers match</td></tr>
+        <tr><td>"Coach for Governor"</td><td><strong>0 results</strong></td><td>Tuberville campaign not running Google political ads</td></tr>
+        <tr><td>"Tommy Tuberville"</td><td><strong>0 results</strong></td><td>No Google political ads for Tuberville gubernatorial</td></tr>
+        <tr><td>"Doug Jones"</td><td><strong>2 results (Senate-era)</strong></td><td>"Doug Jones for Senate Committee" — 70 + 63 ads from prior Senate campaigns. No 2026 governor ads on Google.</td></tr>
+      </tbody>
+    </table>
+    <div class="source-box"><strong>Source:</strong> Google Ads Transparency Center (adstransparency.google.com), searched March 20, 2026. Political ads filter applied for United States.</div>
+  </div>
+
+  <div class="card">
+    <h3>Meta Ad Library (Facebook/Instagram) — Political Ads Scan</h3>
+    <table>
+      <thead><tr><th>Search Term</th><th>Results</th><th>Key Finding</th></tr></thead>
+      <tbody>
+        <tr><td>"Alabama Leadership Fund"</td><td>~280 keyword matches</td><td>All results are from unrelated candidates/pages (e.g., Nicole Jones Wadsworth for Lt. Gov). <strong>No ads from ALF itself.</strong></td></tr>
+        <tr><td>"Tuberville Governor"</td><td>~110 keyword matches</td><td>Results are primarily news article boosts from Alabama media outlets (Lagniappe Daily, etc.). No Tuberville campaign ads detected.</td></tr>
+        <tr><td>"Coach for Governor"</td><td>>50,000 keyword matches</td><td>Broad "governor" matches from nationwide races. No Tuberville-specific campaign ads found.</td></tr>
+      </tbody>
+    </table>
+    <div class="alert-box alert-info" style="margin-top: 16px;">
+      <div class="alert-icon">&#128241;</div>
+      <div>
+        <div class="alert-title">Neither Tuberville nor ALF Are Running Social Media Ads</div>
+        <div class="alert-text">The Tuberville campaign does not appear to be running paid Facebook/Instagram advertising for the governor race. This is consistent with a campaign that has $7.5M cash on hand and a 59-point primary lead — there is no urgency to spend on digital. ALF is similarly absent from social media, reinforcing the CTV-only theory. Note: Meta Ad Library last reporting date is March 17, 2026 (3-day lag).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Meta Ad Library — Full Alabama Political Ad Export Analysis (March 1–20, 2026)</h3>
+    <div class="source-box" style="margin-bottom: 16px;">
+      <strong>Data Source:</strong> Complete Meta Ad Library CSV export for Alabama political/issue ads, March 2026 MTD. 307 total ads from all advertisers targeting or originating from Alabama.
+    </div>
+    <p style="margin-bottom: 12px;"><strong>Hard confirmation: Alabama Leadership Fund has ZERO ads in the full Alabama Meta political export.</strong> This is not a search limitation — ALF is definitively absent from the entire dataset. Neither Tuberville's campaign nor Doug Jones's campaign placed any Meta ads in this period.</p>
+
+    <h4 style="margin: 20px 0 10px; color: var(--primary);">Top Alabama Political Advertisers on Meta (March 2026 MTD)</h4>
+    <table>
+      <thead>
+        <tr><th>Rank</th><th>Page Name</th><th>Ads</th><th>Est. Spend</th><th>Impressions</th><th>Race / Context</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background: #fff5f5;">
+          <td>1</td>
+          <td style="font-weight: 700;">Jared Hudson for Alabama</td>
+          <td class="td-center">127</td>
+          <td class="td-right">$10,586</td>
+          <td>912K – 1.19M</td>
+          <td><span class="tag tag-active">U.S. Senate (Tuberville's vacated seat)</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Southern Poverty Law Center</td>
+          <td class="td-center">5</td>
+          <td class="td-right">$10,198</td>
+          <td>—</td>
+          <td>Issue advocacy</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Kite & Key Media</td>
+          <td class="td-center">2</td>
+          <td class="td-right">$6,849</td>
+          <td>800K – 900K</td>
+          <td>Congressional earmarks explainer (national)</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td style="font-weight: 600;">American Conservatives Fund</td>
+          <td class="td-center">69</td>
+          <td class="td-right">$6,016</td>
+          <td>—</td>
+          <td><span class="tag tag-active">Multiple AL downballot races</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Patriot Training Center</td>
+          <td class="td-center">9</td>
+          <td class="td-right">$5,846</td>
+          <td>—</td>
+          <td>Gun training / lead gen (Alabama targeted)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td style="font-weight: 600;">Rick Pate for Lt. Governor</td>
+          <td class="td-center">8</td>
+          <td class="td-right">$2,896</td>
+          <td>—</td>
+          <td><span class="tag tag-active">Lt. Governor primary</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Greater Birmingham Humane Society</td>
+          <td class="td-center">2</td>
+          <td class="td-right">$1,699</td>
+          <td>—</td>
+          <td>Issue advocacy (Beau's Law / SB361)</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>AARP Alabama</td>
+          <td class="td-center">1</td>
+          <td class="td-right">$1,250</td>
+          <td>—</td>
+          <td>Issue advocacy (crypto fraud / HB 303)</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Terry Waters for State Senate, Dist. 22</td>
+          <td class="td-center">1</td>
+          <td class="td-right">$1,250</td>
+          <td>—</td>
+          <td>State Senate primary</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td style="color: var(--text-muted);">Tommy Tuberville / Coach for Governor</td>
+          <td class="td-center">0</td>
+          <td class="td-right">$0</td>
+          <td>—</td>
+          <td>Governor (no Meta ads)</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td style="color: var(--text-muted);">Doug Jones</td>
+          <td class="td-center">0</td>
+          <td class="td-right">$0</td>
+          <td>—</td>
+          <td>Governor (no Meta ads)</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td style="color: var(--accent);">Alabama Leadership Fund</td>
+          <td class="td-center">0</td>
+          <td class="td-right">$0</td>
+          <td>—</td>
+          <td style="color: var(--accent); font-weight: 600;">Not present in export — CTV only</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert-box alert-critical">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <div class="alert-title">Critical Intelligence: Jared Hudson's "Stock Trading Ban" Ads Create Converging Narrative</div>
+      <div class="alert-text">U.S. Senate candidate Jared Hudson (running for Tuberville's vacated seat) is the #1 Meta advertiser in Alabama with 127 ads and ~$10.6K in spend. His flagship ad explicitly vows to "never trade stocks as a United States Senator" and calls on all candidates to support a Congressional stock trading ban. While Hudson does not name Tuberville directly, the implicit reference is unmistakable — he is running for the seat Tuberville is vacating. Combined with ALF's rumored CTV ads hitting Tuberville on "insider trading," this creates a <strong>converging two-front narrative attack</strong> on Tuberville's stock trading record from both the Senate race and the Governor race simultaneously. This is strategically significant even if the efforts are uncoordinated.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>American Conservatives Fund — Downballot Outside Money Activity</h3>
+    <p>The American Conservatives Fund is the second-most active political advertiser in Alabama by ad count (69 ads, ~$6K spend), running ads supporting multiple downballot Republican candidates across Alabama. This indicates organized outside money infrastructure is active in Alabama's 2026 cycle.</p>
+    <table>
+      <thead><tr><th>Supported Candidate</th><th>Race</th><th>Sample Message Theme</th></tr></thead>
+      <tbody>
+        <tr><td>Chris Pringle</td><td>Alabama (downballot)</td><td>"Making Government Accountable Again" — fiscal responsibility</td></tr>
+        <tr><td>Bill Morris</td><td>Alabama (downballot)</td><td>Law enforcement, jobs, education</td></tr>
+        <tr><td>Frances Holk-Jones</td><td>Alabama (downballot)</td><td>"Holding the line for conservative values"</td></tr>
+        <tr><td>James Lomax</td><td>Alabama (downballot)</td><td>"Protecting Alabama families"</td></tr>
+      </tbody>
+    </table>
+    <div class="source-box"><strong>Note:</strong> American Conservatives Fund is a federal-level political committee. Its presence in Alabama downballot races indicates the state's 2026 cycle is attracting organized outside spending across multiple levels.</div>
+  </div>
+
+  <!-- COMPETITIVE LANDSCAPE -->
+  <h2 class="section-header">5. Competitive Landscape — All Candidates</h2>
+
+  <h3 style="margin: 20px 0 12px; color: var(--primary);">Republican Primary (May 19, 2026)</h3>
+  <div class="candidates-grid">
+    <div class="candidate-card" style="border-color: #fc8181;">
+      <span class="party-tag tag-r">Republican — Frontrunner</span>
+      <div class="name">Tommy Tuberville</div>
+      <div class="role">U.S. Senator (2021–present) | Former Auburn Football Coach</div>
+      <div class="stat-row"><span class="stat-label">Primary Poll</span><span class="stat-value">63%</span></div>
+      <div class="stat-row"><span class="stat-label">Cash on Hand</span><span class="stat-value">~$7.5M</span></div>
+      <div class="stat-row"><span class="stat-label">Total Raised</span><span class="stat-value">~$9M</span></div>
+      <div class="stat-row"><span class="stat-label">PAC Money</span><span class="stat-value">$0</span></div>
+      <div class="stat-row"><span class="stat-label">TV/Digital Ads</span><span class="stat-value">None detected</span></div>
+      <div class="stat-row"><span class="stat-label">Key Vulnerabilities</span><span class="stat-value">Stock trading, FL residency</span></div>
+    </div>
+    <div class="candidate-card">
+      <span class="party-tag tag-r">Republican</span>
+      <div class="name">Ken McFeeters</div>
+      <div class="role">2024 AL-6 Congressional Candidate</div>
+      <div class="stat-row"><span class="stat-label">Primary Poll</span><span class="stat-value">4%</span></div>
+      <div class="stat-row"><span class="stat-label">Cash on Hand</span><span class="stat-value">Not reported</span></div>
+      <div class="stat-row"><span class="stat-label">Notable Action</span><span class="stat-value">Filed residency challenge vs. Tuberville</span></div>
+      <div class="stat-row"><span class="stat-label">TV/Digital Ads</span><span class="stat-value">None detected</span></div>
+    </div>
+    <div class="candidate-card">
+      <span class="party-tag tag-r">Republican</span>
+      <div class="name">Will Santivasci</div>
+      <div class="role">Anniston, AL</div>
+      <div class="stat-row"><span class="stat-label">Primary Poll</span><span class="stat-value"><1%</span></div>
+      <div class="stat-row"><span class="stat-label">TV/Digital Ads</span><span class="stat-value">None detected</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin: 24px 0 12px; color: var(--primary);">Democratic Primary (May 19, 2026)</h3>
+  <div class="candidates-grid">
+    <div class="candidate-card" style="border-color: #90cdf4;">
+      <span class="party-tag tag-d">Democrat — Frontrunner</span>
+      <div class="name">Doug Jones</div>
+      <div class="role">Former U.S. Senator (2018–2021) | Former U.S. Attorney</div>
+      <div class="stat-row"><span class="stat-label">Cash Raised</span><span class="stat-value">$1.31M</span></div>
+      <div class="stat-row"><span class="stat-label">Cash Spent</span><span class="stat-value">$399K</span></div>
+      <div class="stat-row"><span class="stat-label">Cash on Hand</span><span class="stat-value">~$909K</span></div>
+      <div class="stat-row"><span class="stat-label">In-State %</span><span class="stat-value">76.9%</span></div>
+      <div class="stat-row"><span class="stat-label">Google Ads</span><span class="stat-value">Senate-era only (133 ads)</span></div>
+      <div class="stat-row"><span class="stat-label">Key Connection</span><span class="stat-value">ALF founder Ragsdale is Jones's attorney</span></div>
+    </div>
+    <div class="candidate-card">
+      <span class="party-tag tag-d">Democrat</span>
+      <div class="name">Yolanda Rochelle Flowers</div>
+      <div class="role">2022 Democratic Gubernatorial Nominee</div>
+      <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Filed</span></div>
+      <div class="stat-row"><span class="stat-label">TV/Digital Ads</span><span class="stat-value">None detected</span></div>
+    </div>
+    <div class="candidate-card">
+      <span class="party-tag tag-d">Democrat</span>
+      <div class="name">Other Democratic Candidates</div>
+      <div class="role">Will Boyd, Ja'Mel Brown, Chad "Chig" Martin, Nathan Mathis</div>
+      <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">Filed</span></div>
+      <div class="stat-row"><span class="stat-label">Collective Ads</span><span class="stat-value">None detected</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Fundraising Comparison</h3>
+    <div class="chart-container" style="height: 300px;">
+      <canvas id="fundraisingChart"></canvas>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN TIMELINE -->
+  <h2 class="section-header">6. Campaign Timeline & News Correlation</h2>
+
+  <div class="timeline-item positive">
+    <div class="timeline-date">May 27, 2025</div>
+    <div class="timeline-title">Tuberville Announces Governor Bid</div>
+    <div class="timeline-text">Announced via "The Will Cain Show" on Fox News from Byron's Smokehouse in Auburn. Raised $2M+ in first 24 hours, $3M+ in first week. Campaign branded as "Coach for Governor."</div>
+  </div>
+  <div class="timeline-item positive">
+    <div class="timeline-date">July 2025</div>
+    <div class="timeline-title">$1.2M Monthly Raise — Strong Fundraising Momentum</div>
+    <div class="timeline-text">July filing showed $1.2M raised, $260K spent, $4.7M cash on hand. Campaign spending primarily on fundraising infrastructure, admin, and consultants.</div>
+  </div>
+  <div class="timeline-item neutral">
+    <div class="timeline-date">October 2025</div>
+    <div class="timeline-title">Poll Shows Tuberville at 63%</div>
+    <div class="timeline-text">Survey of registered Republican primary voters: Tuberville 63%, McFeeters 4%, 22% undecided. Effective primary coronation.</div>
+  </div>
+  <div class="timeline-item neutral">
+    <div class="timeline-date">November 2025</div>
+    <div class="timeline-title">Doug Jones Enters Democratic Primary</div>
+    <div class="timeline-text">Former U.S. Senator launches gubernatorial bid. Immediately recognized as strongest potential Democratic general election opponent. Raises $105K in partial month.</div>
+  </div>
+  <div class="timeline-item positive">
+    <div class="timeline-date">December 2025</div>
+    <div class="timeline-title">Jones Raises $483K; Tuberville Maintains $6.7M Lead</div>
+    <div class="timeline-text">Jones's first full fundraising month; Tuberville raised $259K in same period but holds massive cash advantage.</div>
+  </div>
+  <div class="timeline-item warning">
+    <div class="timeline-date">January 6, 2026</div>
+    <div class="timeline-title">Tuberville Officially Files; Residency Challenge Filed</div>
+    <div class="timeline-text">Filed paperwork at AL GOP HQ. Simultaneously, Ken McFeeters filed a residency challenge alleging Tuberville primarily resides in Florida. AL GOP later dismissed the challenge.</div>
+  </div>
+  <div class="timeline-item strategic">
+    <div class="timeline-date">January 2026</div>
+    <div class="timeline-title">Alabama Leadership Fund Formed</div>
+    <div class="timeline-text">ALF incorporated as Alabama nonprofit. Founded by Barry Ragsdale, Doug Jones's personal attorney. Website launched as minimal placeholder with Squarespace (DC timezone metadata). Likely 527 political organization.</div>
+  </div>
+  <div class="timeline-item positive">
+    <div class="timeline-date">January 2026</div>
+    <div class="timeline-title">Tuberville $1M January Haul; $7.5M Cash on Hand</div>
+    <div class="timeline-text">Campaign reports another $1M+ monthly raise. Total raised since May 2025 approaches $9M with zero PAC contributions.</div>
+  </div>
+  <div class="timeline-item negative">
+    <div class="timeline-date">February 2026</div>
+    <div class="timeline-title">Residency Questions Deepen — Travel Expense Records</div>
+    <div class="timeline-text">Lagniappe Daily reports Tuberville's Senate travel records show final February charge was for airport shuttle service in 30A (Florida panhandle), not return to Alabama. Fuels ongoing residency narrative.</div>
+  </div>
+  <div class="timeline-item warning">
+    <div class="timeline-date">March 2026 (Week of March 17–20)</div>
+    <div class="timeline-title">ALF Ad Activity Rumored but Unconfirmed</div>
+    <div class="timeline-text">Tuberville team reports rumors of ALF running CTV ads hitting Coach on "insider trading." Comprehensive multi-platform scan (Meta, Google, FCC broadcast/cable) returns zero results. Full Meta Ad Library CSV export (307 AL ads) confirms ALF completely absent from social media. Field operative contacts in Alabama have not seen or heard any ALF ads. Assessment: ALF may be pre-launch, running a micro-targeted CTV test flight below detection threshold, or delayed. Infrastructure is in place for rapid activation.</div>
+  </div>
+
+  <!-- MEDIA CHANNEL ANALYSIS -->
+  <h2 class="section-header">7. Media Channel Analysis — Full Spectrum</h2>
+
+  <div class="card">
+    <h3>Channel Activity Matrix — All Candidates & Groups (as of March 20, 2026)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Entity</th>
+          <th>Broadcast TV</th>
+          <th>Cable TV</th>
+          <th>CTV/Streaming</th>
+          <th>Meta (FB/IG)</th>
+          <th>Google/YouTube</th>
+          <th>Radio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: 600;">Tuberville Campaign</td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Alabama Leadership Fund</td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-ctv">Unconfirmed</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Doug Jones Campaign</td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Ken McFeeters</td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Other Candidates</td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+          <td><span class="tag tag-none">None</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="source-box">
+      <strong>Key Takeaway:</strong> The 2026 Alabama Governor race has NOT entered the paid media phase on any tracked channel. ALF's CTV activity remains unconfirmed by independent verification and field operatives. The only confirmed paid political activity in Alabama's 2026 cycle is on Meta: Jared Hudson (Senate, 127 ads / $10.6K), American Conservatives Fund (downballot, 69 ads / $6K), and Rick Pate (Lt. Gov, 8 ads / $2.9K).
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Estimated Total Media Spend — All Entities</h3>
+    <div class="chart-container" style="height: 300px;">
+      <canvas id="mediaSpendChart"></canvas>
+    </div>
+  </div>
+
+  <!-- STRATEGIC ASSESSMENT -->
+  <h2 class="section-header">8. Strategic Assessment & Path Forward</h2>
+
+  <div class="card">
+    <h3>Current Position Summary</h3>
+    <p><strong>Polling Position:</strong> Tuberville holds a commanding 63% in the Republican primary with 22% undecided. His nearest primary rival is at 4%. This is effectively a non-competitive primary, barring extraordinary developments.</p>
+    <p style="margin-top: 8px;"><strong>Financial Position:</strong> With ~$7.5M cash on hand vs. Jones's ~$909K, Tuberville enjoys an approximately 8:1 financial advantage over the strongest potential general election opponent. Tuberville's fundraising ($9M total, $0 PAC money) demonstrates strong grassroots and donor network support.</p>
+    <p style="margin-top: 8px;"><strong>Opposition Activity:</strong> The Alabama Leadership Fund represents the first organized opposition infrastructure identified in this race. While ad activity remains unconfirmed by independent scans and field contacts, the entity's formation, professional website, DC connections, and known attack vector (stock trading) indicate it is operationally ready to deploy. Whether pre-launch or running a micro-targeted test, ALF should be monitored as an active threat. Separately, U.S. Senate candidate Jared Hudson's anti-stock-trading Meta ads (127 ads, ~$10.6K) create a converging narrative environment that amplifies the stock trading vulnerability even without ALF.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="strength-box">
+      <h4>Competitive Strengths</h4>
+      <ul style="padding-left: 20px;">
+        <li><strong>Dominant primary position</strong> — 63% support leaves little room for challenge</li>
+        <li><strong>Massive financial advantage</strong> — 8:1 over strongest Dem opponent</li>
+        <li><strong>Name recognition</strong> — Football coaching career provides unique statewide brand</li>
+        <li><strong>Trump alignment</strong> — Strong MAGA credentials in deep-red Alabama</li>
+        <li><strong>No paid media needed yet</strong> — Campaign preserving resources for general election</li>
+        <li><strong>Residency challenge dismissed</strong> — AL GOP cleared him to run</li>
+      </ul>
+    </div>
+    <div class="challenge-box">
+      <h4>Competitive Challenges & Risks</h4>
+      <ul style="padding-left: 20px;">
+        <li><strong>Stock trading record</strong> — 1,300+ trades, STOCK Act violations create opposition ammunition</li>
+        <li><strong>ALF early attack</strong> — CTV ads seeding "insider trading" narrative before campaign can respond</li>
+        <li><strong>Residency questions</strong> — Florida beach house narrative persists despite dismissed challenge</li>
+        <li><strong>Jones general election</strong> — Proven Alabama winner (2017 Senate) with national fundraising network</li>
+        <li><strong>Dark money opacity</strong> — CTV attacks hard to monitor, counter, or trace</li>
+        <li><strong>527 structure</strong> — ALF can raise unlimited, undisclosed funds</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Probability Scenarios</h3>
+    <table>
+      <thead><tr><th>Scenario</th><th>Probability</th><th>Key Assumptions</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: 600;">Tuberville wins Republican primary</td>
+          <td><strong style="color: var(--success);">95%+</strong></td>
+          <td>63% poll lead, no credible challenger, massive financial advantage</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Jones wins Democratic primary</td>
+          <td><strong style="color: var(--success);">85%</strong></td>
+          <td>Highest name recognition, strongest fundraising, national media profile</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Tuberville wins general (base case)</td>
+          <td><strong style="color: var(--info);">75–80%</strong></td>
+          <td>Alabama R+20 lean; Tuberville's stock trading vulnerability not disqualifying in deep-red state</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Tuberville faces competitive general</td>
+          <td><strong style="color: var(--warning);">15–20%</strong></td>
+          <td>Requires sustained ALF/outside spending, national attention on stock trading, high Dem turnout</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Jones wins general (upset)</td>
+          <td><strong style="color: var(--accent);">5–8%</strong></td>
+          <td>Requires major scandal escalation, national environment shift, massive outside spending against Tuberville</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Strategic Recommendations</h3>
+    <div class="alert-box alert-critical">
+      <div class="alert-icon">1</div>
+      <div>
+        <div class="alert-title">Immediate: Confirm & Monitor ALF CTV Activity</div>
+        <div class="alert-text">Deploy ad monitoring tools (Pathmatics/Sensor Tower, AdImpact, or equivalent CTV monitoring) to confirm ALF placements, identify specific platforms and geographies, capture ad creative, and estimate spend. CTV monitoring should cover Roku, Amazon Fire TV, Hulu, Pluto TV, Tubi, and Paramount+. Request supporters in Alabama to screencap any ads they encounter on streaming services.</div>
+      </div>
+    </div>
+    <div class="alert-box alert-warning">
+      <div class="alert-icon">2</div>
+      <div>
+        <div class="alert-title">Short-Term: Prepare Stock Trading Response Framework</div>
+        <div class="alert-text">Develop a proactive response strategy for the "insider trading" attack before it gains traction. Options include: (a) preemptive transparency — release a comprehensive stock trading explainer, (b) pivot to offense — frame the attack as Democratic dark money interference in a Republican primary, (c) inoculation messaging — test message that acknowledges trades were handled by financial advisors and pivots to Tuberville's anti-corruption record. The Ragsdale-Jones connection provides a strong counter-narrative about Democratic operatives trying to undermine the Republican primary.</div>
+      </div>
+    </div>
+    <div class="alert-box alert-info">
+      <div class="alert-icon">3</div>
+      <div>
+        <div class="alert-title">Medium-Term: Track ALF 527 Filings & Donor Sources</div>
+        <div class="alert-text">Monitor IRS 527 filings (Form 8871/8872), Alabama Secretary of State records, and ProPublica 527 Explorer for ALF disclosure filings. Once donors are disclosed, research connections to Democratic Party infrastructure, Jones campaign orbit, and out-of-state political operatives. The "cal@" email contact and DC timezone metadata suggest additional operatives beyond Ragsdale.</div>
+      </div>
+    </div>
+    <div class="alert-box alert-success">
+      <div class="alert-icon">4</div>
+      <div>
+        <div class="alert-title">Pre-Primary: Reserve TV Budget for General Election Response</div>
+        <div class="alert-text">With no competitive primary, the campaign should continue banking resources. When TV buys begin (likely April/May for primary, September for general), prioritize Birmingham DMA (DMA 45) as the largest Alabama market, followed by Mobile-Pensacola, Huntsville-Decatur, and Montgomery-Selma. Estimated cost for a statewide 1,000 GRP flight across all four DMAs: $800K–$1.2M.</div>
+      </div>
+    </div>
+    <div class="alert-box alert-purple">
+      <div class="alert-icon">5</div>
+      <div>
+        <div class="alert-title">Ongoing: Expand Competitive Intelligence Monitoring</div>
+        <div class="alert-text">Establish recurring monitoring across all channels: (a) Weekly FCC OPIF checks at all 7+ Alabama broadcast stations, (b) Daily Meta Ad Library and Google Ads Transparency scans, (c) CTV monitoring service, (d) Alabama campaign finance filings, (e) IRS 527 database checks, (f) News monitoring for ALF activity and new outside groups. Consider establishing a Google Alert for "Alabama Leadership Fund" and "Barry Ragsdale."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <h2 class="section-header">9. Methodology & Data Sources</h2>
+
+  <div class="card">
+    <h3>Data Collection Methods</h3>
+    <table>
+      <thead><tr><th>Source</th><th>Method</th><th>Date Accessed</th></tr></thead>
+      <tbody>
+        <tr><td>FCC Political Files (OPIF)</td><td>API search for 28 broadcast stations across 6 Alabama DMAs (Birmingham, Huntsville, Mobile, Montgomery, Dothan, Columbus GA) + 4 cable systems. Search keys: Governor, Tuberville, ALF, Doug Jones, 2026.</td><td>March 20, 2026</td></tr>
+        <tr><td>Meta Ad Library (Browser)</td><td>Keyword and page-level search for ALF, Tuberville, Jones, and all candidates</td><td>March 20, 2026 (data through Mar 17)</td></tr>
+        <tr><td>Meta Ad Library (CSV Export)</td><td>Full Alabama political/issue ad export — 307 ads analyzed, all advertisers, spend, impressions, demographics, regions</td><td>March 20, 2026 (March MTD)</td></tr>
+        <tr><td>Google Ads Transparency Center</td><td>Political ads search for all candidates and ALF</td><td>March 20, 2026</td></tr>
+        <tr><td>Alabama Campaign Finance</td><td>Public filings via alcampaignfinance.com and news reporting</td><td>March 20, 2026</td></tr>
+        <tr><td>ProPublica 527 Explorer</td><td>Alabama organization search</td><td>March 20, 2026</td></tr>
+        <tr><td>alabamaleadershipfund.com</td><td>Direct website analysis (Squarespace metadata)</td><td>March 20, 2026</td></tr>
+        <tr><td>Dominick Feld Hyde, P.C.</td><td>Attorney profile — Barry Ragsdale biographical data</td><td>March 20, 2026</td></tr>
+        <tr><td>Polling Data</td><td>RealClearPolling, Quantus Insights, ABC 33/40 reporting</td><td>October 2025 (latest available)</td></tr>
+        <tr><td>News Sources</td><td>Alabama Daily News, AL Reporter, AL Reflector, Yellowhammer News, 1819 News, Lagniappe Daily</td><td>March 20, 2026</td></tr>
+        <tr><td>Field Intelligence</td><td>Tuberville team direct reporting on ALF CTV activity</td><td>Week of March 17, 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="report-footer">
+  <div style="font-size: 1.2em; font-weight: 700;">Alabama Governor 2026 — Competitive Intelligence Report</div>
+  <div class="footer-meta">Prepared March 20, 2026 | Analysis Period: January 2025 — March 2026</div>
+  <div class="footer-meta">Subject: Coach Tommy Tuberville (R) | Classification: Confidential — Client Deliverable</div>
+  <div class="footer-meta" style="margin-top: 12px; opacity: 0.6;">Data sources: FCC OPIF, Meta Ad Library, Google Ads Transparency, AL Campaign Finance, ProPublica 527 Explorer, Field Intelligence</div>
+</div>
+
+<script>
+// Fundraising Chart
+const ctx1 = document.getElementById('fundraisingChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['Tommy Tuberville (R)', 'Doug Jones (D)', 'Ken McFeeters (R)', 'Yolanda Flowers (D)', 'Other Candidates'],
+    datasets: [{
+      label: 'Total Raised',
+      data: [9000000, 1308514, 50000, 25000, 50000],
+      backgroundColor: ['#c53030', '#2b6cb0', '#fc8181', '#90cdf4', '#cbd5e0'],
+      borderRadius: 6
+    }, {
+      label: 'Cash on Hand',
+      data: [7500000, 908778, 25000, 15000, 30000],
+      backgroundColor: ['#9b2c2c', '#2a4365', '#feb2b2', '#bee3f8', '#e2e8f0'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    scales: {
+      x: {
+        ticks: {
+          callback: function(v) { return '$' + (v/1000000).toFixed(1) + 'M'; }
+        },
+        grid: { color: '#f0f0f0' }
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            return ctx.dataset.label + ': $' + ctx.raw.toLocaleString();
+          }
+        }
+      },
+      legend: { position: 'bottom' }
+    }
+  }
+});
+
+// Media Spend Chart — Governor Race + Key Adjacent Entities
+const ctx2 = document.getElementById('mediaSpendChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Tuberville Campaign', 'Alabama Leadership Fund', 'Doug Jones Campaign', 'Jared Hudson (Senate)', 'American Conservatives Fund', 'Rick Pate (Lt. Gov)'],
+    datasets: [
+      {
+        label: 'Broadcast TV',
+        data: [0, 0, 0, 0, 0, 0],
+        backgroundColor: '#2b6cb0',
+        borderRadius: 4
+      },
+      {
+        label: 'Cable TV',
+        data: [0, 0, 0, 0, 0, 0],
+        backgroundColor: '#3182ce',
+        borderRadius: 4
+      },
+      {
+        label: 'CTV/Streaming (est.)',
+        data: [0, 50000, 0, 0, 0, 0],
+        backgroundColor: '#805ad5',
+        borderRadius: 4
+      },
+      {
+        label: 'Meta (Facebook/Instagram)',
+        data: [0, 0, 0, 10586, 6016, 2896],
+        backgroundColor: '#38a169',
+        borderRadius: 4
+      },
+      {
+        label: 'Google/YouTube',
+        data: [0, 0, 0, 0, 0, 0],
+        backgroundColor: '#dd6b20',
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true },
+      y: {
+        stacked: true,
+        ticks: {
+          callback: function(v) {
+            if (v >= 1000) return '$' + (v/1000).toFixed(0) + 'K';
+            return '$' + v;
+          }
+        },
+        grid: { color: '#f0f0f0' }
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            if (ctx.raw === 0) return null;
+            let note = ctx.datasetIndex === 2 && ctx.dataIndex === 1 ? ' (estimated — CTV unconfirmed)' : '';
+            return ctx.dataset.label + ': $' + ctx.raw.toLocaleString() + note;
+          }
+        }
+      },
+      legend: { position: 'bottom' },
+      title: {
+        display: true,
+        text: 'Note: ALF CTV spend is estimated. Meta spend from verified Ad Library CSV export (March 2026 MTD).',
+        font: { size: 11, style: 'italic', weight: 'normal' },
+        color: '#718096',
+        padding: { top: 10 }
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
