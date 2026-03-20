@@ -910,6 +910,21 @@
     <div class="chart-container" style="height: 300px;">
       <canvas id="mediaSpendChart"></canvas>
     </div>
+    <div style="margin-top: 12px; font-size: 0.82em; color: #4a5568; line-height: 1.6;">
+      <p style="margin-bottom: 4px;"><span style="display: inline-block; width: 14px; height: 14px; background: repeating-linear-gradient(135deg, #805ad5, #805ad5 3px, rgba(255,255,255,0.45) 3px, rgba(255,255,255,0.45) 6px); border: 1px dashed #553c9a; border-radius: 2px; vertical-align: middle; margin-right: 4px;"></span> <strong>Hatched bar</strong> = UNCONFIRMED — This is an estimated range. See Methodology below.</p>
+      <p><span style="display: inline-block; width: 14px; height: 14px; background: #38a169; border-radius: 2px; vertical-align: middle; margin-right: 4px;"></span> <strong>Solid bar</strong> = Verified spend.</p>
+    </div>
+    <div style="margin-top: 16px; padding: 16px 20px; background: #faf5ff; border-left: 4px solid #805ad5; border-radius: 4px;">
+      <h4 style="color: #553c9a; margin-bottom: 6px; font-size: 0.95em;">Methodology Note: Unconfirmed Estimates</h4>
+      <p style="font-size: 0.88em; color: #4a5568; line-height: 1.6; margin-bottom: 8px;">Hatched bars in this report represent <strong>modeled spend ranges, not verified data</strong>. Estimates are derived from the following inputs:</p>
+      <ul style="font-size: 0.88em; color: #4a5568; line-height: 1.7; padding-left: 20px; margin-bottom: 8px;">
+        <li><strong>Industry benchmarks</strong> — Typical media buy ranges for the platform, race level, and market size, based on historical campaign spending patterns in comparable races.</li>
+        <li><strong>Race-level context</strong> — Competitive dynamics, candidate positioning, and electoral calendar timing that influence likely spend levels and flight durations.</li>
+        <li><strong>Competitive climate signals</strong> — Organizational formation dates, infrastructure readiness, known attack vectors, and alignment with existing narrative environments.</li>
+        <li><strong>Platform transparency gaps</strong> — Certain channels (e.g., CTV/streaming) lack public ad libraries, unlike broadcast TV (FCC filings) or Meta/Google (transparency tools). Estimates on these platforms represent typical spend ranges, not confirmed activity.</li>
+      </ul>
+      <p style="font-size: 0.88em; color: #553c9a; font-weight: 600;">Unconfirmed estimates are clearly marked with hatched bars and dashed borders throughout this report. These will be updated or removed as independent verification is obtained.</p>
+    </div>
   </div>
 
   <!-- STRATEGIC ASSESSMENT -->
@@ -1096,6 +1111,28 @@ new Chart(ctx1, {
   }
 });
 
+// Create diagonal hatching pattern for unconfirmed spend
+function createHatchPattern(baseColor, stripeColor) {
+  const patternCanvas = document.createElement('canvas');
+  patternCanvas.width = 12;
+  patternCanvas.height = 12;
+  const pCtx = patternCanvas.getContext('2d');
+  // Fill with base color
+  pCtx.fillStyle = baseColor;
+  pCtx.fillRect(0, 0, 12, 12);
+  // Draw diagonal stripes
+  pCtx.strokeStyle = stripeColor;
+  pCtx.lineWidth = 2.5;
+  pCtx.beginPath();
+  pCtx.moveTo(0, 12); pCtx.lineTo(12, 0);
+  pCtx.moveTo(-4, 4); pCtx.lineTo(4, -4);
+  pCtx.moveTo(8, 16); pCtx.lineTo(16, 8);
+  pCtx.stroke();
+  return pCtx.createPattern(patternCanvas, 'repeat');
+}
+
+const alfHatchPattern = createHatchPattern('#805ad5', 'rgba(255,255,255,0.45)');
+
 // Media Spend Chart — Governor Race + Key Adjacent Entities
 const ctx2 = document.getElementById('mediaSpendChart').getContext('2d');
 new Chart(ctx2, {
@@ -1118,7 +1155,10 @@ new Chart(ctx2, {
       {
         label: 'CTV/Streaming (est.)',
         data: [0, 50000, 0, 0, 0, 0],
-        backgroundColor: '#805ad5',
+        backgroundColor: [null, alfHatchPattern, null, null, null, null],
+        borderColor: [null, '#805ad5', null, null, null, null],
+        borderWidth: [0, 2, 0, 0, 0, 0],
+        borderDash: [5, 3],
         borderRadius: 4
       },
       {
@@ -1142,6 +1182,7 @@ new Chart(ctx2, {
       x: { stacked: true },
       y: {
         stacked: true,
+        max: 80000,
         ticks: {
           callback: function(v) {
             if (v >= 1000) return '$' + (v/1000).toFixed(0) + 'K';
@@ -1156,21 +1197,80 @@ new Chart(ctx2, {
         callbacks: {
           label: function(ctx) {
             if (ctx.raw === 0) return null;
-            let note = ctx.datasetIndex === 2 && ctx.dataIndex === 1 ? ' (estimated — CTV unconfirmed)' : '';
-            return ctx.dataset.label + ': $' + ctx.raw.toLocaleString() + note;
+            if (ctx.datasetIndex === 2 && ctx.dataIndex === 1) {
+              return 'CTV/Streaming (UNCONFIRMED): Est. range $25K–$75K (midpoint shown)';
+            }
+            return ctx.dataset.label + ': $' + ctx.raw.toLocaleString();
           }
         }
       },
-      legend: { position: 'bottom' },
-      title: {
-        display: true,
-        text: 'Note: ALF CTV spend is estimated. Meta spend from verified Ad Library CSV export (March 2026 MTD).',
-        font: { size: 11, style: 'italic', weight: 'normal' },
-        color: '#718096',
-        padding: { top: 10 }
+      legend: {
+        position: 'bottom',
+        labels: {
+          generateLabels: function(chart) {
+            const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+            return defaultLabels.map(function(label, i) {
+              if (i === 2) {
+                // CTV/Streaming dataset — force the purple color to match hatched bar
+                label.fillStyle = '#805ad5';
+                label.strokeStyle = '#553c9a';
+                label.lineWidth = 2;
+                label.lineDash = [3, 2];
+              }
+              return label;
+            });
+          }
+        }
+      },
+      title: { display: false },
+      // Draw range annotations on ALF bar
+      annotation: {
+        annotations: {}
       }
     }
-  }
+  },
+  plugins: [{
+    id: 'rangeIndicator',
+    afterDraw: function(chart) {
+      const meta = chart.getDatasetMeta(2);
+      const bar = meta.data[1]; // ALF bar
+      if (!bar) return;
+      const ctx = chart.ctx;
+      const yScale = chart.scales.y;
+      const xCenter = bar.x;
+      const barWidth = bar.width || 40;
+      // Draw range whiskers: $25K low, $75K high
+      const yLow = yScale.getPixelForValue(25000);
+      const yHigh = yScale.getPixelForValue(75000);
+      ctx.save();
+      ctx.strokeStyle = '#553c9a';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 3]);
+      // Vertical range line
+      ctx.beginPath();
+      ctx.moveTo(xCenter, yLow);
+      ctx.lineTo(xCenter, yHigh);
+      ctx.stroke();
+      // Top whisker
+      ctx.beginPath();
+      ctx.moveTo(xCenter - 12, yHigh);
+      ctx.lineTo(xCenter + 12, yHigh);
+      ctx.stroke();
+      // Bottom whisker
+      ctx.beginPath();
+      ctx.moveTo(xCenter - 12, yLow);
+      ctx.lineTo(xCenter + 12, yLow);
+      ctx.stroke();
+      // Labels
+      ctx.setLineDash([]);
+      ctx.font = 'bold 10px system-ui, sans-serif';
+      ctx.fillStyle = '#553c9a';
+      ctx.textAlign = 'left';
+      ctx.fillText('$75K high', xCenter + 16, yHigh + 4);
+      ctx.fillText('$25K low', xCenter + 16, yLow + 4);
+      ctx.restore();
+    }
+  }]
 });
 </script>
 
